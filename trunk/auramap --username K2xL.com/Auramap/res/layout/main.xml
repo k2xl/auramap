@@ -7,10 +7,10 @@
 <TextView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" android:text='"How ya doin?"' android:layout_gravity="center_horizontal" android:gravity="center_horizontal" android:textColorHighlight="#4499EE" android:textColor="#FFF" android:textColorHint="#4499EE" android:textStyle="bold" android:textSize="18sp"/>
-<TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/HappyMetric" android:gravity="center_horizontal" android:minWidth="50">
+<TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/HappyMetric" android:gravity="center_horizontal">
 
 <TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
-<ImageButton android:id="@+id/ImageButton01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate"></ImageButton>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate" android:id="@+id/PirateButton"></ImageButton>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
