@@ -3,50 +3,50 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:descendantFocusability="afterDescendants" android:gravity="center_horizontal|center" android:background="@drawable/bg1">
+    android:descendantFocusability="afterDescendants" android:gravity="center_horizontal|center" android:background="#000">
 <TextView  
     android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" android:text='"How ya doin?"' android:layout_gravity="center_horizontal" android:gravity="center_horizontal" android:textColorHighlight="#4499EE" android:textColor="#FFF" android:textColorHint="#4499EE" android:textStyle="bold" android:textSize="18sp"/>
+    android:layout_height="wrap_content" android:gravity="center_horizontal" android:textColorHighlight="#4499EE" android:textColor="#FFF" android:textColorHint="#4499EE" android:textStyle="bold" android:textSize="18sp" android:text="How do you feel?" android:layout_gravity="center_vertical|center_horizontal" android:lines="5"/>
 <TableLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/HappyMetric" android:gravity="center_horizontal">
 
 <TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
-<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate" android:id="@+id/PirateButton"></ImageButton>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/HappyButton00" android:background="@drawable/face_mad"></ImageButton>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate"></ImageView>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate" android:id="@+id/HappyButton04"></ImageButton>
 </TableRow>
 
 <TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate"></ImageView>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate" android:id="@+id/HappyButton11"></ImageButton>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate"></ImageView>
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
-</TableRow>
-
-<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate"></ImageView>
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate" android:id="@+id/HappyButton13"></ImageButton>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
 </TableRow>
 
 <TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate"></ImageView>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate"></ImageView>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate" android:id="@+id/HappyButton22"></ImageButton>
+<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
 </TableRow>
 
 <TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate"></ImageView>
+<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate" android:id="@+id/HappyButton31"></ImageButton>
+<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate" android:id="@+id/HappyButton33"></ImageButton>
+<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
+</TableRow>
+
+<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate" android:id="@+id/HappyButton40"></ImageButton>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/blank"></ImageView>
-<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate"></ImageView>
+<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/pirate" android:id="@+id/HappyButton44"></ImageButton>
 </TableRow>
 
 
