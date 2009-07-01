@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-
 <TableLayout android:id="@+id/TableLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+	
 	<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
 		<TextView android:text="You feel " android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFF" android:textStyle="bold"></TextView>
-		<TextView android:text="emotion" android:id="@+id/emote" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<TextView android:id="@+id/emote" android:layout_width="wrap_content" android:layout_height="wrap_content" android:inputType="text"></TextView>
 	</TableRow>
+	
 	<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
 		<TextView android:text="X Value: " android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFF" android:textStyle="bold"></TextView>
-		<TextView android:text="X Val" android:id="@+id/happyX" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<TextView android:id="@+id/happyX" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="X Val"></TextView>
 	</TableRow>
 	
 	<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
 		<TextView android:text="Y Value: " android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFF" android:textStyle="bold"></TextView>
-		<TextView android:text="Y Val" android:id="@+id/happyY" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<TextView android:id="@+id/happyY" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Y Val"></TextView>
 	</TableRow>
 	
 	<TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
 		<TextView android:text="GPS Coords: " android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FFF" android:textStyle="bold"></TextView>
-		<TextView android:text="Coordinates" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/loc"></TextView>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/loc" android:text="not working yet"></TextView>
 	</TableRow>
+
 </TableLayout>
