@@ -2,6 +2,7 @@ package com.auramap;
 
 public class HappyState {
 	public String stateName;
-	public int val;
+	public int xVal;
+	public int yVal;
 	
 }
