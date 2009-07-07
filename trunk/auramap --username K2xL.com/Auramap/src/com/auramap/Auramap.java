@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -96,6 +97,15 @@ public class Auramap extends Activity {
         }  
    };
    
+   private OnClickListener mapButtonListener = new OnClickListener() {
+
+	public void onClick(View arg0) {
+		goToMap();		
+	}	   
+   };
+   
+
+   
    private class MyLocationListener implements LocationListener
    {      
          public void onLocationChanged(Location newLoc) {
@@ -149,6 +159,9 @@ public class Auramap extends Activity {
         
         ImageButton button44 = (ImageButton)findViewById(R.id.HappyButton44);
         button44.setOnClickListener(happyButtonListener);
+        
+        Button mapbutton = (Button)findViewById(R.id.MapButton);
+        mapbutton.setOnClickListener(mapButtonListener);
     }
     
     
@@ -199,7 +212,9 @@ public class Auramap extends Activity {
         //finish();
         */
     }
-    
+    //Bobby Dodd Stadium
+    //Lat: 33.772
+    //Long: -84.392
     public String textURL(String vars)
     {
         int BUFFER_SIZE = 2000;
@@ -254,9 +269,14 @@ public class Auramap extends Activity {
         }    
         return str;        
     }
+    public void goToMap() {
 
+    	setContentView(R.layout.map);
+    }
   
  }
+
+
 
 
 
