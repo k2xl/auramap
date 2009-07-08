@@ -171,23 +171,13 @@ public class Auramap extends Activity {
     	setContentView(R.layout.state_disp);
     	
 
-    	TextView vText = (TextView)findViewById(R.id.emote);
-    	vText.setText(happyState.stateName);
 
-    	TextView xText = (TextView)findViewById(R.id.happyX);
-    	xText.setText("" + happyState.xVal);
-
-    	TextView yText = (TextView)findViewById(R.id.happyY);
-    	yText.setText("" + happyState.yVal);
-    	    	
-    	vText = (TextView)findViewById(R.id.loc);
     	vText.setText("Long: " +     			
     			location.getLongitude() + " Lat: " +
     			location.getLatitude());	
     	sendAurapoint("test","test",happyState.xVal,happyState.yVal,"traffic",location.getLatitude(),location.getLongitude());
     }
     
-    //from Matt Drake
     private void sendAurapoint(String username,String password,int emotx,int emoty,String tag, double lat,double lon){
        Bundle extras = getIntent().getExtras();
        String q="";
@@ -202,8 +192,8 @@ public class Auramap extends Activity {
         {
                 q = extras.getString("query");
         } 
-        String val = textURL(q);
-        Log.v("Auramap", "Output: " + val);
+        //String val = textURL(q);
+        //Log.v("Auramap", "Output: " + val);
         /*Intent intent = new Intent();
         String val = textURL(q);
         intent.putExtra("webResponse",val);
@@ -212,6 +202,7 @@ public class Auramap extends Activity {
         //finish();
         */
     }
+    /*
     //Bobby Dodd Stadium
     //Lat: 33.772
     //Long: -84.392
@@ -268,7 +259,7 @@ public class Auramap extends Activity {
             return "FAILED";
         }    
         return str;        
-    }
+    }*/
     public void goToMap() {
 
     	setContentView(R.layout.map);
