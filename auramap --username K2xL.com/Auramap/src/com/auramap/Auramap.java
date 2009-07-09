@@ -93,7 +93,7 @@ public class Auramap extends Activity {
         		happyState.xVal = 100;
         		happyState.yVal = -100;        		
         	}
-        	goToStateDisp();
+        	getTag();
         }  
    };
    
@@ -163,35 +163,52 @@ public class Auramap extends Activity {
         Button mapbutton = (Button)findViewById(R.id.MapButton);
         mapbutton.setOnClickListener(mapButtonListener);
     }
-    
-    
-    private void goToStateDisp(){    	
-
-    	Log.v("Auramap", happyState.stateName);
-    	setContentView(R.layout.state_disp);
-    	
-
-
-    	vText.setText("Long: " +     			
-    			location.getLongitude() + " Lat: " +
-    			location.getLatitude());	
-    	sendAurapoint("test","test",happyState.xVal,happyState.yVal,"traffic",location.getLatitude(),location.getLongitude());
+        
+    private void getTag(){
+    Intent tag = new Intent(this.getBaseContext(), GetTag.class);
+    startSubActivity(tag, 0);
     }
+    //Get Tag result
+    protected void onActivityResult(int requestCode,int resultCode,String strdata,Bundle bundle)
+    {
     
-    private void sendAurapoint(String username,String password,int emotx,int emoty,String tag, double lat,double lon){
-       Bundle extras = getIntent().getExtras();
-       String q="";
-       q+= "username="+username+"&";
-       q+= "password="+password+"&";
-       q+= "emotx="+emotx+"&";
-       q+= "emoty="+emoty+"&";
-       q+= "tag="+tag+"&";
-       q+= "lat="+lat+"&";
-       q+= "lon="+lon+"&";
-        if(extras !=null)
-        {
-                q = extras.getString("query");
-        } 
+		switch (requestCode) {
+		case 0:
+		sendAuraPoint(bundle);
+		break;
+		
+	}}
+    
+    public void onActivityResult  (int requestCode, int resultCode, Intent data){
+        Intent intent = new Intent();
+    intent.putExtra("webResponse",data.getExtras().getString("webResponse"));
+    setResult(RESULT_OK, intent);
+    finish();
+        
+}
+    	
+    private void sendAuraPoint(Bundle bundle) {
+    Intent i = new Intent(this.getBaseContext(), ConnectionResource.class);
+		String data = "";
+		data += "username=" + "test&"
+			+ "password=" + "text&"
+			+ "emotx=" + happyState.xVal + "&"
+			+ "emoty=" + happyState.yVal + "&"
+			+ "lat=" + location.getLatitude() + "&"
+			+ "lon=" + location.getLongitude() + "&"
+			+ "tag=" + bundle.getString("tag");
+		
+		i.putExtra("data",data);
+		startActivityForResult(i,1);
+    }
+    /*
+    i.putExtra("username", "test");
+    i.putExtra("password", "test");
+    i.putExtra("emotx", happyState.xVal);
+    i.putExtra("emoty", happyState.yVal);
+    i.putExtra("lat", location.getLatitude());
+    i.putExtra("lon", location.getLongitude());
+     */
         //String val = textURL(q);
         //Log.v("Auramap", "Output: " + val);
         /*Intent intent = new Intent();
@@ -201,7 +218,7 @@ public class Auramap extends Activity {
         setResult(RESULT_OK, intent);
         //finish();
         */
-    }
+    //}
     /*
     //Bobby Dodd Stadium
     //Lat: 33.772
@@ -263,8 +280,7 @@ public class Auramap extends Activity {
     public void goToMap() {
 
     	setContentView(R.layout.map);
-    }
-  
+    }  
  }
 
 
