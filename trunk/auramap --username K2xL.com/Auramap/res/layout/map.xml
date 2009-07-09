@@ -1,9 +1,7 @@
 <LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-<view id="@+id/mv"
-   class="com.google.android.maps.MapView"
-   android:layout_width="fill_parent"
-   android:layout_height="fill_parent"
-   android:apiKey="04MVU6_RL2g5_a5DaA9MhR0GG6ANij0kzfhY-LQ"
-   android:layout_weight="1" />
-
+<com.google.android.maps.MapView
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:apiKey="04MVU6_RL2g5_a5DaA9MhR0GG6ANij0kzfhY-LQ"
+                 />
 </LinearLayout>
