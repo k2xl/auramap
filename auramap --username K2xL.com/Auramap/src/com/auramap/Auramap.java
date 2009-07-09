@@ -93,13 +93,13 @@ public class Auramap extends Activity {
         		happyState.xVal = 100;
         		happyState.yVal = -100;        		
         	}
-        	getTag();
+        	sendAuraPoint();
         }  
    };
    
    private OnClickListener mapButtonListener = new OnClickListener() {
 
-	public void onClick(View arg0) {
+	public void onClick(View v) {
 		goToMap();		
 	}	   
    };
@@ -160,123 +160,22 @@ public class Auramap extends Activity {
         ImageButton button44 = (ImageButton)findViewById(R.id.HappyButton44);
         button44.setOnClickListener(happyButtonListener);
         
-        Button mapbutton = (Button)findViewById(R.id.MapButton);
-        mapbutton.setOnClickListener(mapButtonListener);
     }
         
-    private void getTag(){
-    Intent tag = new Intent(this.getBaseContext(), GetTag.class);
-    startSubActivity(tag, 0);
-    }
-    //Get Tag result
-    protected void onActivityResult(int requestCode,int resultCode,String strdata,Bundle bundle)
-    {
-    
-		switch (requestCode) {
-		case 0:
-		sendAuraPoint(bundle);
-		break;
-		
-	}}
-    
-    public void onActivityResult  (int requestCode, int resultCode, Intent data){
-        Intent intent = new Intent();
-    intent.putExtra("webResponse",data.getExtras().getString("webResponse"));
-    setResult(RESULT_OK, intent);
-    finish();
-        
-}
-    	
-    private void sendAuraPoint(Bundle bundle) {
-    Intent i = new Intent(this.getBaseContext(), ConnectionResource.class);
-		String data = "";
-		data += "username=" + "test&"
-			+ "password=" + "text&"
-			+ "emotx=" + happyState.xVal + "&"
-			+ "emoty=" + happyState.yVal + "&"
-			+ "lat=" + location.getLatitude() + "&"
-			+ "lon=" + location.getLongitude() + "&"
-			+ "tag=" + bundle.getString("tag");
-		
-		i.putExtra("data",data);
-		startActivityForResult(i,1);
-    }
-    /*
+
+    private void sendAuraPoint() {
+    Intent i = new Intent(this.getBaseContext(), GetTag.class);	
+    i.putExtra("emote", happyState.stateName);
     i.putExtra("username", "test");
     i.putExtra("password", "test");
     i.putExtra("emotx", happyState.xVal);
     i.putExtra("emoty", happyState.yVal);
     i.putExtra("lat", location.getLatitude());
-    i.putExtra("lon", location.getLongitude());
-     */
-        //String val = textURL(q);
-        //Log.v("Auramap", "Output: " + val);
-        /*Intent intent = new Intent();
-        String val = textURL(q);
-        intent.putExtra("webResponse",val);
-        
-        setResult(RESULT_OK, intent);
-        //finish();
-        */
-    //}
-    /*
-    //Bobby Dodd Stadium
-    //Lat: 33.772
-    //Long: -84.392
-    public String textURL(String vars)
-    {
-        int BUFFER_SIZE = 2000;
-        InputStream in = null;
-        try {
-                HttpURLConnection con = (HttpURLConnection)(new URL("http://www.k2xl.info/auramap/server/insertaura.php")).openConnection();
-            
-            con.setRequestMethod( "POST" );
-            con.setRequestProperty("METHOD", "POST");
-            con.setDoInput( true );
-            con.setDoOutput( true );
+    i.putExtra("lon", location.getLongitude());    
+    startActivity(i);
+    finish();
+    }
 
-           // add url form parameters
-            DataOutputStream ostream = null;
-            try {
-                ostream = new DataOutputStream( con.getOutputStream() );
-                ostream.writeBytes( vars );
-            }finally {
-                if( ostream != null ) {
-                    ostream.flush();
-                    ostream.close();
-                  }
-                }
-            
-            in = con.getInputStream();
-
-            
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-            return e1.toString();
-        }
-        
-        InputStreamReader isr = new InputStreamReader(in);
-        int charRead;
-          String str = "";
-          char[] inputBuffer = new char[BUFFER_SIZE];          
-        try {
-            while ((charRead = isr.read(inputBuffer))>0)
-            {                    
-                //---convert the chars to a String---
-                String readString =
-                    String.copyValueOf(inputBuffer, 0, charRead);                    
-                str += readString;
-                inputBuffer = new char[BUFFER_SIZE];
-            }
-            in.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return "FAILED";
-        }    
-        return str;        
-    }*/
     public void goToMap() {
 
     	setContentView(R.layout.map);

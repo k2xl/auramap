@@ -7,6 +7,7 @@ import java.io.*;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 //Slightly modified version of the code provided by Matt Drake
@@ -16,11 +17,13 @@ public class ConnectionResource extends Activity {
         public final static String queryBase="http://ngp.lcc.gatech.edu/php_scripts/droid_root.php?";
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        Log.v("Auramap", "1");
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.state_disp);
               
-        
+
         Bundle extras = getIntent().getExtras();
         
         String q="overwrite_me";
@@ -29,6 +32,15 @@ public class ConnectionResource extends Activity {
                 q = extras.getString("entry");
         }
         
+        //Puts bundle in q
+       q = "username=test&"  
+       	+ "password=test&"
+       	+ "emotx=" + extras.getInt("emotx") + "&"
+       	+ "emoty=" + extras.getInt("emoty")+ "&"
+       	+ "lat=" + extras.getDouble("lat")+ "&"
+       	+ "lon=" + extras.getDouble("lon")+ "&"
+       	+ "tag=" + extras.getString("tag");    	
+       	        
         //Creates an optional view showing all the data it's sending off
     	
         TextView vText = (TextView)findViewById(R.id.emote);
@@ -44,17 +56,20 @@ public class ConnectionResource extends Activity {
     	vText.setText("Long: " +     			
     			extras.get("lon").toString() + " Lat: " +
     			extras.get("lat").toString());	
-    	    	
+
+        Log.v("Auramap", "2");
         Intent intent = new Intent();
+        Log.v("Auramap", "3");
         String val = textURL(q);
         intent.putExtra("webResponse",val);
         setResult(RESULT_OK, intent);
-        finish();
+        //finish();
     }
     public String textURL(String vars)
     {
     	int BUFFER_SIZE = 2000;
         InputStream in = null;
+
         try {
             HttpURLConnection con = (HttpURLConnection)(new URL("http://www.k2xl.info/auramap/server/insertaura.php")).openConnection();
             
@@ -62,7 +77,7 @@ public class ConnectionResource extends Activity {
             con.setRequestProperty("METHOD", "POST");
             con.setDoInput( true );
             con.setDoOutput( true );
-
+            Log.v("Auramap", "Sending message: " + vars);
            // add url form parameters
             DataOutputStream ostream = null;
             try {
@@ -102,7 +117,9 @@ public class ConnectionResource extends Activity {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return "FAILED";
-        }    
+        } 
+
+        Log.v("Auramap", "CR: " + str);
         return str;        
     }
 }
