@@ -1,0 +1,11 @@
+Server
+-Server side color selection/creation
+-time decay
+
+Android
+-initial screen
+-no emot-y
+-client side effects
+-layouts
+-buddy list
+-tags
