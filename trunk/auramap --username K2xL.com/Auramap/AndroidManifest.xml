@@ -11,13 +11,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GetTag" android:label="GetTag"/>
-        <activity android:name=".ConnectionResource" android:label="GetTag"/>
+        <activity android:name=".GetTag" android:label="GetTagLabel"/>
+        <activity android:name=".ConnectionResource" android:label="ConnectionResourceLabel"/>
+        <activity android:name=".MoodMap" android:label="MapLabel"/>
+        
+    <uses-library android:name="com.google.android.maps"/>
     </application>
     <uses-sdk android:minSdkVersion="3" />
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
     <uses-permission android:name="android.permission.ACCESS_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission xmlns:android="http://schemas.android.com/apk/res/android" android:name="android.permission.INTERNET"></uses-permission>
 </manifest> 
