@@ -45,10 +45,11 @@ public class GetTag extends Activity {
     	Intent i = new Intent(this.getBaseContext(), ConnectionResource.class);				
 		i.putExtras(this.getIntent().getExtras());
 		i.putExtra("tag", t);
-		startActivityForResult(i,0);
+		startActivity(i);
+		finish();
 		
     }
-    
+    /*
     public void onActivityResult  (int requestCode, int resultCode, Intent data){
 
     	Intent intent = new Intent();
@@ -57,7 +58,7 @@ public class GetTag extends Activity {
     	Log.v("Auramap", "Returned");
         Log.v("Auramap", intent.getExtras().getString("webresponse"));
     	finish();        
-    }    
+    } */   
     
  }
     

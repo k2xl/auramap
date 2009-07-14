@@ -96,14 +96,7 @@ public class Auramap extends Activity {
         	sendAuraPoint();
         }  
    };
-   
-   private OnClickListener mapButtonListener = new OnClickListener() {
-
-	public void onClick(View v) {
-		goToMap();		
-	}	   
-   };
-   
+  
 
    
    private class MyLocationListener implements LocationListener
@@ -170,16 +163,18 @@ public class Auramap extends Activity {
     i.putExtra("password", "test");
     i.putExtra("emotx", happyState.xVal);
     i.putExtra("emoty", happyState.yVal);
-    i.putExtra("lat", location.getLatitude());
-    i.putExtra("lon", location.getLongitude());    
+    double randomTechpointLat = 
+    	33.78156339080061 - Math.random() * 0.010487523427205;
+    double randomTechpointLon =
+    -84.38984870910645 - Math.random() * 0.01780986785888;
+    i.putExtra("lat", randomTechpointLat);
+    i.putExtra("lon", randomTechpointLon);
+    //i.putExtra("lat", location.getLatitude());
+    //i.putExtra("lon", location.getLongitude());    
     startActivity(i);
     finish();
     }
 
-    public void goToMap() {
-
-    	setContentView(R.layout.map);
-    }  
  }
 
 
