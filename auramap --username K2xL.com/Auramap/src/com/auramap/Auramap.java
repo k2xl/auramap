@@ -58,39 +58,39 @@ public class Auramap extends Activity {
         public void onClick(View v) {
         	if( v.getId() == R.id.HappyButton00 ) {
         		happyState.stateName = "furious";
-        		happyState.xVal = -100;
+        		happyState.xVal = 0;
         		happyState.yVal = 100;        		
         	} else if( v.getId() == R.id.HappyButton04 ) {
         		happyState.stateName = "ecstatic";
-        		happyState.xVal = 100;
+        		happyState.xVal = 0;
         		happyState.yVal = 100;        		
         	} else if( v.getId() == R.id.HappyButton11 ) {
         		happyState.stateName = "mad";
-        		happyState.xVal = -50;
+        		happyState.xVal = 0;
         		happyState.yVal = 50;        		
         	} else if( v.getId() == R.id.HappyButton13 ) {
         		happyState.stateName = "happy";
-        		happyState.xVal = -50;
+        		happyState.xVal = 1;
         		happyState.yVal = 50;        		
         	} else if( v.getId() == R.id.HappyButton22 ) {
         		happyState.stateName = "neutral";
-        		happyState.xVal = 0;
+        		happyState.xVal = 1;
         		happyState.yVal = 0;        		
         	} else if( v.getId() == R.id.HappyButton31 ) {
         		happyState.stateName = "sad";
-        		happyState.xVal = -50;
+        		happyState.xVal = 2;
         		happyState.yVal = -50;        		
         	} else if( v.getId() == R.id.HappyButton33 ) {
         		happyState.stateName = "satisfied";
-        		happyState.xVal = 50;
+        		happyState.xVal = 3;
         		happyState.yVal = -50;        		
         	} else if( v.getId() == R.id.HappyButton40 ) {
         		happyState.stateName = "depressed";
-        		happyState.xVal = -100;
+        		happyState.xVal = 3;
         		happyState.yVal = -100;        		
         	} else if( v.getId() == R.id.HappyButton44 ) {
         		happyState.stateName = "content";
-        		happyState.xVal = 100;
+        		happyState.xVal = 4;
         		happyState.yVal = -100;        		
         	}
         	sendAuraPoint();
@@ -167,10 +167,10 @@ public class Auramap extends Activity {
     	33.78156339080061 - Math.random() * 0.010487523427205;
     double randomTechpointLon =
     -84.38984870910645 - Math.random() * 0.01780986785888;
-    i.putExtra("lat", randomTechpointLat);
-    i.putExtra("lon", randomTechpointLon);
-    //i.putExtra("lat", location.getLatitude());
-    //i.putExtra("lon", location.getLongitude());    
+    //i.putExtra("lat", randomTechpointLat);
+    //i.putExtra("lon", randomTechpointLon);
+    i.putExtra("lat", location.getLatitude());
+    i.putExtra("lon", location.getLongitude());    
     startActivity(i);
     finish();
     }
