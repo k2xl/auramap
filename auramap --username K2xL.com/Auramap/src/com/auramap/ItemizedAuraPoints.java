@@ -38,10 +38,11 @@ public class ItemizedAuraPoints extends ItemizedOverlay
 		for (int i = 0; i < tempS; i++)
 		{
 			point = items.get(i).getPoint();
-			double emoteRatio = 256*Integer.parseInt(items.get(i).getSnippet())+100.0/200.0;
-			int color = (((int)emoteRatio)<<6)|0x000000;
+			//double emoteRatio = 256*Integer.parseInt(items.get(i).getSnippet())+100.0/200.0;
+			//int color = (((int)emoteRatio)<<6)|0x000000;
+			int color = Integer.parseInt(items.get(i).getSnippet());
 			auraImage.setColor(color);
-			auraImage.setAlpha(127);
+			auraImage.setAlpha(63);
 			Point pixelPoint = proj.toPixels(point, null);
 			canvas.drawCircle(pixelPoint.x,pixelPoint.y,Math.max(3,(int)(222.0/Math.pow(2,19-zoomLevel))),auraImage);
 		}
