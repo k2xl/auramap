@@ -8,6 +8,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 //Slightly modified version of the code provided by Matt Drake
@@ -15,6 +18,7 @@ import android.widget.TextView;
 public class ConnectionResource extends Activity {
     /** Called when the activity is first created. */
         public final static String queryBase="http://ngp.lcc.gatech.edu/php_scripts/droid_root.php?";
+        
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -56,7 +60,9 @@ public class ConnectionResource extends Activity {
     	vText.setText("Long: " +     			
     			extras.get("lon").toString() + " Lat: " +
     			extras.get("lat").toString());	
-
+    	final Button mapButton = (Button) findViewById(R.id.MapButton);
+        mapButton.setOnClickListener(mListener);
+    	
         Log.v("Auramap", "2");
         Intent intent = new Intent();
         Log.v("Auramap", "3");
@@ -65,6 +71,21 @@ public class ConnectionResource extends Activity {
         setResult(RESULT_OK, intent);
         //finish();
     }
+    private OnClickListener mListener =new OnClickListener() {
+    	
+    	public void onClick(View v) {                
+    	    goToMap();                 
+        }
+    };
+    
+    private void goToMap() {
+    	
+        Intent i = new Intent(this.getBaseContext(), MoodMap.class);	  
+        startActivity(i);
+        finish();
+    }  
+    
+    
     public String textURL(String vars)
     {
     	int BUFFER_SIZE = 2000;
@@ -122,4 +143,7 @@ public class ConnectionResource extends Activity {
         Log.v("Auramap", "CR: " + str);
         return str;        
     }
-}
+    private void log(String s) {
+    	Log.v("Auramap", s);    
+    }
+    }
