@@ -33,9 +33,8 @@ public class GetTag extends Activity {
         tag = (EditText) findViewById(R.id.tag);
   
     
-    final Button submit = (Button) findViewById(R.id.submit);
-    
-    submit.setOnClickListener(sListener);
+    final Button next = (Button) findViewById(R.id.submit);    
+    next.setOnClickListener(sListener);
         
     }
     

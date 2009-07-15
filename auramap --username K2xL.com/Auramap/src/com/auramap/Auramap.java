@@ -1,15 +1,6 @@
 package com.auramap;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import org.apache.http.client.HttpClient;
+import android.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,12 +8,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 
 
@@ -56,44 +44,34 @@ public class Auramap extends Activity {
     
     private OnClickListener happyButtonListener = new OnClickListener() {
         public void onClick(View v) {
-        	if( v.getId() == R.id.HappyButton00 ) {
-        		happyState.stateName = "furious";
+        	int id = v.getId();
+        	
+        	switch(id) {
+        	case R.id.HappyButton0: 
+        	    happyState.stateName = "depressed";
         		happyState.xVal = 0;
-        		happyState.yVal = 100;        		
-        	} else if( v.getId() == R.id.HappyButton04 ) {
-        		happyState.stateName = "ecstatic";
-        		happyState.xVal = 0;
-        		happyState.yVal = 100;        		
-        	} else if( v.getId() == R.id.HappyButton11 ) {
-        		happyState.stateName = "mad";
-        		happyState.xVal = 0;
-        		happyState.yVal = 50;        		
-        	} else if( v.getId() == R.id.HappyButton13 ) {
-        		happyState.stateName = "happy";
+        		break;
+        	case R.id.HappyButton1: 
+        	    happyState.stateName = "sad";
         		happyState.xVal = 1;
-        		happyState.yVal = 50;        		
-        	} else if( v.getId() == R.id.HappyButton22 ) {
-        		happyState.stateName = "neutral";
-        		happyState.xVal = 1;
-        		happyState.yVal = 0;        		
-        	} else if( v.getId() == R.id.HappyButton31 ) {
-        		happyState.stateName = "sad";
+        		break;
+        	case R.id.HappyButton2: 
+        	    happyState.stateName = "neutral";
         		happyState.xVal = 2;
-        		happyState.yVal = -50;        		
-        	} else if( v.getId() == R.id.HappyButton33 ) {
-        		happyState.stateName = "satisfied";
+        		break;
+        	case R.id.HappyButton3: 
+        	    happyState.stateName = "happy";
         		happyState.xVal = 3;
-        		happyState.yVal = -50;        		
-        	} else if( v.getId() == R.id.HappyButton40 ) {
-        		happyState.stateName = "depressed";
-        		happyState.xVal = 3;
-        		happyState.yVal = -100;        		
-        	} else if( v.getId() == R.id.HappyButton44 ) {
-        		happyState.stateName = "content";
+        		break;
+        	case R.id.HappyButton4: 
+        	    happyState.stateName = "ecstatic";
         		happyState.xVal = 4;
-        		happyState.yVal = -100;        		
+        		break;
+        	case R.id.nextButton: 
+        	    sendAuraPoint();
+        		break;
+        	
         	}
-        	sendAuraPoint();
         }  
    };
   
@@ -126,33 +104,23 @@ public class Auramap extends Activity {
     
     private void createButtons() {
     	
-        ImageButton button00 = (ImageButton)findViewById(R.id.HappyButton00);
+        ImageButton button00 = (ImageButton)findViewById(R.id.HappyButton0);
         button00.setOnClickListener(happyButtonListener);
         
-        ImageButton button04 = (ImageButton)findViewById(R.id.HappyButton04);
+        ImageButton button04 = (ImageButton)findViewById(R.id.HappyButton1);
         button04.setOnClickListener(happyButtonListener);
         
-        ImageButton button11 = (ImageButton)findViewById(R.id.HappyButton11);
+        ImageButton button11 = (ImageButton)findViewById(R.id.HappyButton2);
         button11.setOnClickListener(happyButtonListener);
         
-        ImageButton button13 = (ImageButton)findViewById(R.id.HappyButton13);
+        ImageButton button13 = (ImageButton)findViewById(R.id.HappyButton3);
         button13.setOnClickListener(happyButtonListener);
         
-        ImageButton button22 = (ImageButton)findViewById(R.id.HappyButton22);
+        ImageButton button22 = (ImageButton)findViewById(R.id.HappyButton4);
         button22.setOnClickListener(happyButtonListener);
         
-        ImageButton button31 = (ImageButton)findViewById(R.id.HappyButton31);
-        button31.setOnClickListener(happyButtonListener);
-        
-        ImageButton button33 = (ImageButton)findViewById(R.id.HappyButton33);
-        button33.setOnClickListener(happyButtonListener);
-        
-        ImageButton button40 = (ImageButton)findViewById(R.id.HappyButton40);
-        button40.setOnClickListener(happyButtonListener);
-        
-        ImageButton button44 = (ImageButton)findViewById(R.id.HappyButton44);
-        button44.setOnClickListener(happyButtonListener);
-        
+        ImageButton next = (ImageButton)findViewById(R.id.nextButton);
+        next.setOnClickListener(happyButtonListener);
     }
         
 
@@ -162,11 +130,10 @@ public class Auramap extends Activity {
     i.putExtra("username", "test");
     i.putExtra("password", "test");
     i.putExtra("emotx", happyState.xVal);
-    i.putExtra("emoty", happyState.yVal);
-    double randomTechpointLat = 
-    	33.78156339080061 - Math.random() * 0.010487523427205;
-    double randomTechpointLon =
-    -84.38984870910645 - Math.random() * 0.01780986785888;
+    //double randomTechpointLat = 
+    //	33.78156339080061 - Math.random() * 0.010487523427205;
+    //double randomTechpointLon =
+    //-84.38984870910645 - Math.random() * 0.01780986785888;
     //i.putExtra("lat", randomTechpointLat);
     //i.putExtra("lon", randomTechpointLon);
     i.putExtra("lat", location.getLatitude());
