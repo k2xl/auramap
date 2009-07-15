@@ -28,15 +28,15 @@
 	<TableRow android:id="@+id/faces" android:layout_width="wrap_content" android:padding="15dip"
 	android:layout_height="wrap_content" android:gravity="center_horizontal">
 		<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" 
-		android:id="@+id/HappyButton40" android:background="@drawable/sad"></ImageButton>
+		android:background="@drawable/sad" android:id="@+id/HappyButton0"></ImageButton>
 		<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" 
-		android:id="@+id/HappyButton31" android:background="@drawable/lesssad"></ImageButton>
+		android:background="@drawable/lesssad" android:id="@+id/HappyButton1"></ImageButton>
 		<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" 
-		android:id="@+id/HappyButton22" android:background="@drawable/neutral"></ImageButton>
+		android:background="@drawable/neutral" android:id="@+id/HappyButton2"></ImageButton>
 		<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" 
-		android:id="@+id/HappyButton13" android:background="@drawable/lesshappy"></ImageButton>
+		android:background="@drawable/lesshappy" android:id="@+id/HappyButton3"></ImageButton>
 		<ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" 
-		android:id="@+id/HappyButton04" android:background="@drawable/happy"></ImageButton>	
+		android:background="@drawable/happy" android:id="@+id/HappyButton4"></ImageButton>	
 	</TableRow>
 	
 	<TableRow android:id="@+id/scroll" android:layout_width="wrap_content" android:padding="10dip" 
