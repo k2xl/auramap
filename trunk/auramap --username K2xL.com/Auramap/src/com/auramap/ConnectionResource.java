@@ -1,8 +1,11 @@
 package com.auramap;
 
-import java.lang.reflect.Array;
-import java.net.*;
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +21,12 @@ import android.widget.TextView;
 public class ConnectionResource extends Activity {
     /** Called when the activity is first created. */
         public final static String queryBase="http://ngp.lcc.gatech.edu/php_scripts/droid_root.php?";
-        
+        String[] randTags = {
+        	"Traffic", "Blah", "Blarg", "Meh", "Jackson", "Cancer", "Paper Cups", "Weather", "Tulips",
+        	"Beer", "Booze", "Jesus", "Computer", "Android", "Girlfriend", "Boyfriend", "Kids",
+        	"Spaceships", "Dinosaurs", "Bears", "Pizza", "Fire", "Bruce Willis", "M Jackson", "Doughnuts",
+        	"Lighting", "Life", "Swine Flu", "Baseball", "Hockey", "Money", "Economy", "Obama"       		
+        };
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -39,8 +47,7 @@ public class ConnectionResource extends Activity {
         //Puts bundle in q
        q = "username=test&"  
        	+ "password=test&"
-       	+ "emotx=" + extras.getInt("emotx") + "&"
-       	+ "emoty=" + extras.getInt("emoty")+ "&"
+       	+ "emotx=" + extras.getDouble("emotx") + "&"
        	+ "lat=" + extras.getDouble("lat")+ "&"
        	+ "lon=" + extras.getDouble("lon")+ "&"
        	+ "tag=" + extras.getString("tag");    	
@@ -52,9 +59,6 @@ public class ConnectionResource extends Activity {
 
     	vText = (TextView)findViewById(R.id.happyX);
     	vText.setText(extras.get("emotx").toString());
-
-    	vText = (TextView)findViewById(R.id.happyY);
-    	vText.setText(extras.get("emoty").toString());
     	
     	vText = (TextView)findViewById(R.id.loc);
     	vText.setText("Long: " +     			
@@ -62,15 +66,42 @@ public class ConnectionResource extends Activity {
     			extras.get("lat").toString());	
     	final Button mapButton = (Button) findViewById(R.id.MapButton);
         mapButton.setOnClickListener(mListener);
+        
+        final Button genButton = (Button) findViewById(R.id.point_gen);
+        genButton.setOnClickListener(gListener);
     	
-        Log.v("Auramap", "2");
         Intent intent = new Intent();
-        Log.v("Auramap", "3");
         String val = textURL(q);
+        log("messge to server: " + q);
         intent.putExtra("webResponse",val);
         setResult(RESULT_OK, intent);
         //finish();
     }
+    private OnClickListener gListener =new OnClickListener() {
+    	public void onClick(View v) {
+    		for(int i=0; i<100; i++) {
+    		String s = "";
+    		double eX = ((Math.round(Math.random()*4)))/4.0;
+    		//Log.v()
+    		double randomTechpointLat = 
+    	    	33.78156339080061 - Math.random() * 0.010487523427205;
+    	    double randomTechpointLon =
+    	    	-84.38984870910645 - Math.random() * 0.01780986785888;
+    	    
+    	    int numTags = (int)(1 + Math.random()*4);
+    	    int startTag = (int)(Math.random() * (randTags.length-numTags));
+    	    String tags = "&tag=";
+    	    for(int y =0; y<numTags; y++) {
+    	    	tags += randTags[y+startTag] + ",";    	    	
+    	    }
+    	    Log.v("...", tags);
+    		
+    		s += "username=test&password=test&emotx="
+    		  + eX + "&lat=" + randomTechpointLat 
+    		  + "&lon=" + randomTechpointLon + tags;
+    		textURL(s);
+    	}}
+    };
     private OnClickListener mListener =new OnClickListener() {
     	
     	public void onClick(View v) {                

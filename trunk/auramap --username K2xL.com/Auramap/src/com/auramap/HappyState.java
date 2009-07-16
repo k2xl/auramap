@@ -3,8 +3,8 @@ package com.auramap;
 public class HappyState {
 
 	public String stateName;
-	public int xVal;
-	public int yVal;
+	public double xVal;
+	public double yVal;
 	
 	public HappyState() {
 		

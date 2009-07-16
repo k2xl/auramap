@@ -36,21 +36,36 @@ public class MoodMap extends MapActivity {
         mc.zoomToSpan(10487, 17809);
         mapView.setBuiltInZoomControls(true);
         OverlayItem[] items = getPoints();
-        Drawable drawable = this.getResources().getDrawable(R.drawable.blank);
+        Log.v("Auramap","AAA");
+        Drawable drawable = this.getResources().getDrawable(R.drawable.blank2);
+        Log.v("Auramap","BBB");
         ItemizedAuraPoints circ = new ItemizedAuraPoints(drawable);
+        
         int tempS = items.length;
+        Log.v("Auramap","CCC = "+tempS);
         for (int i = 0 ; i < tempS ; i++)
         {
         	circ.addOverlay(items[i]);
         }
-        mapView.getOverlays().add(circ);
         
+        Log.v("Auramap","DDD");
+        circ.callPopulate();
+        mapView.setAlwaysDrawnWithCacheEnabled(true);
+        mapView.setDrawingCacheEnabled(true);
+        
+        
+        mapView.getOverlays().add(circ);
+        Log.v("Auramap","EEE");
     }
     
     private OverlayItem[] getPoints() {    	
+    	
     	String serverResult = textURL("username=test&password=test");
+    	
     	String[] sploded = serverResult.split("#");
+
     	if(sploded[0].equals("SUCCESS") == false) {Log.v("Auramap", "ERROR ERROR ERROR=" + sploded[0]); return null;}
+
     	int tempS = sploded.length;
     	
     	OverlayItem[] items = new OverlayItem[tempS-1];
@@ -64,6 +79,8 @@ public class MoodMap extends MapActivity {
     		GeoPoint geopt = new GeoPoint(latData,lonData);
     		items[i-1] = new OverlayItem(geopt,"",""+emotX);
     	}
+
+
     	return items;
     }
     
