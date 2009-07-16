@@ -14,9 +14,9 @@
     </TableRow>
     
     <TableRow android:id="@+id/face" android:layout_width="wrap_content" android:padding="20dip"
-    android:layout_height="wrap_content" android:gravity="center_horizontal">
+    android:layout_height="wrap_content" android:gravity="center_horizontal" android:background="@drawable/blank2" android:minHeight="120sp" android:minWidth="120sp">
         <ImageButton android:layout_width="wrap_content" android:layout_height="wrap_content" 
-		android:id="@+id/FaceButton" android:background="@drawable/face"></ImageButton>
+		android:id="@+id/FaceButton" android:minHeight="125sp" android:minWidth="125sp" android:background="@drawable/blank2"></ImageButton>
     </TableRow>
         
     <TableRow android:id="@+id/select" android:layout_width="wrap_content" android:padding="5dip"
