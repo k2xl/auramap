@@ -1,17 +1,13 @@
 package com.auramap;
 
-import java.net.*;
-import java.io.*;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 public class GetTag extends Activity {
     public EditText tag;
@@ -31,9 +27,10 @@ public class GetTag extends Activity {
 
         //data = this.getIntent().getExtras().getString("data");
         tag = (EditText) findViewById(R.id.tag);
+        //createTagButtons();
   
     
-    final Button next = (Button) findViewById(R.id.submit);    
+    final ImageButton next = (ImageButton) findViewById(R.id.submit);    
     next.setOnClickListener(sListener);
         
     }
@@ -48,6 +45,9 @@ public class GetTag extends Activity {
 		finish();
 		
     }
+    
+    
+    
     /*
     public void onActivityResult  (int requestCode, int resultCode, Intent data){
 

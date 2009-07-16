@@ -1,19 +1,17 @@
 package com.auramap;
 
-import android.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-
-
-
 
 public class Auramap extends Activity {
     /** Called when the activity is first created. */
@@ -22,9 +20,7 @@ public class Auramap extends Activity {
 	LocationManager manager;
 	Location location; //location
 	LocationListener locationListener;
-    
-    
-    
+        
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
@@ -32,49 +28,58 @@ public class Auramap extends Activity {
         location = manager.getLastKnownLocation( "gps" );
         locationListener = new MyLocationListener();
         
+    	
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 2500,
                 25,
                 locationListener); 
         
-        setContentView(R.layout.main);      
-        
+        setContentView(R.layout.main);     
+        ((ImageButton)findViewById(R.id.FaceButton)).setBackgroundDrawable( getResources().getDrawable(R.drawable.neutral2) );
+		
+    	
         createButtons();
     }
     
     private OnClickListener happyButtonListener = new OnClickListener() {
         public void onClick(View v) {
         	int id = v.getId();
-        	
         	switch(id) {
         	case R.id.HappyButton0: 
         	    happyState.stateName = "depressed";
         		happyState.xVal = 0;
+        		((ImageButton)findViewById(R.id.FaceButton)).setBackgroundDrawable( getResources().getDrawable(R.drawable.sad2) );
         		break;
         	case R.id.HappyButton1: 
         	    happyState.stateName = "sad";
-        		happyState.xVal = 1;
+        		((ImageButton)findViewById(R.id.FaceButton)).setBackgroundDrawable( getResources().getDrawable(R.drawable.lesssad2) );
+        		
+        		happyState.xVal = .25;
         		break;
         	case R.id.HappyButton2: 
         	    happyState.stateName = "neutral";
-        		happyState.xVal = 2;
+        		((ImageButton)findViewById(R.id.FaceButton)).setBackgroundDrawable( getResources().getDrawable(R.drawable.neutral2) );
+        		
+        		happyState.xVal = .5;
         		break;
         	case R.id.HappyButton3: 
         	    happyState.stateName = "happy";
-        		happyState.xVal = 3;
+        		((ImageButton)findViewById(R.id.FaceButton)).setBackgroundDrawable( getResources().getDrawable(R.drawable.lesshappy2) );
+        		
+        		happyState.xVal = .75;
         		break;
         	case R.id.HappyButton4: 
         	    happyState.stateName = "ecstatic";
-        		happyState.xVal = 4;
+        		((ImageButton)findViewById(R.id.FaceButton)).setBackgroundDrawable( getResources().getDrawable(R.drawable.happy2) );
+        		
+        		happyState.xVal = 1;
         		break;
         	case R.id.nextButton: 
         	    sendAuraPoint();
-        		break;
-        	
+        		break;        	
         	}
         }  
    };
-  
 
    
    private class MyLocationListener implements LocationListener
