@@ -1,64 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" 
 android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" 
-android:gravity="center" android:padding="12dip"
+android:gravity="center" android:padding="6dip" android:orientation="horizontal"
 android:background="#333333" android:layout_gravity="center_vertical|center_horizontal|center">
 
-<TextView android:id="@+id/TextView01" android:padding="10dip" 
-android:layout_width="wrap_content" android:layout_height="wrap_content" 
-android:textColor="#FF9900" android:textSize="16sp" android:textStyle="bold" android:text="Tag your reasons or select from the most popular ones below." android:layout_gravity="center" android:gravity="center_horizontal"></TextView>
+    <TextView android:id="@+id/TextView01" android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" android:textColor="#FF9900" android:textSize="14sp" android:textStyle="bold" 
+        android:text="Tag your reasons or select from the most popular ones below." 
+        android:gravity="center_horizontal" android:padding="6dip" 
+        android:layout_marginRight="6dip"></TextView>
+        <EditText android:layout_width="wrap_content" android:id="@+id/tag" android:layout_height="wrap_content" android:layout_marginLeft="19dip" android:layout_marginRight="19dip" android:maxLines="1"></EditText>
 
-<EditText android:layout_width="wrap_content" android:layout_height="wrap_content" 
-android:id="@+id/tag"></EditText>
-
-<TableRow android:id="@+id/firstCheckBoxes" android:layout_width="wrap_content"
+<TableRow android:id="@+id/taglabels" android:layout_width="wrap_content" android:paddingBottom="2dp"
     android:layout_height="wrap_content" android:gravity="left">
-    <TextView android:id="@+id/TextView02" android:padding="8dip"
-	android:layout_width="wrap_content" android:layout_height="wrap_content" 
-	android:text="Top local tags:" android:textColor="#FFF" android:textSize="18sp" 
-	android:textStyle="bold"></TextView>
+    <TextView android:id="@+id/toplocal" 
+        android:layout_width="wrap_content" android:layout_height="wrap_content" 
+        android:text="Top local tags:" android:textColor="#FFF" android:textSize="16sp" 
+        android:textStyle="bold" android:layout_marginLeft="20dp"></TextView>
+        
+        
+        <ImageView android:id="@+id/blank3" android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" android:background="@drawable/blank3"></ImageView>
 
-	<TextView android:id="@+id/TextView03" android:padding="8dip"
-	android:layout_width="wrap_content" android:layout_height="wrap_content" 
-	android:text="Top world tags:" android:textColor="#FFF" android:textSize="18sp" 
-	android:textStyle="bold"></TextView>
+        <TextView android:id="@+id/topworld" 
+        android:layout_width="wrap_content" android:layout_height="wrap_content" 
+        android:text="Top world tags:" android:textColor="#FFF" android:textSize="16sp" 
+        android:textStyle="bold" android:layout_marginLeft="20dp"></TextView>
 </TableRow>
 
 <TableRow android:id="@+id/firstCheckBoxes" android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" android:gravity="left">
-    <CheckBox android:text="School" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/localTag01"></CheckBox>
-	<CheckBox android:text="Traffic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/globalTag01"></CheckBox>
-	</TableRow> 
+    android:layout_height="wrap_content" android:gravity="left" android:layout_marginLeft="12dp">
+    <Button android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" android:id="@+id/localTag01" android:textSize="14sp" 
+    android:typeface="normal" android:width="20dp" android:text="School"></Button>
+    <ImageView android:id="@+id/blank3" android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" android:background="@drawable/blank3"></ImageView>
+        <Button android:text="Traffic" android:layout_width="wrap_content" android:textSize="14sp"
+        android:layout_height="wrap_content" android:width="20dp" android:id="@+id/globalTag01" android:includeFontPadding="true"></Button>
+        </TableRow> 
 
 <TableRow android:id="@+id/secondCheckBoxes" android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" android:gravity="center_horizontal">	    
-	<CheckBox android:text="CheckBox03" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/localTag02"></CheckBox>
-	<CheckBox android:text="CheckBox04" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/globalTag02"></CheckBox>
-	</TableRow> 
-	
+    android:layout_height="wrap_content" android:gravity="left" android:layout_marginLeft="12dp">            
+        <Button android:text="CheckBox03" android:layout_width="wrap_content" android:textSize="14sp"
+        android:layout_height="wrap_content" android:id="@+id/localTag02"></Button>
+        <ImageView android:id="@+id/blank2" android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" android:background="@drawable/blank2"></ImageView>
+        <Button android:text="CheckBox04" android:layout_width="wrap_content" 
+        android:textSize="14sp" android:layout_height="wrap_content" android:id="@+id/globalTag02"></Button>
+        
+</TableRow> 
+        
 <TableRow android:id="@+id/thirdCheckBoxes" android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" android:gravity="center_horizontal">
-    <CheckBox android:text="School" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/localTag03"></CheckBox>
-	<CheckBox android:text="Traffic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/globalTag03"></CheckBox>
-	</TableRow> 
-	
-<TableRow android:id="@+id/fourthCheckBoxes" android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" android:gravity="center_horizontal">
-    <CheckBox android:text="School" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/localTag04"></CheckBox>
-	<CheckBox android:text="Traffic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/globalTag04"></CheckBox>
-	</TableRow> 
-	
-<TableRow android:id="@+id/fifthCheckBoxes" android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" android:gravity="center_horizontal">
-    <CheckBox android:text="School" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/localTag05"></CheckBox>
-	<CheckBox android:text="Traffic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/globalTag05"></CheckBox>
-	</TableRow> 
-
+    android:layout_height="wrap_content" android:gravity="left" android:layout_marginLeft="12dp">
+    <Button android:text="CheckBox05" android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" android:textSize="14sp" android:id="@+id/localTag03"></Button>
+<ImageView android:id="@+id/blank2" android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" android:background="@drawable/blank2"></ImageView>
+        <Button android:text="CheckBox06" android:layout_width="wrap_content" android:textSize="14sp"
+        android:layout_height="wrap_content" android:id="@+id/globalTag03"></Button>
+        </TableRow> 
+        
 <TableRow android:id="@+id/next" android:layout_width="wrap_content" android:gravity="right"
     android:layout_height="wrap_content" >
-	    <ImageButton android:layout_width="wrap_content"
-    	android:layout_height="wrap_content" android:id="@+id/submit" 
+            <ImageButton android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/submit" 
         android:gravity="right"
-    	android:background="@drawable/next" android:layout_gravity="right"></ImageButton>    	
+            android:background="@drawable/arrow2" android:layout_gravity="right" android:layout_marginRight="30dip" android:layout_marginBottom="4dp"></ImageButton>            
     </TableRow> 
 </TableLayout> 
