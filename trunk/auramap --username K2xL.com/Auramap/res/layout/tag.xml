@@ -32,32 +32,32 @@ android:background="#333333" android:layout_gravity="center_vertical|center_hori
     android:layout_height="wrap_content" android:gravity="left" android:layout_marginLeft="12dp">
     <Button android:layout_width="wrap_content" 
     android:layout_height="wrap_content" android:id="@+id/localTag01" android:textSize="14sp" 
-    android:typeface="normal" android:width="20dp" android:text="School"></Button>
+    android:typeface="normal" android:width="20dp" android:text="School" android:textColor="#FFFFFF"></Button>
     <ImageView android:id="@+id/blank3" android:layout_width="wrap_content" 
                 android:layout_height="wrap_content" android:background="@drawable/blank3"></ImageView>
         <Button android:text="Traffic" android:layout_width="wrap_content" android:textSize="14sp"
-        android:layout_height="wrap_content" android:width="20dp" android:id="@+id/globalTag01" android:includeFontPadding="true"></Button>
+        android:layout_height="wrap_content" android:width="20dp" android:id="@+id/globalTag01" android:includeFontPadding="true" android:textColor="#FFFFFF"></Button>
         </TableRow> 
 
 <TableRow android:id="@+id/secondCheckBoxes" android:layout_width="wrap_content" 
     android:layout_height="wrap_content" android:gravity="left" android:layout_marginLeft="12dp">            
         <Button android:text="CheckBox03" android:layout_width="wrap_content" android:textSize="14sp"
-        android:layout_height="wrap_content" android:id="@+id/localTag02"></Button>
+        android:layout_height="wrap_content" android:id="@+id/localTag02" android:textColor="#FFFFFF"></Button>
         <ImageView android:id="@+id/blank2" android:layout_width="wrap_content" 
                 android:layout_height="wrap_content" android:background="@drawable/blank2"></ImageView>
         <Button android:text="CheckBox04" android:layout_width="wrap_content" 
-        android:textSize="14sp" android:layout_height="wrap_content" android:id="@+id/globalTag02"></Button>
+        android:textSize="14sp" android:layout_height="wrap_content" android:id="@+id/globalTag02" android:textColor="#FFFFFF"></Button>
         
 </TableRow> 
         
 <TableRow android:id="@+id/thirdCheckBoxes" android:layout_width="wrap_content" 
     android:layout_height="wrap_content" android:gravity="left" android:layout_marginLeft="12dp">
     <Button android:text="CheckBox05" android:layout_width="wrap_content" 
-    android:layout_height="wrap_content" android:textSize="14sp" android:id="@+id/localTag03"></Button>
+    android:layout_height="wrap_content" android:textSize="14sp" android:id="@+id/localTag03" android:textColor="#FFFFFF"></Button>
 <ImageView android:id="@+id/blank2" android:layout_width="wrap_content" 
                 android:layout_height="wrap_content" android:background="@drawable/blank2"></ImageView>
         <Button android:text="CheckBox06" android:layout_width="wrap_content" android:textSize="14sp"
-        android:layout_height="wrap_content" android:id="@+id/globalTag03"></Button>
+        android:layout_height="wrap_content" android:id="@+id/globalTag03" android:textColor="#FFFFFF"></Button>
         </TableRow> 
         
 <TableRow android:id="@+id/next" android:layout_width="wrap_content" android:gravity="right"
