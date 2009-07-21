@@ -142,7 +142,8 @@ public class Auramap extends Activity {
     //i.putExtra("lat", randomTechpointLat);
     //i.putExtra("lon", randomTechpointLon);
     i.putExtra("lat", location.getLatitude());
-    i.putExtra("lon", location.getLongitude());    
+    i.putExtra("lon", location.getLongitude());
+    Log.v("Auramap", "Lat/Lon: " + location.getLatitude() + ", " + location.getLongitude());
     startActivity(i);
     finish();
     }
