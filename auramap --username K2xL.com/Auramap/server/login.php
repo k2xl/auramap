@@ -30,4 +30,19 @@ if ($loggedIn == 0)
 $Me = $DB->query("select * from users where username='$username' and password='$password'");
 $Me = mysql_fetch_assoc($Me);
 
+
+function validCoordinates($lat,$long)
+{
+	if ( (is_numeric($lat) && is_numeric($long)) == false)
+	{
+		return INVALID_COORD_ERROR;
+	}
+	// Lat and long should be floats at this point of code. Else the previous if statement would return an error.
+	/*if ($lat < 0 || $lat > 90 || $long < 0 || $long > 180)
+	{
+		return INVALID_COORD_ERROR;
+	}*/
+	return SUCCESS;
+}
+
 ?>

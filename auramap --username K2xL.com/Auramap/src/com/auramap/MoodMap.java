@@ -35,6 +35,7 @@ public class MoodMap extends MapActivity {
         mc.animateTo(new GeoPoint(33778268, -84399182));
         mc.zoomToSpan(10487, 17809);
         mapView.setBuiltInZoomControls(true);
+        
         OverlayItem[] items = getPoints();
         Log.v("Auramap","AAA");
         Drawable drawable = this.getResources().getDrawable(R.drawable.blank2);

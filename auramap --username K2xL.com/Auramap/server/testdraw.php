@@ -13,10 +13,10 @@ $circlealpha = .5;//0.05;
 $radius = 50;
 $imgSrc = "gtmap.JPG";
 
-$topleftlat = $Header['topleftlat'];//33.78156339080061;
-$topleftlong = $Header['topleftlong'];//-84.40765857696533;
-$bottomrightlat =  $Header['bottomrightlat'];//33.771075867373405;
-$bottomrightlong = $Header['bottomrightlong'];//-84.38984870910645; 
+$topleftlat = 33.78156339080061;
+$topleftlong = -84.40765857696533;
+$bottomrightlat =  33.771075867373405;
+$bottomrightlong = -84.38984870910645; 
 $myImage = imagecreatefromjpeg($imgSrc); 
 // send the new PNG image to the browser 
 
@@ -36,7 +36,13 @@ $DataPoints = $DB->query("$sql");
 // Parse through all the circles
 
 while ($rs = mysql_fetch_assoc($DataPoints))
-{	
+//for ($a = 0; $a < 100; $a++)
+//
+{
+	
+ 	
+	//rand($radius,$width-$radius);
+	
 	$percX = (floatval($rs['lon']-$topleftlong)/($bottomrightlong-$topleftlong));
 	$percY =  (floatval($rs['lat']-$topleftlat)/($bottomrightlat-$topleftlat));
 	
