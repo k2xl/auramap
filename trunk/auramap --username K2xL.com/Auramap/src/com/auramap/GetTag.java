@@ -40,20 +40,39 @@ public class GetTag extends Activity {
     
     private void setupLocalTags(String toServer) {
     	String fromServer = textURL(toServer + "&radius=100&numresults=" + numTags);
+    	localTagNames[0] = "[no data]";
+    	localTagNames[1] = "[no data]";
+    	localTagNames[2] = "[no data]";
+    	localTagColors[0] = "#CCCCCC";
+    	localTagColors[1] = "#CCCCCC";
+    	localTagColors[2] = "#CCCCCC";
+        if (fromServer.equals("EMPTY_RESULT") == true) {
+        	return;
+        }
+        
     	String[] sploded = fromServer.split("#");
     	int tempS = sploded.length;
-    	for(int i=1; i<tempS; i++) {
+    	for(int i=0; i<tempS; i++) {
     		String[] anotherTemp = sploded[i].split(",");
-    		localTagNames[i-1]=anotherTemp[0];   
+    		localTagNames[i]=anotherTemp[0];   
     		Double d = Double.parseDouble(anotherTemp[2]);
     		int n = (int)Math.round(d*4);
-    		localTagColors[i-1]= colors[n];
+    		localTagColors[i]= colors[n];
     		}
     }
     
     private void setupGlobalTags(String toServer) {
 
     	String fromServer = textURL(toServer + "&radius=5000&numresults=" + numTags);
+    	globalTagNames[0] = "[no data]";
+		globalTagNames[1] = "[no data]";
+		globalTagNames[2] = "[no data]";
+		globalTagColors[0] = "#CCCCCC";
+    	globalTagColors[1] = "#CCCCCC";
+    	globalTagColors[2] = "#CCCCCC";
+    	if (fromServer.equals("EMPTY_RESULT") == true) {
+        	return;
+        }
     	String[] sploded = fromServer.split("#");
     	int tempS = sploded.length;
     	for(int i=0; i<tempS; i++) {
@@ -110,6 +129,9 @@ public class GetTag extends Activity {
         tagButton.setBackgroundColor(Color.parseColor(localTagColors[1]));
         tagButton.setOnClickListener(tagListener);
         
+        Log.v("aaa","local1 = "+localTagColors[0]);
+        Log.v("aaa","local2 = "+localTagColors[1]);
+        Log.v("aaa","local3 = "+localTagColors[2]);
         tagButton = (Button) findViewById(R.id.localTag03 );
         tagButton.setText(localTagNames[2]);
         tagButton.setBackgroundColor(Color.parseColor(localTagColors[2]));
@@ -125,9 +147,24 @@ public class GetTag extends Activity {
     	public void onClick(View v) {
     		String str = tag.getText().toString();
     		String newTag = ((Button) findViewById(v.getId())).getText().toString();
-    		if(str.equalsIgnoreCase("") ) str = newTag;
-    		else if(!str.contains(", " + newTag)) str += ", " + newTag;
-    		tag.setText(str);
+    		String[] splitted = str.split(",");
+    		boolean found = false;
+    		int tempS = splitted.length;
+    		for (int i = 0 ; i < tempS; i++)
+    		{
+    			if (splitted[i].equals(newTag))
+    			{
+    				found =true;
+    				break;
+    			}
+    		}
+    		
+    		if (!found){
+    			if (tempS == 0){ tag.setText(newTag+","); }
+    			else{
+    			tag.setText(str+""+newTag+",");
+    			}
+    		}
     		    		
     	}
     };

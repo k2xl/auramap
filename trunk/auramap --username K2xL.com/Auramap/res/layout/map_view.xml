@@ -2,7 +2,6 @@
     android:id="@+id/main"
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent">
-<TextView android:text="I promise I'm not null." android:layout_toLeftOf="@+id/thismap" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/NotNullText"></TextView>
 
     <com.google.android.maps.MapView
         android:id="@+id/thismap"
@@ -10,7 +9,7 @@
         android:layout_height="fill_parent"
         android:enabled="true"
         android:clickable="true"
-        android:apiKey="04MVU6_RL2g5_a5DaA9MhR0GG6ANij0kzfhY-LQ"
+        android:apiKey="06lCbg_9Y6PjNuQKAg0AWESFKNeo3AhNhpWcakA"
         />
 </RelativeLayout>
 
