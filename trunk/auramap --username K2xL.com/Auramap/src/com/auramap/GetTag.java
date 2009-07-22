@@ -37,7 +37,23 @@ public class GetTag extends Activity {
             sendAuraPoint();                          
         }
     };
-    
+    public static int averageColors(int col1,int col2,double weight1 ,double weight2)
+	{
+		int[] c1 = getRGB(col1);
+		int[] c2 = getRGB(col2);
+		int r = (int) ((c1[0]*weight1+c2[0]*weight2)/(weight1+weight2));
+		int g = (int) ((c1[1]*weight1+c2[1]*weight2)/(weight1+weight2));
+		int b = (int) ((c1[2]*weight1+c2[2]*weight2)/(weight1+weight2));
+		return Color.rgb(r, g, b);
+	}
+    public static int[] getRGB(int rgb){
+    	int[] c = new int[2];
+    	c[0] = rgb>>16&0xFF;
+    	c[1] = rgb>>8&0xFF;
+    	c[2] = rgb&0xFF;
+    	return c;
+	}
+	
     private void setupLocalTags(String toServer) {
     	String fromServer = textURL(toServer + "&radius=100&numresults=" + numTags);
     	localTagNames[0] = "[no data]";
