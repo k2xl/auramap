@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,24 +21,28 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
 public class MoodMap extends MapActivity {
-
+	ProgressDialog pd ;
      LinearLayout linearLayout;
      MapView mapView;
      ZoomControls mapZoom;
      MapController mc;
+     OverlayItem[] items;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.map_view);
-       
         mapView = (MapView) findViewById(R.id.thismap);
         mc = mapView.getController();
         mc.animateTo(new GeoPoint(33778268, -84399182));
         mc.zoomToSpan(10487, 17809);
         mapView.setBuiltInZoomControls(true);
         
-        OverlayItem[] items = getPoints();
+        getPoints();
+    }
+    
+    private void drawPoints() {
         Log.v("Auramap","AAA");
         Drawable drawable = this.getResources().getDrawable(R.drawable.blank2);
         Log.v("Auramap","BBB");
@@ -59,17 +65,25 @@ public class MoodMap extends MapActivity {
         Log.v("Auramap","EEE");
     }
     
-    private OverlayItem[] getPoints() {    	
-    	
-    	String serverResult = textURL("username=test&password=test");
-    	
-    	String[] sploded = serverResult.split("#");
+    private void getPoints() {    	
+		pd = ProgressDialog.show(this, "Getting Aurapoints...", "Please wait while we get the Aurapoints from the server");	
+        Intent intent = new Intent(this.getBaseContext(), TextURL.class);
+        intent.putExtra("URL","http://www.k2xl.info/auramap/server/getcoords.php");
+        intent.putExtra("loadMessage","Retrieving Aurapoints");
+        intent.putExtra("servMessage","username=test&password=test");
+        startActivityForResult(intent, 0);
+    }
+    
+    public void onActivityResult (int requestCode, int resultCode, Intent data) {
+    	pd.dismiss();
+    	Log.v("ddd", "CR: " + data.getExtras().getString("webResponse"));
+    	String[] sploded = data.getExtras().getString("webResponse").split("#");
 
-    	if(sploded[0].equals("SUCCESS") == false) {Log.v("Auramap", "ERROR ERROR ERROR=" + sploded[0]); return null;}
+    	if(sploded[0].equals("SUCCESS") == false) {Log.v("Auramap", "ERROR ERROR ERROR=" + sploded[0]); }
 
     	int tempS = sploded.length;
     	
-    	OverlayItem[] items = new OverlayItem[tempS-1];
+    	items = new OverlayItem[tempS-1];
     	
     	for(int i =1; i<tempS; i++) {
     		String curString = sploded[i];
@@ -80,9 +94,8 @@ public class MoodMap extends MapActivity {
     		GeoPoint geopt = new GeoPoint(latData,lonData);
     		items[i-1] = new OverlayItem(geopt,"",""+emotX);
     	}
+    	drawPoints();
 
-
-    	return items;
     }
     
     
