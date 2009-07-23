@@ -23,5 +23,7 @@
 	</TableRow>
 
 <Button android:text="Go to Map" android:id="@+id/MapButton" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Make a bunch of points." android:id="@+id/point_gen"></Button>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/point_gen" android:text="Make a bunch of points at Tech."></Button>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/world_gen" android:text="Make a bunch of points all over the place."></Button>
+
 </TableLayout>
