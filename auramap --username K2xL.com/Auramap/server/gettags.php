@@ -9,7 +9,10 @@ $validCoord = validCoordinates($lat,$lon);
 if ($validCoord != SUCCESS) { echo $validCoord; exit();}
 
 // Step 2: Get all aurapoints ids in radius
-$radius = SPACE_RADIUS;
+//$radius = SPACE_RADIUS;
+//$radius = 100000;
+$radius = intval($Headers['radius']);
+$numresults = intval($Headers['numresults']);
 $sql = "SELECT *,((ACOS(SIN($lat* PI() / 180) * SIN(lat * PI() / 180) + COS($lat* PI() / 180) * COS(lat * PI() / 180) * COS(($lon- lon) * PI() / 180)) * 180 / PI()) * 60 * 1.1515) AS distance FROM aurapoints having distance<=$radius ORDER BY distance ASC ";
 $query = $DB->query($sql);
 
@@ -33,18 +36,20 @@ while ($rs = mysql_fetch_assoc($query))
 $query = $DB->query($sql);
 if (!$query){echo SERVER_ERROR; exit();}
 
-echo $sql;
+//echo $sql;
 // now place all tags in an array
 $tagArray = array();
 while ($rs = mysql_fetch_assoc($query))
 {
 	$tag = $rs['tag'];
-	echo ">$tag<br/>";
+	//echo ">$tag<br/>";
 	if (!isset($tagArray[$tag]))
 	{
 		$tagArray[$tag] = array();
 		$tagArray[$tag][0] = 1; // 1 count
 		$tagArray[$tag][1] = $rs['emotrating'];
+		$tagArray[$tag][2] = $tag;
+
 	}
 	else
 	{
@@ -52,17 +57,23 @@ while ($rs = mysql_fetch_assoc($query))
 		$currentWeight = $tagArray[$tag][1];
 		$tagArray[$tag][1] = $currentWeight*($currentCount++)/($currentCount)+ $rs['emotrating']*(1/($currentCount));
 		$tagArray[$tag][0] = $currentCount;
+		$tagArray[$tag][2] = $tag;
 	}
 }
-echo "<br/><br/>Looping thru tags<br/><br/>";
-foreach ($tagArray as $key => $value) {
-    echo $key."=".$tagArray[$key][0]." with avg color of ".$tagArray[$key][1]."<br/>";
-}
-usort($tagArray,$comparemethod);
+//echo "<br/><br/>Looping thru tags<br/><br/>";
 
-function comparemethod($a,$b)
+function comp($a,$b)
 {
-	if ($a[0])
+	return ($a[0] < $b[0]);
 }
 
+usort($tagArray,"comp");
+$count = min($numresults,count($tagArray));
+$str = "";
+foreach ($tagArray as $key => $value) {
+    $str.= $tagArray[$key][2].",".$tagArray[$key][0].",".$tagArray[$key][1]."#";
+	if (--$count == 0){ break; }
+}
+$str = substr($str,0,strlen($str)-1);
+echo $str;
 ?>
