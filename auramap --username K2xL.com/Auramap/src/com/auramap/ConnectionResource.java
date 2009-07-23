@@ -66,6 +66,10 @@ public class ConnectionResource extends Activity {
 
 		final Button genButton = (Button) findViewById(R.id.point_gen);
 		genButton.setOnClickListener(gListener);
+		
+
+		Button worldGen = (Button) findViewById(R.id.world_gen);
+		worldGen.setOnClickListener(wListener);
 
 		Intent intent = new Intent(this.getBaseContext(), TextURL.class);
 		intent.putExtra("URL",
@@ -74,6 +78,32 @@ public class ConnectionResource extends Activity {
 		intent.putExtra("servMessage", q);
 		startActivityForResult(intent, 0);
 	}
+	
+	private OnClickListener wListener = new OnClickListener() {
+		public void onClick(View v) {
+			for (int i = 0; i < 100; i++) {
+				String s = "";
+				double eX = ((Math.round(Math.random() * 4))) / 4.0;
+				// Log.v()
+				double randomTechpointLat = Math.random() * 360 - 180;
+				double randomTechpointLon = Math.random() * 360 - 180;
+
+				int numTags = (int) (1 + Math.random() * 4);
+				int startTag = (int) (Math.random() * (randTags.length - numTags));
+				String tags = "&tag=";
+				for (int y = 0; y < numTags; y++) {
+					tags += randTags[y + startTag] + ",";
+					//eX += Double.parseDouble(randWeights);
+				}
+				Log.v("...", tags);
+
+				s += "username=test&password=test&emotx=" + eX + "&lat="
+						+ randomTechpointLat + "&lon=" + randomTechpointLon
+						+ tags;
+				textURL(s);
+			}
+		}
+	};
 
 	private OnClickListener gListener = new OnClickListener() {
 		public void onClick(View v) {

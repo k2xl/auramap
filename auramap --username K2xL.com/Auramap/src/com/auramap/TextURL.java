@@ -32,15 +32,12 @@ public class TextURL extends Activity {
         Intent i = new Intent();
         i.putExtra("webResponse", response);
         setResult(RESULT_OK, i);
-        pd.dismiss();
-        //loadAlert.cancel();
         finish();
 	}
     
 	private String contactServer(String url, String servMessage, String loadMessage) {
 		
 
-		pd = ProgressDialog.show(TextURL.this, "Loading...", loadMessage);
 		String str;
 		
     	int BUFFER_SIZE = 2000;
@@ -94,7 +91,6 @@ public class TextURL extends Activity {
             e.printStackTrace();
             str = "FAILED";
         }
-        pd.dismiss();
         
         return str;        
     }
