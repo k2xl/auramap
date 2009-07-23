@@ -70,16 +70,15 @@ public class ConnectionResource extends Activity {
         final Button genButton = (Button) findViewById(R.id.point_gen);
         genButton.setOnClickListener(gListener);
     	
-        Intent intent = new Intent();
-        String val = textURL(q);
-        log("messge to server: " + q);
-        intent.putExtra("webResponse",val);
-        setResult(RESULT_OK, intent);
-        //finish();
+        Intent intent = new Intent(this.getBaseContext(), TextURL.class);
+        intent.putExtra("URL","http://www.k2xl.info/auramap/server/insertaura.php");
+        intent.putExtra("loadMessage","Sending Aurapoint");
+        intent.putExtra("servMessage",q);
+        startActivityForResult(intent, 0);
     }
     private OnClickListener gListener =new OnClickListener() {
     	public void onClick(View v) {
-    		for(int i=0; i<100; i++) {
+    		for(int i=0; i<10; i++) {
     		String s = "";
     		double eX = ((Math.round(Math.random()*4)))/4.0;
     		//Log.v()
@@ -98,8 +97,12 @@ public class ConnectionResource extends Activity {
     		
     		s += "username=test&password=test&emotx="
     		  + eX + "&lat=" + randomTechpointLat 
-    		  + "&lon=" + randomTechpointLon + tags;
-    		textURL(s);
+    		  + "&lon=" + randomTechpointLon + tags;        Intent intent = new Intent();
+    	        intent.putExtra("url", "");        
+    	        intent.putExtra("url","http://www.k2xl.info/auramap/server/insertaura.php");
+    	        intent.putExtra("loadMessage","Sending Aurapoint");
+    	        intent.putExtra("servMessage",s);
+    	        startActivityForResult(intent, 0);
     	}}
     };
     private OnClickListener mListener =new OnClickListener() {
@@ -114,67 +117,9 @@ public class ConnectionResource extends Activity {
         Intent i = new Intent(this.getBaseContext(), MoodMap.class);	  
         startActivity(i);
         finish();
-    }  
+    }
+    public void onActivityResult (int requestCode, int resultCode, Intent data) {
+    	Log.v("ddd", "CR: " + data.getExtras().getString("webResponse"));
+    }
     
-    
-    public String textURL(String vars)
-    {
-    	int BUFFER_SIZE = 2000;
-        InputStream in = null;
-
-        try {
-            HttpURLConnection con = (HttpURLConnection)(new URL("http://www.k2xl.info/auramap/server/insertaura.php")).openConnection();
-            
-            con.setRequestMethod( "POST" );
-            con.setRequestProperty("METHOD", "POST");
-            con.setDoInput( true );
-            con.setDoOutput( true );
-            Log.v("Auramap", "Sending message: " + vars);
-           // add url form parameters
-            DataOutputStream ostream = null;
-            try {
-                ostream = new DataOutputStream( con.getOutputStream() );
-                ostream.writeBytes( vars );
-            }finally {
-                if( ostream != null ) {
-                    ostream.flush();
-                    ostream.close();
-                  }
-                }
-            
-            in = con.getInputStream();
-
-            
-        } catch (IOException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-            return e1.toString();
-        }
-        
-        InputStreamReader isr = new InputStreamReader(in);
-        int charRead;
-          String str = "";
-          char[] inputBuffer = new char[BUFFER_SIZE];          
-        try {
-            while ((charRead = isr.read(inputBuffer))>0)
-            {                    
-                //---convert the chars to a String---
-                String readString =
-                    String.copyValueOf(inputBuffer, 0, charRead);                    
-                str += readString;
-                inputBuffer = new char[BUFFER_SIZE];
-            }
-            in.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return "FAILED";
-        } 
-
-        Log.v("Auramap", "CR: " + str);
-        return str;        
-    }
-    private void log(String s) {
-    	Log.v("Auramap", s);    
-    }
-    }
+ }

@@ -12,6 +12,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".GetTag" android:label="GetTagLabel"/>
+        <activity android:name=".TextURL" android:label="TextURLLabel"/>
         <activity android:name=".ConnectionResource" android:label="ConnectionResourceLabel"/>
         <activity android:name=".MoodMap" android:label="MapLabel"/>
         
