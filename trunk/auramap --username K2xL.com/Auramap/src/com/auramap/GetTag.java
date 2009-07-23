@@ -10,6 +10,7 @@ import java.net.URL;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -168,20 +169,41 @@ public class GetTag extends Activity {
         tagButton.setBackgroundColor((localTagColors[1]));
         tagButton.setOnClickListener(tagListener);
         
-        Log.v("aaa","local1 = "+localTagColors[0]);
-        Log.v("aaa","local2 = "+localTagColors[1]);
-        Log.v("aaa","local3 = "+localTagColors[2]);
         tagButton = (Button) findViewById(R.id.localTag03 );
         tagButton.setText(localTagNames[2]);
         tagButton.setBackgroundColor((localTagColors[2]));
         tagButton.setOnClickListener(tagListener);
   
+       
     
     final ImageButton next = (ImageButton) findViewById(R.id.submit);    
     next.setOnClickListener(sListener);
-        
-    }
     
+    }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus){
+    	super.onWindowFocusChanged(hasFocus);
+
+         
+         ImageButton happymeter = (ImageButton)findViewById(R.id.happymeter);
+         double emotval = this.getIntent().getExtras().getDouble("emotx");
+         
+         int padding = (int)(emotval*happymeter.getWidth()-happymeter.getDrawable().getIntrinsicWidth()/2);
+         if (emotval == 0) { padding = -200; happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.sad));}
+         else if (emotval == .25) { padding = -100;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.lesssad)); }
+         else if (emotval == .5) { padding = 0;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.neutral)); }
+         else if (emotval == .75) { padding = 100;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.lesshappy)); }
+         else if (emotval == 1) { padding = 200;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.happy)); }
+         if (padding > 0){padding+=17;
+         happymeter.setPadding(padding, 0, 0, 0); // 17 is width of that left silver bar thing on scroll
+         }
+         if (padding < 0)
+         {
+        	 padding-=17;
+        	 happymeter.setPadding(0, 0, -(padding), 0); // 17 is width of that left silver bar thing on scroll	 
+         }
+         
+    }
     private OnClickListener tagListener =new OnClickListener() {
     	public void onClick(View v) {
     		String str = tag.getText().toString();
