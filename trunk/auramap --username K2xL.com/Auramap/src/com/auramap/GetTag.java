@@ -21,14 +21,14 @@ import android.widget.ImageButton;
 public class GetTag extends Activity {
     public EditText tag;
     private String data;
-    private String[] colors = { "#33CCCC", "#66CC99",  "#99CC66", "#CC9933", "#FF9900" };
     
+    private int[] colorsHEX = { 0x33CCCC, 0x66CC99,  0x99CC66, 0xCC9933, 0xFF9900 };
     private final int numTags = 3;
     
     String[] localTagNames;
-    String[] localTagColors;
+    int[] localTagColors;
     String[] globalTagNames;
-    String[] globalTagColors;
+    int[] globalTagColors;
     
     
     private OnClickListener sListener =new OnClickListener() {
@@ -47,21 +47,25 @@ public class GetTag extends Activity {
 		return Color.rgb(r, g, b);
 	}
     public static int[] getRGB(int rgb){
-    	int[] c = new int[2];
+    	int[] c = new int[3];
     	c[0] = rgb>>16&0xFF;
     	c[1] = rgb>>8&0xFF;
     	c[2] = rgb&0xFF;
     	return c;
 	}
-	
+	private int getColorFromGradient(int lowC, int highC,double perc)
+	{
+		Log.v("Aa","Low C = "+lowC+",highC"+highC+",perc="+perc);
+		return averageColors(lowC,highC,1-perc,perc);
+	}
     private void setupLocalTags(String toServer) {
     	String fromServer = textURL(toServer + "&radius=100&numresults=" + numTags);
     	localTagNames[0] = "[no data]";
     	localTagNames[1] = "[no data]";
     	localTagNames[2] = "[no data]";
-    	localTagColors[0] = "#CCCCCC";
-    	localTagColors[1] = "#CCCCCC";
-    	localTagColors[2] = "#CCCCCC";
+    	localTagColors[0] = 0x999999;
+    	localTagColors[1] = 0x999999;
+    	localTagColors[2] = 0x999999;
         if (fromServer.equals("EMPTY_RESULT") == true) {
         	return;
         }
@@ -71,9 +75,17 @@ public class GetTag extends Activity {
     	for(int i=0; i<tempS; i++) {
     		String[] anotherTemp = sploded[i].split(",");
     		localTagNames[i]=anotherTemp[0];   
-    		Double d = Double.parseDouble(anotherTemp[2]);
-    		int n = (int)Math.round(d*4);
-    		localTagColors[i]= colors[n];
+    		double d = Double.parseDouble(anotherTemp[2]);
+    		
+    		double realVal = (d*((colorsHEX.length)-1));
+    		int lowC = (int)Math.floor(realVal);
+    		int highC = (int)Math.ceil(realVal);
+    		
+
+    		double percAcross = (realVal-lowC);
+    		
+    		
+    		localTagColors[i]= getColorFromGradient(colorsHEX[lowC],colorsHEX[highC],percAcross);
     		}
     }
     
@@ -83,9 +95,9 @@ public class GetTag extends Activity {
     	globalTagNames[0] = "[no data]";
 		globalTagNames[1] = "[no data]";
 		globalTagNames[2] = "[no data]";
-		globalTagColors[0] = "#CCCCCC";
-    	globalTagColors[1] = "#CCCCCC";
-    	globalTagColors[2] = "#CCCCCC";
+		globalTagColors[0] = 0x999999;
+    	globalTagColors[1] = 0x999999;
+    	globalTagColors[2] = 0x999999;
     	if (fromServer.equals("EMPTY_RESULT") == true) {
         	return;
         }
@@ -94,9 +106,18 @@ public class GetTag extends Activity {
     	for(int i=0; i<tempS; i++) {
     		String[] anotherTemp = sploded[i].split(",");
     		globalTagNames[i]=anotherTemp[0];   
-    		Double d = Double.parseDouble(anotherTemp[2]);
-    		int n = (int)Math.round(d*4);
-    		globalTagColors[i]= colors[n];
+    		double d = Double.parseDouble(anotherTemp[2]);
+    	
+    		
+    		double realVal = (d*((colorsHEX.length)-1));
+    		int lowC = (int)Math.floor(realVal);
+    		int highC = (int)Math.ceil(realVal);
+    		
+
+    		double percAcross = (realVal-lowC);
+    		
+    		
+    		globalTagColors[i]= getColorFromGradient(colorsHEX[lowC],colorsHEX[highC],percAcross);
     		}
     }
     
@@ -105,9 +126,9 @@ public class GetTag extends Activity {
         setContentView(R.layout.tag);
         
         localTagNames = new String[5];
-        localTagColors = new String[5];
+        localTagColors = new int[5];
         globalTagNames = new String[5];
-        globalTagColors = new String[5];
+        globalTagColors = new int[5];
 
         //data = this.getIntent().getExtras().getString("data");
         tag = (EditText) findViewById(R.id.tag);
@@ -122,27 +143,27 @@ public class GetTag extends Activity {
         //parseResponse();
     	Button tagButton = (Button) findViewById(R.id.globalTag01 );
         tagButton.setText(globalTagNames[0]);
-        tagButton.setBackgroundColor(Color.parseColor(globalTagColors[0]));
+        tagButton.setBackgroundColor((globalTagColors[0]));
     	tagButton.setOnClickListener(tagListener);
         
         tagButton = (Button) findViewById(R.id.globalTag02 );
         tagButton.setText(globalTagNames[1]);
-        tagButton.setBackgroundColor(Color.parseColor(globalTagColors[1]));
+        tagButton.setBackgroundColor((globalTagColors[1]));
         tagButton.setOnClickListener(tagListener);
         
         tagButton = (Button) findViewById(R.id.globalTag03 );
         tagButton.setText(globalTagNames[2]);
-        tagButton.setBackgroundColor(Color.parseColor(globalTagColors[2]));
+        tagButton.setBackgroundColor((globalTagColors[2]));
         tagButton.setOnClickListener(tagListener);
         
         tagButton = (Button) findViewById(R.id.localTag01 );
         tagButton.setText(localTagNames[0]);
-        tagButton.setBackgroundColor(Color.parseColor(localTagColors[0]));
+        tagButton.setBackgroundColor((localTagColors[0]));
         tagButton.setOnClickListener(tagListener);
         
         tagButton = (Button) findViewById(R.id.localTag02 );
         tagButton.setText(localTagNames[1]);
-        tagButton.setBackgroundColor(Color.parseColor(localTagColors[1]));
+        tagButton.setBackgroundColor((localTagColors[1]));
         tagButton.setOnClickListener(tagListener);
         
         Log.v("aaa","local1 = "+localTagColors[0]);
@@ -150,7 +171,7 @@ public class GetTag extends Activity {
         Log.v("aaa","local3 = "+localTagColors[2]);
         tagButton = (Button) findViewById(R.id.localTag03 );
         tagButton.setText(localTagNames[2]);
-        tagButton.setBackgroundColor(Color.parseColor(localTagColors[2]));
+        tagButton.setBackgroundColor((localTagColors[2]));
         tagButton.setOnClickListener(tagListener);
   
     
