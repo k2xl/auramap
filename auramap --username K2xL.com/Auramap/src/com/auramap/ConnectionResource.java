@@ -77,7 +77,7 @@ public class ConnectionResource extends Activity {
 
 	private OnClickListener gListener = new OnClickListener() {
 		public void onClick(View v) {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 100; i++) {
 				String s = "";
 				double eX = ((Math.round(Math.random() * 4))) / 4.0;
 				// Log.v()
@@ -96,7 +96,7 @@ public class ConnectionResource extends Activity {
 				s += "username=test&password=test&emotx=" + eX + "&lat="
 						+ randomTechpointLat + "&lon=" + randomTechpointLon
 						+ tags;
-				startIntent(s);
+				textURL(s);
 			}
 		}
 	};
@@ -125,5 +125,63 @@ public class ConnectionResource extends Activity {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 	}
+	
+	public String textURL(String vars)
+    {
+    	int BUFFER_SIZE = 2000;
+        InputStream in = null;
+
+        try {
+            HttpURLConnection con = (HttpURLConnection)(new URL("http://www.k2xl.info/auramap/server/insertaura.php")).openConnection();
+            
+            con.setRequestMethod( "POST" );
+            con.setRequestProperty("METHOD", "POST");
+            con.setDoInput( true );
+            con.setDoOutput( true );
+            Log.v("Auramap", "Sending message: " + vars);
+           // add url form parameters
+            DataOutputStream ostream = null;
+            try {
+                ostream = new DataOutputStream( con.getOutputStream() );
+                ostream.writeBytes( vars );
+            }finally {
+                if( ostream != null ) {
+                    ostream.flush();
+                    ostream.close();
+                  }
+                }
+            
+            in = con.getInputStream();
+
+            
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+            return e1.toString();
+        }
+        
+        InputStreamReader isr = new InputStreamReader(in);
+        int charRead;
+          String str = "";
+          char[] inputBuffer = new char[BUFFER_SIZE];          
+        try {
+            while ((charRead = isr.read(inputBuffer))>0)
+            {                    
+                //---convert the chars to a String---
+                String readString =
+                    String.copyValueOf(inputBuffer, 0, charRead);                    
+                str += readString;
+                inputBuffer = new char[BUFFER_SIZE];
+            }
+            in.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "FAILED";
+        } 
+
+        Log.v("Auramap", "CR: " + str);
+        return str;        
+    }
 
 }
