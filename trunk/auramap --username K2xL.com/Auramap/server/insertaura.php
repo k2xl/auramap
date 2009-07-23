@@ -32,7 +32,6 @@ $str = "INSERT INTO tags(aurapoint_id,tag,emotrating) VALUES";
 for ($i = 0; $i < $count; $i++)
 {
 	$curTag = trim(strtolower($tagsArray[$i]));
-	
 	if (strlen($curTag) == 0) { continue; }
 	$str.= "($aurapoint_id,'".$curTag."','$emotx')";
 	if ($i < $count-1)
