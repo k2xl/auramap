@@ -44,7 +44,7 @@ public class ConnectionResource extends Activity {
 		}
 
 		// Puts bundle in q
-		q = "username=test&" + "password=test&" + "emotx="
+		q = "username=7707120740&" + "password=788eb77a3c1f739a0ea699612863d745&" + "emotx="
 				+ extras.getDouble("emotx") + "&" + "lat="
 				+ extras.getDouble("lat") + "&" + "lon="
 				+ extras.getDouble("lon") + "&" + "tag="

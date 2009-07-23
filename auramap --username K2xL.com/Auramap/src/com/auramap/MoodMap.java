@@ -70,7 +70,7 @@ public class MoodMap extends MapActivity {
         Intent intent = new Intent(this.getBaseContext(), TextURL.class);
         intent.putExtra("URL","http://www.k2xl.info/auramap/server/getcoords.php");
         intent.putExtra("loadMessage","Retrieving Aurapoints");
-        intent.putExtra("servMessage","username=test&password=test");
+        intent.putExtra("servMessage","username=7707120740&password=788eb77a3c1f739a0ea699612863d745");
         startActivityForResult(intent, 0);
     }
     

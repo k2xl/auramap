@@ -132,17 +132,17 @@ public class Auramap extends Activity {
     private void sendAuraPoint() {
     Intent i = new Intent(this.getBaseContext(), GetTag.class);	
     i.putExtra("emote", happyState.stateName);
-    i.putExtra("username", "test");
-    i.putExtra("password", "test");
+    i.putExtra("username", "7707120740");
+    i.putExtra("password", "788eb77a3c1f739a0ea699612863d745");
     i.putExtra("emotx", happyState.xVal);
-    //double randomTechpointLat = 
-    //	33.78156339080061 - Math.random() * 0.010487523427205;
-    //double randomTechpointLon =
-    //-84.38984870910645 - Math.random() * 0.01780986785888;
-    //i.putExtra("lat", randomTechpointLat);
-    //i.putExtra("lon", randomTechpointLon);
-    i.putExtra("lat", location.getLatitude());
-    i.putExtra("lon", location.getLongitude());
+    double randomTechpointLat = 
+    	33.78156339080061 - Math.random() * 0.010487523427205;
+    double randomTechpointLon =
+    -84.38984870910645 - Math.random() * 0.01780986785888;
+    i.putExtra("lat", randomTechpointLat);
+    i.putExtra("lon", randomTechpointLon);
+    //i.putExtra("lat", location.getLatitude());
+    //i.putExtra("lon", location.getLongitude());
     Log.v("Auramap", "Lat/Lon: " + location.getLatitude() + ", " + location.getLongitude());
     startActivity(i);
     finish();
