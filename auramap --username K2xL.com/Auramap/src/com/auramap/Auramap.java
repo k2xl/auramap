@@ -3,11 +3,11 @@ package com.auramap;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +20,7 @@ public class Auramap extends Activity {
 	LocationManager manager;
 	Location location; //location
 	LocationListener locationListener;
-        
+    String MyPhoneNumber;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
@@ -28,7 +28,11 @@ public class Auramap extends Activity {
         location = manager.getLastKnownLocation( "gps" );
         locationListener = new MyLocationListener();
         
-    	
+        TelephonyManager telephony = (TelephonyManager)
+        
+        getSystemService(TELEPHONY_SERVICE);
+        MyPhoneNumber = telephony.getLine1Number();
+        Log.v("aaa","My telephone number = "+MyPhoneNumber);
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 2500,
                 25,
