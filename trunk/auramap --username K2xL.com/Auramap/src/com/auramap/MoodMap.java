@@ -84,7 +84,6 @@ public class MoodMap extends MapActivity {
     	int tempS = sploded.length;
     	
     	items = new OverlayItem[tempS-1];
-    	
     	for(int i =1; i<tempS; i++) {
     		String curString = sploded[i];
     		String[] auraPointData = curString.split(",");
