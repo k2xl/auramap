@@ -7,7 +7,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.OverlayItem;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -22,6 +26,9 @@ import android.widget.ImageButton;
 public class GetTag extends Activity {
     public EditText tag;
     private String data;
+    ProgressDialog pd;
+    boolean localTagsRetrieved=false;
+    boolean globalTagsRetrieved=false;
     
     private int[] colorsHEX = { 0x33CCCC, 0x66CC99,  0x99CC66, 0xCC9933, 0xFF9900 };
     private final int numTags = 3;
@@ -38,6 +45,7 @@ public class GetTag extends Activity {
             sendAuraPoint();                          
         }
     };
+    
     public static int averageColors(int col1,int col2,double weight1 ,double weight2)
 	{
 		int[] c1 = getRGB(col1);
@@ -60,90 +68,107 @@ public class GetTag extends Activity {
 		return averageColors(lowC,highC,1-perc,perc);
 	}
     private void setupLocalTags(String toServer) {
+    	toServer += "&radius=100&numresults=" + numTags;
+    	//pd = ProgressDialog.show(this, "Loading...", "Please wait while we get the local tags from the server");	
     	
-    	String fromServer = textURL(toServer + "&radius=100&numresults=" + numTags);
-    	localTagNames[0] = "[no data]";
-    	localTagNames[1] = "[no data]";
-    	localTagNames[2] = "[no data]";
-
-    	localTagColors[0] = 0x999999;
-    	localTagColors[1] = 0x999999;
-    	localTagColors[2] = 0x999999;
-
-        if (fromServer.equals("EMPTY_RESULT") == true) {
-        	return;
-        }
-        
-    	String[] sploded = fromServer.split("#");
-    	int tempS = sploded.length;
-    	for(int i=0; i<tempS; i++) {
-    		String[] anotherTemp = sploded[i].split(",");
-    		localTagNames[i]=anotherTemp[0];   
-    		double d = Double.parseDouble(anotherTemp[2]);
-    		
-    		double realVal = (d*((colorsHEX.length)-1));
-    		int lowC = (int)Math.floor(realVal);
-    		int highC = (int)Math.ceil(realVal);
-    		
-
-    		double percAcross = (realVal-lowC);
-    		
-    		
-    		localTagColors[i]= getColorFromGradient(colorsHEX[lowC],colorsHEX[highC],percAcross);
-    		}
+    	Intent intent = new Intent(this.getBaseContext(), TextURL.class);
+        intent.putExtra("URL","http://www.k2xl.info/auramap/server/gettags.php");
+        intent.putExtra("loadMessage","Retrieving Tags");
+        intent.putExtra("servMessage",toServer);
+        startActivityForResult(intent, 0);
     }
     
     private void setupGlobalTags(String toServer) {
 
-    	String fromServer = textURL(toServer + "&radius=5000&numresults=" + numTags);
-    	globalTagNames[0] = "[no data]";
-		globalTagNames[1] = "[no data]";
-		globalTagNames[2] = "[no data]";
-
-		globalTagColors[0] = 0x999999;
-    	globalTagColors[1] = 0x999999;
-    	globalTagColors[2] = 0x999999;
-
-    	if (fromServer.equals("EMPTY_RESULT") == true) {
-        	return;
-        }
-    	String[] sploded = fromServer.split("#");
-    	int tempS = sploded.length;
-    	for(int i=0; i<tempS; i++) {
-    		String[] anotherTemp = sploded[i].split(",");
-    		globalTagNames[i]=anotherTemp[0];   
-    		double d = Double.parseDouble(anotherTemp[2]);
+    	toServer += "&radius=5000000&numresults=" + numTags;
+    	//pd = ProgressDialog.show(this, "Loading...", "Please wait while we get the global tags from the server");	
     	
-    		
-    		double realVal = (d*((colorsHEX.length)-1));
-    		int lowC = (int)Math.floor(realVal);
-    		int highC = (int)Math.ceil(realVal);
-    		
-
-    		double percAcross = (realVal-lowC);
-    		
-    		
-    		globalTagColors[i]= getColorFromGradient(colorsHEX[lowC],colorsHEX[highC],percAcross);
-    		}
+    	Intent intent = new Intent(this.getBaseContext(), TextURL.class);
+        intent.putExtra("URL","http://www.k2xl.info/auramap/server/gettags.php");
+        intent.putExtra("loadMessage","Retrieving Tags");
+        intent.putExtra("servMessage",toServer);
+        startActivityForResult(intent, 1);
+    	
     }
     
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tag);
-        
-        localTagNames = new String[5];
-        localTagColors = new int[5];
-        globalTagNames = new String[5];
-        globalTagColors = new int[5];
+    public void onActivityResult (int requestCode, int resultCode, Intent data) {
 
-        tag = (EditText) findViewById(R.id.tag);
-        
-        String toServer = "username=" + this.getIntent().getExtras().getString("username") +
-        				  "&password=" + this.getIntent().getExtras().getString("password") + 
-        				  "&lat=" + this.getIntent().getExtras().getDouble("lat") +  
-        				  "&lon=" + this.getIntent().getExtras().getDouble("lon");
-        setupLocalTags(toServer);
-        setupGlobalTags(toServer);
+    	//pd.dismiss();
+    	String fromServer = data.getExtras().getString("webResponse");
+    	Log.v("ddd", "CR: Code: " + requestCode + " Response: " + fromServer);
+    	
+  
+    	if(requestCode == 0) {
+        	
+        	localTagNames[0] = "[no data]";
+        	localTagNames[1] = "[no data]";
+        	localTagNames[2] = "[no data]";
+
+        	localTagColors[0] = 0x999999;
+        	localTagColors[1] = 0x999999;
+        	localTagColors[2] = 0x999999;
+
+            if (fromServer.equals("EMPTY_RESULT") == true) {
+            	return;
+            }
+            
+        	String[] sploded = fromServer.split("#");
+        	int tempS = sploded.length;
+        	for(int i=0; i<tempS; i++) {
+        		String[] anotherTemp = sploded[i].split(",");
+        		localTagNames[i]=anotherTemp[0];   
+        		double d = Double.parseDouble(anotherTemp[2]);
+        		
+        		double realVal = (d*((colorsHEX.length)-1));
+        		int lowC = (int)Math.floor(realVal);
+        		int highC = (int)Math.ceil(realVal);
+        		
+
+        		double percAcross = (realVal-lowC);
+        		
+        		
+        		localTagColors[i]= getColorFromGradient(colorsHEX[lowC],colorsHEX[highC],percAcross);
+        		}
+            localTagsRetrieved=true;
+    	
+    	} else if(requestCode==1) {
+
+        	globalTagNames[0] = "[no data]";
+    		globalTagNames[1] = "[no data]";
+    		globalTagNames[2] = "[no data]";
+
+    		globalTagColors[0] = 0x999999;
+        	globalTagColors[1] = 0x999999;
+        	globalTagColors[2] = 0x999999;
+
+        	if (fromServer.equals("EMPTY_RESULT") == true) {
+            	return;
+            }
+        	String[] sploded = fromServer.split("#");
+        	int tempS = sploded.length;
+        	for(int i=0; i<tempS; i++) {
+        		String[] anotherTemp = sploded[i].split(",");
+        		globalTagNames[i]=anotherTemp[0];   
+        		double d = Double.parseDouble(anotherTemp[2]);
+        	
+        		
+        		double realVal = (d*((colorsHEX.length)-1));
+        		int lowC = (int)Math.floor(realVal);
+        		int highC = (int)Math.ceil(realVal);
+        		
+
+        		double percAcross = (realVal-lowC);
+        		
+        		
+        		globalTagColors[i]= getColorFromGradient(colorsHEX[lowC],colorsHEX[highC],percAcross);
+        		}
+
+            globalTagsRetrieved=true;
+    	}
+    	if(localTagsRetrieved && globalTagsRetrieved) setupButtons();
+    }
+    
+    public void setupButtons() {
         //parseResponse();
     	Button tagButton = (Button) findViewById(R.id.globalTag01 );
         tagButton.setText(globalTagNames[0]);
@@ -179,6 +204,32 @@ public class GetTag extends Activity {
     
     final ImageButton next = (ImageButton) findViewById(R.id.submit);    
     next.setOnClickListener(sListener);
+    	
+    }
+
+    
+    
+
+    
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tag);
+        
+        localTagNames = new String[5];
+        localTagColors = new int[5];
+        globalTagNames = new String[5];
+        globalTagColors = new int[5];
+
+        tag = (EditText) findViewById(R.id.tag);
+        
+        String toServer = "username=" + this.getIntent().getExtras().getString("username") +
+        				  "&password=" + this.getIntent().getExtras().getString("password") + 
+        				  "&lat=" + this.getIntent().getExtras().getDouble("lat") +  
+        				  "&lon=" + this.getIntent().getExtras().getDouble("lon");
+        Log.v("Auramap", "Tags To Server: " + toServer);
+        setupLocalTags(toServer);
+        setupGlobalTags(toServer);
+
     
     }
     @Override
@@ -300,20 +351,6 @@ public class GetTag extends Activity {
         Log.v("Auramap", "CR: " + str);
         return str;        
     }
-
-    
-    
-    
-    /*
-    public void onActivityResult  (int requestCode, int resultCode, Intent data){
-
-    	Intent intent = new Intent();
-    	intent.putExtra("webResponse",data.getExtras().getString("webResponse"));
-    	//setResult(RESULT_OK, intent);
-    	Log.v("Auramap", "Returned");
-        Log.v("Auramap", intent.getExtras().getString("webresponse"));
-    	finish();        
-    } */   
     
  }
     
