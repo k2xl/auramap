@@ -21,12 +21,12 @@ import android.widget.TextView;
 public class ConnectionResource extends Activity {
 	/** Called when the activity is first created. */
 	public final static String queryBase = "http://ngp.lcc.gatech.edu/php_scripts/droid_root.php?";
-	String[] randTags = { "Traffic", "Blah", "Blarg", "Meh", "Jackson",
-			"Cancer", "Paper Cups", "Weather", "Tulips", "Beer", "Booze",
-			"Jesus", "Computer", "Android", "Girlfriend", "Boyfriend", "Kids",
+	String[] randTags = { "Traffic", "Whales", "Pizza", "Android", "Jackson",
+			"Sunshine", "Paper Cups", "Weather", "Tulips", "Beer", "Flowers",
+			"Rainbows", "Computer", "Android", "Girlfriend", "Boyfriend", "Kids",
 			"Spaceships", "Dinosaurs", "Bears", "Pizza", "Fire",
-			"Bruce Willis", "M Jackson", "Doughnuts", "Lighting", "Life",
-			"Swine Flu", "Baseball", "Hockey", "Money", "Economy", "Obama" };
+			"Bruce Willis", "M Jackson", "Doughnuts", "Lightning", "Life",
+			"Plague", "Baseball", "Hockey", "Money", "Economy", "Obama" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
