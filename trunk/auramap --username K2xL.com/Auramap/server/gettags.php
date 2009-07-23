@@ -2,6 +2,10 @@
 require_once("login.php");
 
 // Step 1: Validate params
+if (isset($Headers['lat']) == false || isset($Headers['lon']) == false)
+{
+	echo PARAMETER_ERROR; exit();
+}
 $lat = $Headers['lat'];
 $lon = $Headers['lon'];
 
@@ -35,12 +39,14 @@ while ($rs = mysql_fetch_assoc($query))
 }
 $query = $DB->query($sql);
 if (!$query){echo SERVER_ERROR; exit();}
-
+$numpts = mysql_num_rows($query);
+if ($numpts == 0) { echo EMPTY_RESULT; exit(); }
 //echo $sql;
 // now place all tags in an array
 $tagArray = array();
 while ($rs = mysql_fetch_assoc($query))
 {
+	
 	$tag = $rs['tag'];
 	//echo ">$tag<br/>";
 	if (!isset($tagArray[$tag]))
@@ -60,6 +66,7 @@ while ($rs = mysql_fetch_assoc($query))
 		$tagArray[$tag][2] = $tag;
 	}
 }
+
 //echo "<br/><br/>Looping thru tags<br/><br/>";
 
 function comp($a,$b)
@@ -70,6 +77,7 @@ function comp($a,$b)
 usort($tagArray,"comp");
 $count = min($numresults,count($tagArray));
 $str = "";
+
 foreach ($tagArray as $key => $value) {
     $str.= $tagArray[$key][2].",".$tagArray[$key][0].",".$tagArray[$key][1]."#";
 	if (--$count == 0){ break; }

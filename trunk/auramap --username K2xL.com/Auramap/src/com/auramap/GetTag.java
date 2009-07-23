@@ -241,11 +241,11 @@ public class GetTag extends Activity {
          double emotval = this.getIntent().getExtras().getDouble("emotx");
          
          int padding = (int)(emotval*happymeter.getWidth()-happymeter.getDrawable().getIntrinsicWidth()/2);
-         if (emotval == 0) { padding = -200; happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.sad));}
-         else if (emotval == .25) { padding = -100;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.lesssad)); }
-         else if (emotval == .5) { padding = 0;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.neutral)); }
-         else if (emotval == .75) { padding = 100;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.lesshappy)); }
-         else if (emotval == 1) { padding = 200;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.happy)); }
+         if (emotval == 0) { padding = -200; happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.saddownsized));}
+         else if (emotval == .25) { padding = -100;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.lesssaddownsized)); }
+         else if (emotval == .5) { padding = 0;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.neutraldownsized)); }
+         else if (emotval == .75) { padding = 100;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.lesshappydownsized)); }
+         else if (emotval == 1) { padding = 200;happymeter.setImageDrawable( (Drawable)getResources().getDrawable(R.drawable.happydownsized)); }
          if (padding > 0){padding+=17;
          happymeter.setPadding(padding, 0, 0, 0); // 17 is width of that left silver bar thing on scroll
          }

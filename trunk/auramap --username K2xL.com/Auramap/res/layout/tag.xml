@@ -60,8 +60,8 @@ android:background="#333333" >
         android:layout_height="wrap_content" android:id="@+id/globalTag03" android:textColor="#FFFFFF"></Button>
         </TableRow>
       <TableLayout ><TableRow android:id="@+id/meterrow" >
-        <ImageButton  android:layout_width="fill_parent" android:src="@drawable/happy" android:background="@drawable/scroll" android:id="@+id/happymeter" android:layout_marginLeft="60sp"></ImageButton>
-        <ImageButton android:layout_width="fill_parent" android:id="@+id/submit" android:background="@drawable/next" android:layout_marginLeft="0sp"></ImageButton>
+        <ImageButton  android:layout_width="fill_parent" android:src="@drawable/happy" android:layout_marginTop="4sp" android:background="@drawable/scrolldownsized" android:id="@+id/happymeter" android:layout_marginLeft="60sp"></ImageButton>
+        <ImageButton android:layout_width="fill_parent" android:id="@+id/submit" android:layout_marginTop="4sp"  android:background="@drawable/next" android:layout_marginLeft="0sp"></ImageButton>
         </TableRow>
         </TableLayout>
 </TableLayout>  

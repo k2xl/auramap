@@ -6,20 +6,34 @@
  require_once("utils/mysql_helper.class.php");
  require_once("utils/sp_session.class.php");
  require_once("utils/rss_php.class.php");
+ require_once("dbinfo.php");
 // CLEAN UP POST AND GET... USE A PHP INPUT FILTER!
 //header("Content-type: text/xml");
+
+//
+function connectDB() {
+	global $DB;
+	$DB = new mysql_helper("localhost", "mtserver2", "X:JyPz.p7TyNSSPD", "auramap");
+	$DB->setDebug(true);
+}
+function login($username, $password) {
+	global $DB;
+	$loggedIn = $DB->count("users", "where username='$username' and password='$password'");
+	return $loggedIn;
+}
 $Headers = $_POST;
 if (isset($Headers['username'])== false)
 {
 	$Headers = $_GET;
 }
-$username = $Headers['username'];
-$password = md5($Headers['password']);
+//
 
-$DB = new mysql_helper("localhost","mtserver2","X:JyPz.p7TyNSSPD","auramap");
-$DB->setDebug(true);
+
+$username = $Headers['username'];
+$password = ($Headers['password']);
+connectDB();
  
-$loggedIn = $DB->count("users","where username='$username' and password='$password'");
+$loggedIn = login($username,$password);//$DB->count("users","where username='$username' and password='$password'");
 
 if ($loggedIn == 0)
 {
