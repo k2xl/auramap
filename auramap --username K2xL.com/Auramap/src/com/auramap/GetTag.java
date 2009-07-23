@@ -63,9 +63,11 @@ public class GetTag extends Activity {
     	localTagNames[0] = "[no data]";
     	localTagNames[1] = "[no data]";
     	localTagNames[2] = "[no data]";
+
     	localTagColors[0] = 0x999999;
     	localTagColors[1] = 0x999999;
     	localTagColors[2] = 0x999999;
+
         if (fromServer.equals("EMPTY_RESULT") == true) {
         	return;
         }
@@ -95,9 +97,11 @@ public class GetTag extends Activity {
     	globalTagNames[0] = "[no data]";
 		globalTagNames[1] = "[no data]";
 		globalTagNames[2] = "[no data]";
+
 		globalTagColors[0] = 0x999999;
     	globalTagColors[1] = 0x999999;
     	globalTagColors[2] = 0x999999;
+
     	if (fromServer.equals("EMPTY_RESULT") == true) {
         	return;
         }
@@ -130,9 +134,7 @@ public class GetTag extends Activity {
         globalTagNames = new String[5];
         globalTagColors = new int[5];
 
-        //data = this.getIntent().getExtras().getString("data");
         tag = (EditText) findViewById(R.id.tag);
-        //createTagButtons();
         
         String toServer = "username=" + this.getIntent().getExtras().getString("username") +
         				  "&password=" + this.getIntent().getExtras().getString("password") + 
