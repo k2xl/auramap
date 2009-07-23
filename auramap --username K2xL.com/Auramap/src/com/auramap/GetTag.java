@@ -60,6 +60,7 @@ public class GetTag extends Activity {
 		return averageColors(lowC,highC,1-perc,perc);
 	}
     private void setupLocalTags(String toServer) {
+    	
     	String fromServer = textURL(toServer + "&radius=100&numresults=" + numTags);
     	localTagNames[0] = "[no data]";
     	localTagNames[1] = "[no data]";
@@ -225,6 +226,7 @@ public class GetTag extends Activity {
     			else{
     			tag.setText(str+""+newTag+",");
     			}
+    			tag.setSelection(tag.length());
     		}
     		    		
     	}

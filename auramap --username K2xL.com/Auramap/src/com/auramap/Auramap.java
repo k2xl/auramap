@@ -37,7 +37,7 @@ public class Auramap extends Activity {
         setContentView(R.layout.main);     
         ((ImageButton)findViewById(R.id.FaceButton)).setBackgroundDrawable( getResources().getDrawable(R.drawable.neutral2) );
 		
-    	
+    	happyState.xVal = .5;
         createButtons();
     }
     
