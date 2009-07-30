@@ -1,6 +1,7 @@
 package com.auramap;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -17,7 +18,8 @@ public class NavBar {
     private static OnClickListener navBarListener =new OnClickListener() {
     	public void onClick(View v) {
     		Intent i;
-    		ProgressDialog.show(currentAct, "Loading...", "Switching screens give me a second!");
+    		//ProgressDialog.show(currentAct, "Loading...", "Switching screens give me a second!");
+    		currentAct.setContentView(R.layout.loading);
     		
     		switch(v.getId()) {
     		case R.id.querynav:
