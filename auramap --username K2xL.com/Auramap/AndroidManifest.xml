@@ -15,7 +15,10 @@
         <activity android:name=".TextURL" android:label="TextURLLabel"/>
         <activity android:name=".ConnectionResource" android:label="ConnectionResourceLabel"/>
         <activity android:name=".MoodMap" android:label="MapLabel"/>
-        
+        <activity android:name=".QueryScreen" android:label="QueryScreen"/>
+        <activity android:name=".ProgressScreen" android:label="ProgressScreen"/>
+        <activity android:name=".OptionsScreen" android:label="OptionsScreen"/>
+        <activity android:name=".BuddyScreen" android:label="OptionsScreen"/>
     <uses-library android:name="com.google.android.maps"/>
     </application>
     <uses-sdk android:minSdkVersion="3" />
