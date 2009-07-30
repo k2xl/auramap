@@ -29,11 +29,11 @@ public class NavBar {
     			currentAct.startActivity(i);
     		break;
     		case R.id.buddynav:
-    			i = new Intent(currentAct.getBaseContext(), QueryScreen.class);				
+    			i = new Intent(currentAct.getBaseContext(), BuddyScreen.class);				
     			currentAct.startActivity(i);
     		break;
     		case R.id.optionsnav:
-    			i = new Intent(currentAct.getBaseContext(), QueryScreen.class);				
+    			i = new Intent(currentAct.getBaseContext(), OptionsScreen.class);				
     			currentAct.startActivity(i);
     			break;
     		}
