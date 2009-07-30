@@ -31,8 +31,9 @@ public class MoodMap extends MapActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.map_view);
+        NavBar.adaptNav(this);
+        
         mapView = (MapView) findViewById(R.id.thismap);
         mc = mapView.getController();
         mc.animateTo(new GeoPoint(33778268, -84399182));
