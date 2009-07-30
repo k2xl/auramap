@@ -47,14 +47,14 @@
     	android:background="@drawable/next" android:layout_gravity="right"></ImageButton>    	
     </TableRow> 
     <TableRow android:id="@+id/next" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal">
-    	<ImageView android:id="@+id/blank2" android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" android:background="@drawable/happynavicon"></ImageView>
-    	<ImageView android:id="@+id/blank2" android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" android:background="@drawable/mapicon"></ImageView>
-		<ImageView android:id="@+id/blank2" android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" android:background="@drawable/buddylisticon"></ImageView>
-		<ImageView android:id="@+id/blank2" android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" android:background="@drawable/optionsicon"></ImageView>
+    	<ImageButton android:id="@+id/querynav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/happynavicon"></ImageButton>
+    	<ImageButton android:id="@+id/mapnav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/mapicon"></ImageButton>
+		<ImageButton android:id="@+id/buddynav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/buddylisticon"></ImageButton>
+		<ImageButton android:id="@+id/optionsnav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/optionsicon"></ImageButton>
     </TableRow> 
 
 </LinearLayout>
