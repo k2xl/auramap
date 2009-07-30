@@ -17,6 +17,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -192,6 +193,7 @@ public class GetTag extends Activity {
         
         tagButton = (Button) findViewById(R.id.localTag01 );
         tagButton.setText(localTagNames[0]);
+        tagButton.setGravity(Gravity.CENTER);
         tagButton.setBackgroundColor((localTagColors[0]));
         tagButton.setOnClickListener(tagListener);
         
@@ -214,7 +216,7 @@ public class GetTag extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tag);
-        
+        NavBar.adaptNav(this);
         localTagNames = new String[5];
         localTagColors = new int[5];
         globalTagNames = new String[5];
@@ -229,7 +231,7 @@ public class GetTag extends Activity {
         Log.v("Auramap", "Tags To Server: " + toServer);
         setupLocalTags(toServer);
         setupGlobalTags(toServer);
-
+        
     
     }
     @Override
