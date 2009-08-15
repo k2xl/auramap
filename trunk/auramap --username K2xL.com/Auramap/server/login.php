@@ -13,7 +13,7 @@
 //
 function connectDB() {
 	global $DB;
-	$DB = new mysql_helper("localhost", "happymap", "YvN:fHGjHd8:EvwK", "auramap");
+	$DB = new mysql_helper("localhost", "mtserver2", "X:JyPz.p7TyNSSPD", "auramap");
 	$DB->setDebug(true);
 }
 function login($username, $password) {

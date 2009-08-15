@@ -1,0 +1,6 @@
+	<TableLayout android:id="@+id/TableLayout01"
+		android:layout_width="wrap_content" android:layout_height="wrap_content" xmlns:android="http://schemas.android.com/apk/res/android">
+
+<TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Oh no! There was an error with the server. Try restarting the application."></TextView>
+<ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/lesssad"></ImageView>
+</TableLayout>

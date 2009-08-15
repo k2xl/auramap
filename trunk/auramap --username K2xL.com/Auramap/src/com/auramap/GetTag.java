@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.OverlayItem;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -237,6 +240,7 @@ public class GetTag extends Activity {
 
          
          ImageButton happymeter = (ImageButton)findViewById(R.id.happymeter);
+         if (happymeter == null) { return; }
          double emotval = this.getIntent().getExtras().getDouble("emotx");
          
          int padding = (int)(emotval*happymeter.getWidth()-happymeter.getDrawable().getIntrinsicWidth()/2);
