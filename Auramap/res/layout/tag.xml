@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" 
+android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" 
+ android:padding="6dip" android:orientation="horizontal"
+android:background="#333333" >
+
+    <TextView android:id="@+id/TextView01" android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" android:textColor="#FF9900" android:textSize="14sp" android:textStyle="bold" 
+        android:text="Tag your reasons or select from the most popular ones below." 
+        android:gravity="center_horizontal" android:padding="6dip" 
+        android:layout_marginRight="6dip"></TextView>
+        <EditText android:layout_width="wrap_content" android:id="@+id/tag" android:layout_height="wrap_content" android:layout_marginLeft="19dip" android:layout_marginRight="19dip" android:maxLines="1"></EditText>
+  <TableLayout android:gravity="center_horizontal|center">
+<TableRow android:id="@+id/taglabels" android:layout_width="wrap_content" android:paddingBottom="2dp"
+    android:layout_height="wrap_content" android:gravity="center">
+    <TextView android:id="@+id/toplocal" 
+        android:layout_width="wrap_content" android:layout_height="wrap_content" 
+        android:text="Top local tags" android:textColor="#FFF" android:textSize="16sp" 
+        android:textStyle="bold" android:gravity="center" android:layout_marginRight="10sp"></TextView>
+        <TextView android:id="@+id/topworld" 
+        android:layout_width="wrap_content" android:layout_height="wrap_content" 
+        android:text="Top world tags" android:textColor="#FFF" android:textSize="16sp" 
+        android:textStyle="bold" android:gravity="center" android:layout_marginLeft="10sp"></TextView>
+</TableRow>
+
+<TableRow android:id="@+id/firstCheckBoxes" android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" android:gravity="center">
+    <Button android:text="CheckBox05" android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" android:textSize="14sp" android:id="@+id/localTag01" android:textColor="#FFFFFF" android:layout_marginRight="10sp" android:gravity="center_vertical|center_horizontal|center"></Button>
+	<Button android:text="CheckBox06" android:layout_width="wrap_content" android:textSize="14sp"
+        android:layout_height="wrap_content" android:id="@+id/globalTag01" android:textColor="#FFFFFF" android:layout_marginLeft="10sp"></Button>
+        </TableRow> 
+
+<TableRow android:id="@+id/secondCheckBoxes" android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" android:gravity="center" >            
+        <Button android:text="CheckBox03" android:layout_width="wrap_content" android:textSize="14sp"
+        android:layout_height="wrap_content" android:id="@+id/localTag02" android:textColor="#FFFFFF" android:layout_marginRight="10sp"></Button>
+        <Button android:text="CheckBox04" android:layout_width="wrap_content" 
+        android:textSize="14sp" android:layout_height="wrap_content" android:id="@+id/globalTag02" android:textColor="#FFFFFF" android:layout_marginLeft="10sp"></Button>
+        
+</TableRow> 
+        
+<TableRow android:id="@+id/thirdCheckBoxes" android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" android:gravity="center" >
+    <Button android:text="CheckBox05" android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" android:textSize="14sp" android:id="@+id/localTag03" android:textColor="#FFFFFF" android:layout_marginRight="10sp"></Button>
+	<Button android:text="CheckBox06" android:layout_width="wrap_content" android:textSize="14sp"
+        android:layout_height="wrap_content" android:id="@+id/globalTag03" android:textColor="#FFFFFF" android:layout_marginLeft="10sp"></Button>
+        </TableRow>
+        </TableLayout>
+      <TableLayout ><TableRow android:id="@+id/meterrow" android:gravity="center"  >
+        <ImageButton  android:layout_width="fill_parent" android:src="@drawable/happy" android:background="@drawable/scrolldownsized" android:id="@+id/happymeter"></ImageButton>
+        </TableRow>
+        </TableLayout>
+        
+        <TableRow android:id="@+id/meterrow" android:gravity="center"  >
+        <ImageButton android:layout_width="wrap_content" android:id="@+id/submit" android:src="@drawable/next" android:background="@drawable/blank" android:padding="5sp"></ImageButton>
+        </TableRow>
+        
+         <TableLayout >
+            <TableRow android:id="@+id/next" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom" android:gravity="bottom|center_horizontal">
+    	<ImageButton android:id="@+id/querynav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/happynavicon"></ImageButton>
+    	<ImageButton android:id="@+id/mapnav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/mapicon"></ImageButton>
+		<ImageButton android:id="@+id/buddynav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/buddylisticon"></ImageButton>
+		<ImageButton android:id="@+id/optionsnav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/optionsicon"></ImageButton>
+    </TableRow> 
+</TableLayout>  
+</TableLayout>  
+ 

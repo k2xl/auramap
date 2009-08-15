@@ -1,0 +1,17 @@
+<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView android:id="@+id/TextView01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Buddy Screen
+"></TextView>
+
+
+<TableRow android:id="@+id/next" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom" android:gravity="bottom|center_horizontal">
+    	<ImageButton android:id="@+id/querynav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/happynavicon"></ImageButton>
+    	<ImageButton android:id="@+id/mapnav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/mapicon"></ImageButton>
+		<ImageButton android:id="@+id/buddynav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/buddylisticon"></ImageButton>
+		<ImageButton android:id="@+id/optionsnav" android:layout_width="wrap_content" 
+		android:layout_height="wrap_content" android:background="@drawable/optionsicon"></ImageButton>
+    </TableRow>  
+
+</LinearLayout>

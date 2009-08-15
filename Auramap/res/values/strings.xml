@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emote">emotion</string>
+    <string name="hello">Hello World, Auramap!</string>
+    <string name="app_name">Auramap</string>
+</resources>
