@@ -33,8 +33,8 @@ public class ConnectionResource extends Activity {
 
 		Log.v("Auramap", "1");
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.state_disp);
+		NavBar.adaptNav(this);
 
 		Bundle extras = getIntent().getExtras();
 
@@ -97,7 +97,7 @@ public class ConnectionResource extends Activity {
 				}
 				Log.v("...", tags);
 
-				s += "username=test&password=test&emotx=" + eX + "&lat="
+				s += "username=" +Data.pNumber + "&password=" + Data.pKey +"&emotx=" + eX + "&lat="
 						+ randomTechpointLat + "&lon=" + randomTechpointLon
 						+ tags;
 				textURL(s);
@@ -123,7 +123,7 @@ public class ConnectionResource extends Activity {
 				}
 				Log.v("...", tags);
 
-				s += "username=test&password=test&emotx=" + eX + "&lat="
+				s += "username=" +Data.pNumber + "&password=" + Data.pKey + "&emotx=" + eX + "&lat="
 						+ randomTechpointLat + "&lon=" + randomTechpointLon
 						+ tags;
 				textURL(s);

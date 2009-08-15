@@ -43,7 +43,7 @@ public class QueryScreen extends Activity {
         
         setContentView(R.layout.main);     
         ((ImageButton)findViewById(R.id.FaceButton)).setBackgroundDrawable( getResources().getDrawable(R.drawable.neutral2) );
-		
+        
     	happyState.xVal = .5;
         createButtons();
         NavBar.adaptNav(this);
@@ -138,10 +138,11 @@ public class QueryScreen extends Activity {
         
 
     private void sendAuraPoint() {
+    	this.setContentView(R.layout.loading);
     Intent i = new Intent(this.getBaseContext(), GetTag.class);	
     i.putExtra("emote", happyState.stateName);
-    i.putExtra("username", "7707120740");
-    i.putExtra("password", "788eb77a3c1f739a0ea699612863d745");
+    i.putExtra("username", Data.pNumber);
+    i.putExtra("password", Data.pKey);
     i.putExtra("emotx", happyState.xVal);
     double randomTechpointLat = 
     	33.78156339080061 - Math.random() * 0.010487523427205;

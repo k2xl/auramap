@@ -19,6 +19,7 @@
         <activity android:name=".ProgressScreen" android:label="ProgressScreen"/>
         <activity android:name=".OptionsScreen" android:label="Change Options"/>
         <activity android:name=".BuddyScreen" android:label="View your Buddys"/>
+        <activity android:name=".RegisterPhone" android:label="Register your Phone"/>
     <uses-library android:name="com.google.android.maps"/>
     </application>
     <uses-sdk android:minSdkVersion="3" />

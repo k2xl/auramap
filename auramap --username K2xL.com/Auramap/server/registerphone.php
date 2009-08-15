@@ -51,7 +51,7 @@ connectDB();
 
 $phoneAlreadyExists = phoneExists($username);
 if ($phoneAlreadyExists) {
-	if (!isset ($Headers['password']) || strlen($Headers['password'])==0) {
+	if (!isset ($Headers['password'])) {
 		echo PARAMETER_ERROR;
 		exit();
 	}
