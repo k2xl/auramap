@@ -41,29 +41,31 @@ public class RegisterPhone extends Activity {
 			
 		
     	String fromServer = data.getExtras().getString("webResponse");
-    	Log.v("sss0", "Server Result: " + fromServer);
+    	Log.v("Auramap", "Server Result: " + fromServer);
     	
 
     	if (fromServer.equals("SUCCESS")) {
-    		
-    		finish();
-    		return;
+    		data.putExtra("Result", "OK");
     	}
     	else if (fromServer.contains("_ERROR"))
     	{
-    		setContentView(R.layout.default_error);
-    		Log.v("sss","Error = "+fromServer);
-    		return;
+    		data.putExtra("Result", "ERROR");
+    		Log.v("Auramap","Error = "+fromServer);
     	}
     	else
     	{
-    		Log.v("sss","I got the passkey! It is "+fromServer);
+    		data.putExtra("Result", "FIRST");
+    		Log.v("Auramap","I got the passkey! It is "+fromServer);
         	SharedPreferences.Editor editor = settings.edit();
         	editor.putString("MyPassKey", fromServer);
         	Data.pKey = fromServer;
             editor.commit();	
-        	finish();
 
     	}
+    	
+        setResult(RESULT_OK, data);
+
+    	finish();
+
 	}
 }

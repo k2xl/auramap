@@ -20,10 +20,24 @@ public class Auramap extends Activity {
     
 	public void onActivityResult (int requestCode, int resultCode, Intent data) 
     {
-    	Log.v("ddfs", "ActivityResulted: " + requestCode);
-    	Intent i = new Intent(this.getBaseContext(), QueryScreen.class);
-        startActivity(i);
-        finish();
+		
+		String res = data.getExtras().getString("Result");
+		Log.v("Auramap","resultCode = "+res);
+		if (res.equals("ERROR")){
+    		setContentView(R.layout.default_error);
+			//finish();
+		}
+		else if (res.equals("OK"))
+		{
+			Log.v("Auramap", "ActivityResulted: " + requestCode+", result code = "+resultCode);
+			Intent i = new Intent(this.getBaseContext(), QueryScreen.class);
+			startActivity(i);
+	        finish();
+		}
+		else if (res.equals("FIRST"))
+		{
+			Log.v("Auramap","First time eh?!");
+		}
     }
    
 
