@@ -142,7 +142,7 @@ public class QueryScreen extends Activity {
     Intent i = new Intent(this.getBaseContext(), GetTag.class);	
     i.putExtra("emote", happyState.stateName);
     i.putExtra("username", Data.pNumber);
-    i.putExtra("password", Data.pKey);
+    i.putExtra("password", "12345");//Data.pKey);
     i.putExtra("emotx", happyState.xVal);
     double randomTechpointLat = 
     	33.78156339080061 - Math.random() * 0.010487523427205;
