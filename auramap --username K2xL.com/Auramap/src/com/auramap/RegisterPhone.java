@@ -25,10 +25,11 @@ public class RegisterPhone extends Activity {
 
         Data.pNumber = MyPhoneNumber;
         Data.pKey = passkey;
+        Data.pKey = "12345"; // debuggin
         
         // use textURL or something to call the server (registerphone.php)
 		String toServer = "";
-		toServer+="username=" + MyPhoneNumber + "&password=" + passkey;
+		toServer+="username=" + Data.pNumber + "&password=" + Data.pKey;
 		Intent intent = new Intent(this.getBaseContext(), TextURL.class);
         intent.putExtra("URL","http://www.k2xl.info/auramap/server/registerphone.php");
         intent.putExtra("loadMessage","Retrieving Tags");

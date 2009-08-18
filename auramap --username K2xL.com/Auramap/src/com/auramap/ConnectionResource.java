@@ -44,7 +44,7 @@ public class ConnectionResource extends Activity {
 		}
 
 		// Puts bundle in q
-		q = "username=7707120740&" + "password=12345&" + "emotx="
+		q = "username=7707120740&" + "password="+Data.pKey+"&" + "emotx="
 				+ extras.getDouble("emotx") + "&" + "lat="
 				+ extras.getDouble("lat") + "&" + "lon="
 				+ extras.getDouble("lon") + "&" + "tag="
@@ -97,7 +97,7 @@ public class ConnectionResource extends Activity {
 				}
 				Log.v("...", tags);
 
-				s += "username=" +Data.pNumber + "&password=" + "12345" +"&emotx=" + eX + "&lat="
+				s += "username=" +Data.pNumber + "&password=" + Data.pKey +"&emotx=" + eX + "&lat="
 						+ randomTechpointLat + "&lon=" + randomTechpointLon
 						+ tags;
 				textURL(s);
@@ -123,7 +123,7 @@ public class ConnectionResource extends Activity {
 				}
 				Log.v("...", tags);
 
-				s += "username=" +Data.pNumber + "&password=" + "12345" + "&emotx=" + eX + "&lat="
+				s += "username=" +Data.pNumber + "&password=" + Data.pKey + "&emotx=" + eX + "&lat="
 						+ randomTechpointLat + "&lon=" + randomTechpointLon
 						+ tags;
 				textURL(s);
