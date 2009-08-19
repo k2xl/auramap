@@ -38,8 +38,7 @@ public class GetTag extends Activity {
     int[] localTagColors;
     String[] globalTagNames;
     int[] globalTagColors;
-    
-    
+        
     private OnClickListener sListener =new OnClickListener() {
     	
     	public void onClick(View v) {                

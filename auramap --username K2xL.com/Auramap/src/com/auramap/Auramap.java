@@ -30,8 +30,11 @@ public class Auramap extends Activity {
 		else if (res.equals("OK"))
 		{
 			Log.v("Auramap", "ActivityResulted: " + requestCode+", result code = "+resultCode);
-			Intent i = new Intent(this.getBaseContext(), QueryScreen.class);
+
+			Intent i = new Intent(this.getBaseContext(), UpdateBuddies.class);
 			startActivity(i);
+			Intent o = new Intent(this.getBaseContext(), QueryScreen.class);
+			startActivity(o);
 	        finish();
 		}
 		else if (res.equals("FIRST"))
