@@ -71,7 +71,10 @@ public class TextURL extends Activity {
             e1.printStackTrace();
             str =  e1.toString();
         }
-        
+        if (in == null)
+        {
+        	return "[404]";
+        }
         InputStreamReader isr = new InputStreamReader(in);
         int charRead;
           str = "";
