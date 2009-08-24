@@ -18,10 +18,10 @@ for ($i = 0; $i < $count; $i++)
 {
 	// Now get all numbers and validate them
 	$curRow = explode(",",$Data[$i]);
-	if (count($curRow) == 0) { echo PARAMETER_ERROR; exit(); }
-	$num = $curRow[0];
+	if (count($curRow) < 2) { echo PARAMETER_ERROR." index $i / $count"; exit(); }
+	$num = ($curRow[0]);
 	$privacy = intval($curRow[1]);
-	if (intval($num) == 0) { echo PARAMETER_ERROR; exit(); }
+	if (is_numeric($num) == false || strlen("".$num) < 3) { echo PARAMETER_ERROR; exit(); }
 	$Insert = array();
 	$Insert['user_id'] = $Me['id'];
 	$Insert['buddynumber'] = $num;
