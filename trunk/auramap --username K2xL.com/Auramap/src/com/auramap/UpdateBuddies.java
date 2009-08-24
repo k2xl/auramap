@@ -20,15 +20,21 @@ public class UpdateBuddies extends Activity {
 		do 
 		{
 			int index = C.getColumnIndexOrThrow(People.NUMBER_KEY);
-			Log.v("Auramap","Index is "+index);
 			String num = C.getString(index);
+			int size = num.length();
+			char[] temp = new char[size];
+			for(int h =0; h<size; h++) {				
+				temp[h] = num.charAt(size-1-h);
+			}
+			num = new String(temp);
+			Log.v("Auramap", "Number: " + num);
 			contacts+=num+",0#";
 		}while (C.moveToNext());
 		contacts = contacts.substring(0,contacts.length()-1);
 		Log.v("Auramap","Sending contacts..."+contacts);
 		
 
-		String toServer = "username=" + Data.pNumber + "&password=" + Data.pKey +"&data="+contacts;
+		String toServer = "data="+contacts;
 		
 		
 		Intent intent = new Intent(this.getBaseContext(), TextURL.class);

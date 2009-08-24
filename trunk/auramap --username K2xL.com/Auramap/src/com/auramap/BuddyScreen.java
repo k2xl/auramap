@@ -1,12 +1,16 @@
 package com.auramap;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -18,7 +22,7 @@ public class BuddyScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.buddyscreen);
         NavBar.adaptNav(this);
-        getBuddies("username="+Data.pNumber+"&password="+Data.pKey);
+        getBuddies("");//"username="+Data.pNumber+"&password="+Data.pKey);
     }
 	
     public void onActivityResult (int requestCode, int resultCode, Intent data) {
@@ -32,7 +36,7 @@ public class BuddyScreen extends Activity {
     	 
     		
     		//data.getExtras().getString("webResponse");
-    	Log.v("sss0", "Server Result: " + fromServer);
+    	Log.v("Auramap", "Buddy List Server Result: " + fromServer);
     	String[][] buddyList;
     	String[] sploded = fromServer.split("#");
     	int tempS = sploded.length;
@@ -56,12 +60,18 @@ public class BuddyScreen extends Activity {
         HashMap<String, Object> map;
         for(int i=0; i<tempS; i++) {    		
             map = new HashMap<String, Object>();            
-        	map.put("phone", Data.getNameFromNumber(buddyList[i][0]));
-        	map.put("state", imgStates[1 + Integer.parseInt(buddyList[i][1])]);
-        	if (buddyList[i][2] == "0"){
+        	map.put("phone", getContactNameFromNumber(Data.getNameFromNumber(buddyList[i][0])));
+        	double rawval = Double.parseDouble(buddyList[i][1]);
+        	int val = 0;
+        	if (rawval != -1)
+        	{
+        		val = 1+(int)(4*rawval);
+        	}
+        	map.put("state", imgStates[val]);
+        	if (buddyList[i][2].equals( "0")){ 
         		map.put("update", "");
-        	}else{
-        		map.put("update", buddyList[i][2]+" seconds ago");
+        	}else{    		 
+        		map.put("update", buddyList[i][2] + " seconds ago");
         	}
         	map.put("privacy", buddyList[i][3]);
         	mylist.add(map);
@@ -84,4 +94,29 @@ public class BuddyScreen extends Activity {
     	
         startActivityForResult(intent, 0);
     }
+    
+    private String getContactNameFromNumber(String number) {
+		// define the columns I want the query to return
+		String[] projection = new String[] {
+				Contacts.Phones.DISPLAY_NAME,
+				Contacts.Phones.NUMBER };
+ 
+		// encode the phone number and build the filter URI
+		Uri contactUri = Uri.withAppendedPath(Contacts.Phones.CONTENT_FILTER_URL, Uri.encode(number));
+ 
+		// query time
+		Cursor c = getContentResolver().query(contactUri, projection, null,
+				null, null);
+ 
+		// if the query returns 1 or more results
+		// return the first result
+		if (c.moveToFirst()) {
+			String name = c.getString(c
+					.getColumnIndex(Contacts.Phones.DISPLAY_NAME));
+			return name;
+		}
+ 
+		// return the original number if no match was found
+		return number;
+	}
 }
