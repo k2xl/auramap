@@ -44,7 +44,7 @@ public class ConnectionResource extends Activity {
 		}
 
 		// Puts bundle in q
-		q = "username=7707120740&" + "password="+Data.pKey+"&" + "emotx="
+		q = "emotx="
 				+ extras.getDouble("emotx") + "&" + "lat="
 				+ extras.getDouble("lat") + "&" + "lon="
 				+ extras.getDouble("lon") + "&" + "tag="
@@ -97,7 +97,7 @@ public class ConnectionResource extends Activity {
 				}
 				Log.v("...", tags);
 
-				s += "username=" +Data.pNumber + "&password=" + Data.pKey +"&emotx=" + eX + "&lat="
+				s += "emotx=" + eX + "&lat="
 						+ randomTechpointLat + "&lon=" + randomTechpointLon
 						+ tags;
 				textURL(s);
@@ -123,21 +123,14 @@ public class ConnectionResource extends Activity {
 				}
 				Log.v("...", tags);
 
-				s += "username=" +Data.pNumber + "&password=" + Data.pKey + "&emotx=" + eX + "&lat="
+				s += "emotx=" + eX + "&lat="
 						+ randomTechpointLat + "&lon=" + randomTechpointLon
 						+ tags;
 				textURL(s);
 			}
 		}
 	};
-	private void startIntent(String q)
-	{
-        Intent intent = new Intent(this.getBaseContext(), TextURL.class);
-        intent.putExtra("URL","http://www.k2xl.info/auramap/server/insertaura.php");
-        intent.putExtra("loadMessage","Sending Aurapoint");
-        intent.putExtra("servMessage",q);
-        startActivityForResult(intent, 0);
-	}
+	
 	private OnClickListener mListener = new OnClickListener() {
 
 		public void onClick(View v) {

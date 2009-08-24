@@ -25,7 +25,7 @@ public class TextURL extends Activity {
         String url = b.getString("URL");
         String loadMessage = b.getString("loadMessage");
 
-        String servMessage = b.getString("servMessage");
+        String servMessage = "username="+Data.pNumber+"&password="+Data.pKey+"&"+b.getString("servMessage");
         String response = contactServer(url, servMessage, loadMessage);
         
 		if (response.indexOf("ERROR") >= 0) {
