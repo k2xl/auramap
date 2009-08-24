@@ -28,7 +28,7 @@ if (isset($Headers['username'])== false)
 }
 //
 
-
+if (isset($Headers['username']) == false) { echo LOGIN_ERROR; exit(); }
 $username = $Headers['username'];
 $password = ($Headers['password']);
 connectDB();
@@ -44,6 +44,18 @@ if ($loggedIn == 0)
 $Me = $DB->query("select * from users where username='$username' and password='$password'");
 $Me = mysql_fetch_assoc($Me);
 
+function getUserWithPhone($num)
+{
+	global $DB;
+	// First get user from users table from the phone number
+	$user = $DB->query("select * from users where username=$phone");
+	if (!$user) { echo SERVER_ERROR; exit(); }
+	// If the phone hasn't been registered
+	if (mysql_num_rows($user) == 0){ return -1; };
+	
+	
+	return $user;
+}
 
 function validCoordinates($lat,$long)
 {
