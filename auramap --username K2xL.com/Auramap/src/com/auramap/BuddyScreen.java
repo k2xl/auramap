@@ -44,19 +44,25 @@ public class BuddyScreen extends Activity {
     	
     	ListView list = (ListView) findViewById(R.id.BuddylistView);
         
-    	int[] imgStates = new int[5];
-    	imgStates[0] = R.drawable.sad;
-    	imgStates[1] = R.drawable.lesssad;
-    	imgStates[2] = R.drawable.neutral;
-    	imgStates[3] = R.drawable.lesshappy;
-    	imgStates[4] = R.drawable.happy;
+    	int[] imgStates = new int[6];
+    	imgStates[0] = R.drawable.blank;
+    	imgStates[1] = R.drawable.sad;
+    	imgStates[2] = R.drawable.lesssad;
+    	imgStates[3] = R.drawable.neutral;
+    	imgStates[4] = R.drawable.lesshappy;
+    	imgStates[5] = R.drawable.happy;
+    	
         ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();
         HashMap<String, Object> map;
         for(int i=0; i<tempS; i++) {    		
             map = new HashMap<String, Object>();            
         	map.put("phone", Data.getNameFromNumber(buddyList[i][0]));
-        	map.put("state", imgStates[Integer.parseInt(buddyList[i][1])]);
-        	map.put("update", buddyList[i][2]+" seconds ago");
+        	map.put("state", imgStates[1 + Integer.parseInt(buddyList[i][1])]);
+        	if (buddyList[i][2] == "0"){
+        		map.put("update", "");
+        	}else{
+        		map.put("update", buddyList[i][2]+" seconds ago");
+        	}
         	map.put("privacy", buddyList[i][3]);
         	mylist.add(map);
         }
@@ -71,7 +77,7 @@ public class BuddyScreen extends Activity {
     private void getBuddies(String toServer) {
     	
     	Intent intent = new Intent(this.getBaseContext(), TextURL.class);
-        intent.putExtra("URL","http://www.k2xl.info/auramap/server/getbuddies.php");
+        intent.putExtra("URL","http://www.k2xl.info/auramap/server/getBuddyList.php");
         intent.putExtra("loadMessage","Retrieving Tags");
         intent.putExtra("servMessage",toServer);
         pd = ProgressDialog.show(this, "Loading...", "Please wait while we get your buddies");	

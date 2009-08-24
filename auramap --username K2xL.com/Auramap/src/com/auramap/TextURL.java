@@ -28,6 +28,16 @@ public class TextURL extends Activity {
         String servMessage = b.getString("servMessage");
         String response = contactServer(url, servMessage, loadMessage);
         
+		if (response.indexOf("ERROR") >= 0) {
+			Log.v("Auramap","Error returned from server: "+response);
+			setContentView(R.layout.default_error);
+			//finish();
+			Intent i = new Intent();
+	        i.putExtra("webResponse", response);
+	        setResult(RESULT_CANCELED, i);
+	        return;
+			// finish();
+		}         
         
         Intent i = new Intent();
         i.putExtra("webResponse", response);
