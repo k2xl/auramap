@@ -20,7 +20,9 @@ while ($rs = mysql_fetch_assoc($buddies))
 		$lastAura = getLatestAurapoint($userID);
 		$happystate = $lastAura['emotrating'];
 		$lastupdate = $lastAura['timestamp'];
+		$lastupdate = time()-$lastupdate;
 	}
+	
 	$str.= "$num,$happystate,$lastupdate,$privacy#";
 	
 }
