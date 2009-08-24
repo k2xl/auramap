@@ -28,7 +28,7 @@ if (isset($Headers['username'])== false)
 }
 //
 
-if (isset($Headers['username']) == false) { echo LOGIN_ERROR; exit(); }
+if (isset($Headers['username']) == false ||isset($Headers['password']) == false) { echo LOGIN_ERROR; exit(); }
 $username = $Headers['username'];
 $password = ($Headers['password']);
 connectDB();
@@ -51,10 +51,10 @@ function getUserWithPhone($num)
 	$user = $DB->query("select * from users where username=$num");
 	if (!$user) { echo SERVER_ERROR; exit(); }
 	// If the phone hasn't been registered
-	if (mysql_num_rows($user) == 0){ return -1; };
+	if (mysql_num_rows($user) == 0){ return false; };
 	
 	
-	return $user;
+	return mysql_fetch_array($user);
 }
 
 function validCoordinates($lat,$long)

@@ -23,7 +23,7 @@ for ($i = 0; $i < $count; $i++)
 	$privacy = intval($curRow[1]);
 	if (is_numeric($num) == false || strlen("".$num) < 3) { echo PARAMETER_ERROR; exit(); }
 	
-	if (strlen("".$num) == 10) { $num = "1$num"; }
+	if (strlen("".$num) == 10) { $num = "1".$num; }
 	
 	$Insert = array();
 	$Insert['user_id'] = $Me['id'];
