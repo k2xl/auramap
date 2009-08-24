@@ -6,5 +6,5 @@ android:layout_height="wrap_content" android:text="Oh, no!" android:layout_align
 <ImageView android:id="@+id/ImageView01" android:layout_width="wrap_content" 
 android:layout_centerInParent="true" android:layout_height="wrap_content" android:src="@drawable/ohno"></ImageView>
 <TextView android:id="@+id/TextView01" android:layout_width="wrap_content" 
-android:layout_height="wrap_content" android:text="An error has occurred. Please restart the application." android:layout_centerInParent="true" android:layout_centerVertical="true" android:layout_centerHorizontal="true" android:textSize="20dp" android:layout_alignParentTop="true" android:layout_marginTop="65dp" android:layout_marginLeft="35dp"></TextView>
+android:layout_height="wrap_content" android:text="An error has occurred. Please restart HappyMap." android:layout_centerInParent="true" android:layout_centerVertical="true" android:layout_centerHorizontal="true" android:textSize="20dp" android:layout_alignParentTop="true" android:layout_marginTop="65dp" android:layout_marginLeft="35dp"></TextView>
 </RelativeLayout>
