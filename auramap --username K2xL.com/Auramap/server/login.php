@@ -48,7 +48,7 @@ function getUserWithPhone($num)
 {
 	global $DB;
 	// First get user from users table from the phone number
-	$user = $DB->query("select * from users where username=$phone");
+	$user = $DB->query("select * from users where username=$num");
 	if (!$user) { echo SERVER_ERROR; exit(); }
 	// If the phone hasn't been registered
 	if (mysql_num_rows($user) == 0){ return -1; };
