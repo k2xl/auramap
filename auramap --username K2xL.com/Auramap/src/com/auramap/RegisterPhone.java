@@ -15,6 +15,7 @@ public class RegisterPhone extends Activity {
 	private SharedPreferences settings;
 	public void onCreate(Bundle b) {
 		super.onCreate(b);
+	
 		settings = getSharedPreferences("HappyMapData", 0);
 
 	    String passkey = settings.getString("MyPassKey", "");
@@ -22,8 +23,8 @@ public class RegisterPhone extends Activity {
         
         getSystemService(TELEPHONY_SERVICE);
         String MyPhoneNumber = telephony.getLine1Number();
-        //Data.pNumber = MyPhoneNumber;
-        Data.pNumber = "15555555555"; //MyPhoneNumber;
+        Data.pNumber = MyPhoneNumber;
+       // Data.pNumber = "15555555555"; //MyPhoneNumber;
         Data.pKey = passkey;
         //Data.pKey = "12345"; // debuggin
         
