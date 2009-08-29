@@ -20,7 +20,7 @@ public class Auramap extends Activity {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_CANCELED){ finish(); return; }
 		Log.v("Auramap", "RequestCode: " + requestCode);
-		String res = data.getExtras().getString("Result");
+		//String res = data.getExtras().getString("Result");
 		if (requestCode == 10) {
 			Intent i = new Intent(this.getBaseContext(), UpdateBuddies.class);
 			startActivityForResult(i, 11);

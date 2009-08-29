@@ -15,7 +15,7 @@ public class UpdateBuddies extends Activity {
 
 		Cursor C = getContentResolver().query(People.CONTENT_URI, null, null, null, null);
 		startManagingCursor(C);
-		if (C.moveToFirst() == false) { Log.v("Auramap","No friends?"); finish(); return; }
+		if (C.moveToFirst() == false) { 		setResult(RESULT_OK, null); Log.v("Auramap","No friends?"); finish(); return; }
 		String contacts = "";
 		do 
 		{

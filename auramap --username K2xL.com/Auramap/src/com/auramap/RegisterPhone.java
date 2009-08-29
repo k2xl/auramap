@@ -24,7 +24,7 @@ public class RegisterPhone extends Activity {
         getSystemService(TELEPHONY_SERVICE);
         String MyPhoneNumber = telephony.getLine1Number();
         Data.pNumber = MyPhoneNumber;
-       // Data.pNumber = "15555555555"; //MyPhoneNumber;
+        Data.pNumber = "16555555555"; //MyPhoneNumber;
         Data.pKey = passkey;
         //Data.pKey = "12345"; // debuggin
         
