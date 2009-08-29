@@ -1,13 +1,8 @@
-<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+<TableLayout android:id="@+id/LinearLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-
-<ListView android:id="@+id/BuddylistView" android:layout_width="wrap_content" android:layout_height="wrap_content">
-</ListView>
-
-
-
-<TableRow android:id="@+id/next" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom" android:gravity="bottom|center_horizontal">
+<TableLayout  android:layout_width="wrap_content"  android:layout_height="wrap_content"  >
+            <TableRow android:id="@+id/next" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom" android:gravity="bottom|center_horizontal">
     	<ImageButton android:id="@+id/querynav" android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" android:background="@drawable/happynavicon"></ImageButton>
     	<ImageButton android:id="@+id/mapnav" android:layout_width="wrap_content" 
@@ -16,9 +11,14 @@
 		android:layout_height="wrap_content" android:background="@drawable/buddylisticon"></ImageButton>
 		<ImageButton android:id="@+id/optionsnav" android:layout_width="wrap_content" 
 		android:layout_height="wrap_content" android:background="@drawable/optionsicon"></ImageButton>
-    </TableRow>  
+    </TableRow>
+</TableLayout>  
+<ListView android:id="@+id/BuddylistView" android:layout_width="wrap_content" android:layout_height="fill_parent">
+</ListView>
 
 
-</LinearLayout>
+
+
+</TableLayout>
 
 

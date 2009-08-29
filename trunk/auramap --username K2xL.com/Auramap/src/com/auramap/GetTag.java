@@ -95,7 +95,7 @@ public class GetTag extends Activity {
     public void onActivityResult (int requestCode, int resultCode, Intent data) {
 
     	String fromServer = data.getExtras().getString("webResponse");
-    	Log.v("sss0", "Server Result: " + fromServer);
+    	Log.v("Auramap", "Server Result: " + fromServer);
   
     	if(requestCode == 0) {
     		pd.dismiss();

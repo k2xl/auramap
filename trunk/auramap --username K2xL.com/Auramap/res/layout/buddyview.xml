@@ -1,0 +1,24 @@
+<TableLayout android:id="@+id/TableLayout01"
+	android:layout_width="wrap_content" android:layout_height="wrap_content"
+	xmlns:android="http://schemas.android.com/apk/res/android" android:layout_gravity="center">
+	<TableRow android:layout_gravity="center">
+	<TextView android:id="@+id/Buddyname" android:layout_height="wrap_content"
+		android:text="Buddy Name" android:textSize="24sp" android:typeface="serif"
+		android:textStyle="bold" android:layout_width="fill_parent" android:layout_gravity="center"></TextView>
+		</TableRow>
+		<TableRow android:layout_gravity="center">
+	<ImageView android:id="@+id/Buddystatus"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:src="@drawable/neutral2"></ImageView>
+		</TableRow>
+		<TableRow android:layout_gravity="center">
+	<TextView android:id="@+id/Profilelastupdated" android:layout_height="wrap_content"
+		android:text="Buddy Name" android:textSize="14sp" android:typeface="serif"
+		android:layout_width="fill_parent" android:layout_gravity="center"></TextView>
+		</TableRow>
+		<TableRow android:layout_gravity="center">
+	<TextView android:id="@+id/Profiletags" android:layout_height="wrap_content"
+		android:text="Buddy Name" android:textSize="14sp" android:typeface="serif"
+		android:layout_width="fill_parent" android:layout_gravity="center"></TextView>
+		</TableRow>
+</TableLayout>
