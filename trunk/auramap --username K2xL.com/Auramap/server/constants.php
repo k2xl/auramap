@@ -14,9 +14,26 @@
  define("DUPLICATE_ERROR","DUPLICATE_ERROR");
  define("EMPTY_RESULT","EMPTY_RESULT");
  define("PARAMETER_ERROR","PARAMETER_ERROR");
+ define("INVALID_PHONE_ERROR","INVALID_PHONE_ERROR");
+ define("MAX_NUDGES_REACHED","MAX_NUDGES_REACHED");
+ define("UNKNOWN_PHONE","UNKNOWN_PHONE");
  // VALUES
- define("SPACE_RADIUS",100); // in miles
- define("NAME_CHANGE_VOTES_NEEDED",3);
- define("NAME_CHANGE_VOTES_NEEDED_AS_PERCENTAGE_OF_COMMENTS",0.1);
+ define("NUDGE_EXPIRATION",60*60*24); // in minutes
+ define("MAX_ACTIVE_NUDGES",5); // in minutes
  
+ function phonerize($phonenumber)
+{
+	if (strlen("".$phonenumber) == 11) 
+	{
+		if ($phonenumber[0] == "1")
+			$phonenumber = substr($phonenumber,1);
+		else
+			return false;
+	}
+	
+	if(ereg('^[2-9]{1}[0-9]{2}[0-9]{3}[0-9]{4}$', $phonenumber))
+     return $phonenumber;
+  	else
+     return false;
+}
 ?>

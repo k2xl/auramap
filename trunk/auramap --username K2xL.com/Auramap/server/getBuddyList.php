@@ -20,7 +20,7 @@ while ($rs = mysql_fetch_assoc($buddies))
 		$lastAura = getLatestAurapoint($userID);
 		$happystate = $lastAura['emotrating'];
 		$lastupdate = $lastAura['timestamp'];
-		$lastupdate = time()-$lastupdate;
+		//$lastupdate = time()-$lastupdate;
 	}
 	
 	$str.= "$num,$happystate,$lastupdate,$privacy#";
@@ -32,7 +32,8 @@ function getLatestAurapoint($userID)
 {
 	global $DB;
 	// Phone has been registered... Now I would check here if the $userID has given the $id permissions... but i'll save that for another day
-	$sql = "select * from aurapoints where user_id=$userID order by timestamp desc limit 0,1";
+	// * actually i wouldn't check here i'd do it in getUserWithPhone 
+	$sql = "select id,emotrating,(UNIX_TIMESTAMP()-timestamp) as timestamp from aurapoints where user_id=$userID order by timestamp desc limit 0,1";
 	$latestAurapoint = $DB->query($sql);
 	if (!$latestAurapoint) { echo SERVER_ERROR; exit(); }
 	$latestAurapoint = mysql_fetch_assoc($latestAurapoint);

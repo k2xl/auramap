@@ -28,8 +28,9 @@ if (isset($Headers['username'])== false)
 }
 //
 
-if (isset($Headers['username']) == false ||isset($Headers['password']) == false) { echo LOGIN_ERROR; exit(); }
-$username = $Headers['username'];
+if (isset($Headers['username']) == false ||isset($Headers['password']) == false) { echo PARAMETER_ERROR; exit(); }
+$username = phonerize($Headers['username']);
+if (!$username) { echo PARAMETER_ERROR; }
 $password = ($Headers['password']);
 connectDB();
  
@@ -50,7 +51,7 @@ function getUserWithPhone($num)
 	// First get user from users table from the phone number
 	$user = $DB->query("select * from users where username=$num");
 	if (!$user) { echo SERVER_ERROR; exit(); }
-	// If the phone hasn't been registered
+	// If the phone hasn't been registered OR this user has no permissions to see...
 	if (mysql_num_rows($user) == 0){ return false; };
 	
 	
