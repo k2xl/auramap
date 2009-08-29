@@ -36,13 +36,13 @@ if (isset($Headers['username'])== false)
 }
 
 // Step 1: Check to see if they sent a phone number and validate it
-if (!isset ($Headers['username'])) {
+if (!isset ($Headers['username']) || !isset ($Headers['password'])) {
 	echo PARAMETER_ERROR;
 	exit();
 }
-$username = ($Headers['username']);
-if (is_numeric($username) == false) {
-	echo "not int ".PARAMETER_ERROR;
+$username = phonerize($Headers['username']);
+if (!$username){
+	echo PARAMETER_ERROR;
 	exit();
 }
 
@@ -80,6 +80,7 @@ function registerPhone($phone)
 {
 	global $DB;
 	$insert = array();
+	if ($phone == false) { echo INVALID_PHONE_ERROR; exit(); }
 	$insert['username'] = "'$phone'";
 	$insert['phone'] =  "'$phone'";
 	$key = md5(rand(0,999999999));
