@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,6 +62,13 @@ public class GetBuddy extends Activity {
 		
 		lastupdated.setText(secondsago);
 		lasttags.setText("Tags: "+strdata[2]);
+		
+		if (strdata[3].equals("0"))
+		{
+			Button nudgeB = (Button) findViewById(R.id.SendNudgeButton);
+			nudgeB.setEnabled(false);
+		}
+		
 		Log.v("Auramap", "Server Result: " + fromServer);
 	}
 }
