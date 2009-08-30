@@ -104,6 +104,8 @@ public class ConnectionResource extends Activity {
 			}
 		}
 	};
+	
+	
 
 	private OnClickListener gListener = new OnClickListener() {
 		public void onClick(View v) {

@@ -22,4 +22,6 @@
 		android:layout_width="fill_parent" android:layout_gravity="center"></TextView>
 		</TableRow>
 <Button android:text="Send Nudge" android:id="@+id/SendNudgeButton" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<Button android:text="Go Back" android:id="@+id/BackButton" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+
 </TableLayout>
