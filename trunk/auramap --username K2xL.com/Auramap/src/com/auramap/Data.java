@@ -10,4 +10,8 @@ public static String pKey;
 	{
 		return s;
 	}
+	
+	public static String getDaysFromSeconds(Long seconds) {
+		
+	}
 }
