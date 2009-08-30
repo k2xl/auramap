@@ -6,13 +6,12 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.Contacts;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -37,7 +36,10 @@ public class BuddyScreen extends Activity {
 		if (response.equals("[404]") == false) {
 			fromServer = response;
 		}
-
+		
+        
+         
+         
 		// data.getExtras().getString("webResponse");
 		Log.v("Auramap", "Buddy List Server Result: " + fromServer);
 		String[][] buddyList;
@@ -45,7 +47,8 @@ public class BuddyScreen extends Activity {
 		int tempS = sploded.length;
 		buddyList = new String[tempS][4];
 		for (int i = 0; i < tempS; i++) {
-			buddyList[i] = sploded[i].split(",");
+			buddyList[i] = sploded[i].split(",;,");
+			Log.v("Auramap", "0: " + buddyList[i][0] + " 1: " + buddyList[i][1]);
 		}
 
 		ListView list = (ListView) findViewById(R.id.BuddylistView);
@@ -61,24 +64,37 @@ public class BuddyScreen extends Activity {
 		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();
 		HashMap<String, Object> map;
 		for (int i = 0; i < tempS; i++) {
-			map = new HashMap<String, Object>();
-			map.put("phone", getContactNameFromNumber(Data
-					.getNameFromNumber(buddyList[i][0])));
-			map.put("rawphone", ""+buddyList[i][0]);
-			double rawval = Double.parseDouble(buddyList[i][1]);
-			int val = 0;
-			if (rawval != -1) {
-				val = 1 + (int) (4 * rawval);
-			}
-			map.put("state", imgStates[val]);
-			if (buddyList[i][2].equals("0")) {
-				map.put("update", "");
+			if(buddyList[i][1].equals("EMPTY_RESULT")) {
+				
+				map = new HashMap<String, Object>();
+				map.put("phone", Data.getContactNameFromNumber(buddyList[i][0],this.getBaseContext().getContentResolver()));				
+				map.put("rawphone", ""+buddyList[i][0]);				
+
+				map.put("state", R.drawable.mapicon);
+				map.put("update", "No data for user");
+				
+				//map.put("privacy",0);
+				mylist.add(map);	
 			} else {
-				map.put("update", buddyList[i][2] + " seconds ago");
-			}
-			map.put("privacy", buddyList[i][3]);
-			mylist.add(map);
-		}
+				Log.v("Auramap", "Number: " + buddyList[i][0] + " Raw Value: " + buddyList[i][1]);
+				map = new HashMap<String, Object>();
+				map.put("phone", Data.getContactNameFromNumber(buddyList[i][0],this.getBaseContext().getContentResolver()));
+				map.put("rawphone", ""+buddyList[i][0]);
+				double rawval = Double.parseDouble(buddyList[i][1]);
+				int val = 0;
+				if (rawval != -1) {
+					val = 1 + (int) (4 * rawval);
+				}
+				map.put("state", imgStates[val]);
+				if (buddyList[i][2].equals("0")) {
+					map.put("update", "");
+				} else {
+					map.put("update", Data.distanceTo(Long.parseLong(buddyList[i][2]), true));
+				}
+				//map.put("privacy", buddyList[i][3]);
+				mylist.add(map);
+			
+		}}
 
 		SimpleAdapter mSchedule = new SimpleAdapter(this, mylist,
 				R.layout.buddyrow, new String[] { "phone", "state", "update",
@@ -103,14 +119,15 @@ public class BuddyScreen extends Activity {
 			}
 		});
 	}
-	private void seeBuddy(String name, String phone)
-	{
-		//setContentView(R.layout.buddyview);
+
+	private void seeBuddy(String name, String phone) {
+		// setContentView(R.layout.buddyview);
 		Intent intent = new Intent(this.getBaseContext(), GetBuddy.class);
 		intent.putExtra("name", name);
 		intent.putExtra("phone", phone);
 		startActivity(intent);
 	}
+
 	private void getBuddies(String toServer) {
 
 		Intent intent = new Intent(this.getBaseContext(), TextURL.class);
@@ -124,28 +141,5 @@ public class BuddyScreen extends Activity {
 		startActivityForResult(intent, 0);
 	}
 
-	private String getContactNameFromNumber(String number) {
-		// define the columns I want the query to return
-		String[] projection = new String[] { Contacts.Phones.DISPLAY_NAME,
-				Contacts.Phones.NUMBER };
-
-		// encode the phone number and build the filter URI
-		Uri contactUri = Uri.withAppendedPath(
-				Contacts.Phones.CONTENT_FILTER_URL, Uri.encode(number));
-
-		// query time
-		Cursor c = getContentResolver().query(contactUri, projection, null,
-				null, null);
-
-		// if the query returns 1 or more results
-		// return the first result
-		if (c.moveToFirst()) {
-			String name = c.getString(c
-					.getColumnIndex(Contacts.Phones.DISPLAY_NAME));
-			return name;
-		}
-
-		// return the original number if no match was found
-		return number;
-	}
+	
 }

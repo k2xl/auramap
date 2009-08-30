@@ -22,6 +22,7 @@
         <activity android:name=".RegisterPhone" android:label="Register your Phone"/>
         <activity android:name=".UpdateBuddies" android:label="Update your Buddies"/>
         <activity android:name=".GetBuddy" android:label="View single buddy"/>
+        <service android:name=".NudgeService"/>
     <uses-library android:name="com.google.android.maps"/>
     </application>
     <uses-sdk android:minSdkVersion="3" />
