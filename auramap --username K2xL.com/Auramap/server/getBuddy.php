@@ -25,6 +25,6 @@ $myid = $Me['id'];
 $nudgeAllowed = $DB->count("nudges","where user_id=$myid and target_number=$buddynumber and expired=0");
 if ($nudgeAllowed>0){ $nudgeAllowed = 0;}
 else { $nudgeAllowed = 1; }
-echo $row['timestamp']."#".$row['emotrating']."#".$row['tag']."#".$nudgeAllowed;
+echo distanceOfTimeInWords($row['timestamp']).",;,".$row['emotrating'].",;,".$row['tag'].",;,".$nudgeAllowed;
 
 ?>

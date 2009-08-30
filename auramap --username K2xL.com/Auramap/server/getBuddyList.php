@@ -4,6 +4,8 @@ require_once("login.php");
 $str = "";
 $buddies = $DB->query("select buddynumber,privacy from buddies where user_id=".$Me['id']);
 if (!$buddies) { echo SERVER_ERROR; }
+
+$buddydatas = array();
 while ($rs = mysql_fetch_assoc($buddies))
 {
 	$num = ($rs['buddynumber']);
@@ -19,12 +21,52 @@ while ($rs = mysql_fetch_assoc($buddies))
 	if ($userID > 0){
 		$lastAura = getLatestAurapoint($userID);
 		$happystate = $lastAura['emotrating'];
-		$lastupdate = $lastAura['timestamp'];
+		$lastupdate = ($lastAura['timestamp']);
 		//$lastupdate = time()-$lastupdate;
+		$tempBud = array();
+		$tempBud['num'] = $num;
+		$tempBud['state'] = $happystate;
+		$tempBud['lastupdate'] = $lastupdate;
+		$tempBud['privacy'] = $privacy;
+		array_push($buddydatas,$tempBud);
+		//$str.= "$num,;,$happystate,;,$lastupdate,;,$privacy#";
 	}
-	
-	$str.= "$num,$happystate,$lastupdate,$privacy#";
-	
+	else
+	{
+		$tempBud = array();
+		$tempBud['num'] = $num;
+		$tempBud['state'] = -1;
+		$tempBud['lastupdate'] = 0;
+		$tempBud['privacy'] = 0;
+		array_push($buddydatas,$tempBud);
+		//$str .= $num.",;,".EMPTY_RESULT."#";
+	}
+}
+function buddysorter($a,$b)
+{
+	if ($a['lastupdate'] < $b['lastupdate'] && $a['lastupdate']!=0 || $b['lastupdate'] == 0)
+	{
+		return 0;
+	}
+	return 1;
+}
+usort($buddydatas,"buddysorter");
+$tempC = count($buddydatas);
+for ($i = 0; $i < $tempC; $i++)
+{
+	$tempBud = $buddydatas[$i];
+	if ($tempBud['state'] == -1)
+	{
+		$str .= $tempBud['num'].",;,".EMPTY_RESULT."#";
+	}
+	else
+	{
+		$num = $tempBud['num'];
+		$happystate =$tempBud['state'];
+		$lastupdate = distanceOfTimeInWords($tempBud['lastupdate'],true);
+		$privacy = $tempBud['privacy']; 
+		$str.= "$num,;,$happystate,;,$lastupdate,;,$privacy#";
+	}
 }
 echo $str;
 

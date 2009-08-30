@@ -68,7 +68,7 @@ if ($phoneAlreadyExists) {
 // Step 3: If phone does not exist...
 $phonepasskey = registerPhone($username);
 
-echo $phonepasskey;
+echo "FIRST,".$phonepasskey;
 exit();
 
 function phoneExists($phone)
