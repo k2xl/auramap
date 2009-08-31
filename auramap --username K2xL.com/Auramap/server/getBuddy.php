@@ -16,7 +16,7 @@ if (!$buddy) { echo UNKNOWN_PHONE; exit(); }
  */
 // Step 3: Get last update
 $buddyid = $buddy['id'];
-$q = $DB-> query("select (UNIX_TIMESTAMP()-timestamp) as timestamp, emotrating, tag from aurapoints where user_id=$buddyid order by timestamp desc limit 0,1");
+$q = $DB-> query("select (UNIX_TIMESTAMP()-timestamp) as timestamp, emotrating, tag from aurapoints where user_id=$buddyid order by timestamp asc limit 0,1");
 if (!$q) { echo SERVER_ERROR; exit(); }
 
 $row = mysql_fetch_assoc($q);

@@ -10,7 +10,7 @@ if (isset($Headers['clearnudges']))
 		$Update = array();
 		$Update['expired'] = 1;
 		$Update['read_timestamp'] = "UNIX_TIMESTAMP()";
-		$q = $DB->update("nudges",$Update,"where target_number=$myusername");
+		$q = $DB->update("nudges",$Update,"where target_number=$myusername and expired=0");
 		if (!$q){ echo SERVER_ERROR; exit();}
 		
 		
@@ -48,7 +48,8 @@ else{
 	// get all your nudges that have been seen
 }
 echo "#";
-$yourReadNudges = $DB->query("select timestamp,(select user_id from users where username=nudges.target_number) as target_id,read_timestamp,target_number from nudges where user_id=$myuserid and read_timestamp>0 and expired<=2");
+$sql = "select timestamp,(select id from users where username=nudges.target_number) as target_id,read_timestamp,target_number from nudges where user_id=$myuserid and read_timestamp>0 and expired<=2";
+$yourReadNudges = $DB->query($sql);
 if (!$yourReadNudges)
 {
 	echo SERVER_ERROR; exit();
@@ -62,12 +63,13 @@ while ($rs = mysql_fetch_assoc($yourReadNudges))
 {
 	// now check to see if this person has updated their status since
 	$targetid = $rs['target_id'];
-	$q = $DB->query("select * from aurapoints where user_id=$targetid order by timestamp desc limit 0,1");
+	$nudgetime = $rs['timestamp'];
+	$q = $DB->query("select * from aurapoints where user_id=$targetid and (timestamp>$nudgetime) order by timestamp asc limit 0,1");
 	if (!$q) {echo SERVER_ERROR; exit();}
 	$row = mysql_fetch_assoc($q);
-	if (isset($row['timestamp']) == false) { continue; }
+	if (isset($row['timestamp']) == false) {continue; }
 	
-	if ($row['timestamp'] < $rs['timestamp']) { continue; }
+	//if ($row['timestamp'] < $rs['timestamp']) {  continue; }
 	
 	$Update = array();
 	$Update['expired'] = 2;
@@ -75,6 +77,7 @@ while ($rs = mysql_fetch_assoc($yourReadNudges))
 	$q = $DB->update("nudges",$Update, "where target_number=".$rs['target_number']." and user_id=$myuserid and expired=1");
 	if (!$q) { echo SERVER_ERROR; exit(); }	
 	echo $rs['target_number'].",;,".$row['timestamp'].",;,".$row['emotrating'].",;,".$row['tag'].";;;";
+	//echo $sql;
 }
 
 ?>
