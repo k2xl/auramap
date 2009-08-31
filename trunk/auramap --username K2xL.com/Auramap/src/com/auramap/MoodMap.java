@@ -1,14 +1,17 @@
 package com.auramap;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.List;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -18,15 +21,20 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 public class MoodMap extends MapActivity {
 	ProgressDialog pd ;
      LinearLayout linearLayout;
+     GeoPoint curPoint;
      MapView mapView;
      ZoomControls mapZoom;
      MapController mc;
      OverlayItem[] items;
+	LocationManager manager;
+	Location location; //location
+	LocationListener locationListener;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,31 +47,43 @@ public class MoodMap extends MapActivity {
         mc.animateTo(new GeoPoint(33778268, -84399182));
         mc.zoomToSpan(10487, 17809);
         mapView.setBuiltInZoomControls(true);
-        
+        manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+
+        location = manager.getLastKnownLocation( "gps" );
+        locationListener = new MyLocationListener();
+        int latData = (int)(1000000*location.getLatitude());
+        int lonData = (int)(1000000*location.getLongitude());
+    	curPoint = new GeoPoint(latData,lonData);
+    	/*
+    	  CurrentPointOverlay cpOverlay = new CurrentPointOverlay();
+          List<Overlay> listOfOverlays = mapView.getOverlays();
+          listOfOverlays.clear();
+          listOfOverlays.add(cpOverlay); 
+          mapView.invalidate();
+    	 */
+
         getPoints();
     }
     
     private void drawPoints() {
-        Log.v("Auramap","AAA");
         Drawable drawable = this.getResources().getDrawable(R.drawable.blank2);
-        Log.v("Auramap","BBB");
         ItemizedAuraPoints circ = new ItemizedAuraPoints(drawable);
         
         int tempS = items.length;
-        Log.v("Auramap","CCC = "+tempS);
         for (int i = 0 ; i < tempS ; i++)
         {
         	circ.addOverlay(items[i]);
         }
+        //circ.addOverlay(curPoint);
         
-        Log.v("Auramap","DDD");
         circ.callPopulate();
         mapView.setAlwaysDrawnWithCacheEnabled(true);
-        mapView.setDrawingCacheEnabled(true);
-        
+        mapView.setDrawingCacheEnabled(true);     
+
         
         mapView.getOverlays().add(circ);
-        Log.v("Auramap","EEE");
+        
+        
     }
     
     private void getPoints() {    	
@@ -71,9 +91,34 @@ public class MoodMap extends MapActivity {
         Intent intent = new Intent(this.getBaseContext(), TextURL.class);
         intent.putExtra("URL","http://www.k2xl.info/auramap/server/getcoords.php");
         intent.putExtra("loadMessage","Retrieving Aurapoints");
-        intent.putExtra("servMessage","");//username=" + Data.pNumber + "&password=" + Data.pKey);
+        intent.putExtra("servMessage","");
         startActivityForResult(intent, 0);
     }
+    
+    private class MyLocationListener implements LocationListener
+    {      
+          public void onLocationChanged(Location newLoc) {
+                 if (newLoc != null) {
+                     location = newLoc;
+                 }
+               
+          }
+
+ 		public void onProviderDisabled(String arg0) {
+ 			// TODO Auto-generated method stub
+ 			
+ 		}
+
+ 		public void onProviderEnabled(String provider) {
+ 			// TODO Auto-generated method stub
+ 			
+ 		}
+
+ 		public void onStatusChanged(String provider, int status, Bundle extras) {
+ 			// TODO Auto-generated method stub
+ 			
+ 		}
+    }; 
     
     public void onActivityResult (int requestCode, int resultCode, Intent data) {
     	pd.dismiss();
@@ -83,6 +128,8 @@ public class MoodMap extends MapActivity {
     	if(sploded[0].equals("SUCCESS") == false) {Log.v("Auramap", "ERROR ERROR ERROR=" + sploded[0]); }
 
     	int tempS = sploded.length;
+    	
+
     	
     	items = new OverlayItem[tempS-1];
     	for(int i =1; i<tempS; i++) {
@@ -94,6 +141,7 @@ public class MoodMap extends MapActivity {
     		GeoPoint geopt = new GeoPoint(latData,lonData);
     		items[i-1] = new OverlayItem(geopt,"",""+emotX);
     	}
+    	
     	drawPoints();
 
     }
@@ -105,62 +153,23 @@ public class MoodMap extends MapActivity {
           // TODO Auto-generated method stub
           return false;
      }
-     
-     public String textURL(String vars)
+     class CurrentPointOverlay extends com.google.android.maps.Overlay
      {
-     	int BUFFER_SIZE = 2000;
-         InputStream in = null;
-
-         try {
-             HttpURLConnection con = (HttpURLConnection)(new URL("http://www.k2xl.info/auramap/server/getcoords.php")).openConnection();
-             
-             con.setRequestMethod( "POST" );
-             con.setRequestProperty("METHOD", "POST");
-             con.setDoInput( true );
-             con.setDoOutput( true );
-             Log.v("Auramap", "Sending message: " + vars);
-            // add url form parameters
-             DataOutputStream ostream = null;
-             try {
-                 ostream = new DataOutputStream( con.getOutputStream() );
-                 ostream.writeBytes( vars );
-             }finally {
-                 if( ostream != null ) {
-                     ostream.flush();
-                     ostream.close();
-                   }
-                 }
-             
-             in = con.getInputStream();
-
-             
-         } catch (IOException e1) {
-             // TODO Auto-generated catch block
-             e1.printStackTrace();
-             return e1.toString();
+         @Override
+         public boolean draw(Canvas canvas, MapView mapView, 
+         boolean shadow, long when) 
+         {
+             super.draw(canvas, mapView, shadow);                   
+  
+             //---translate the GeoPoint to screen pixels---
+             Point screenPts = new Point();
+             mapView.getProjection().toPixels(curPoint, screenPts);
+  
+             //---add the marker---
+             Bitmap bmp = BitmapFactory.decodeResource( getResources(), R.drawable.happy);            
+             canvas.drawBitmap(bmp, screenPts.x, screenPts.y-50, null);
+             return true;
          }
-         
-         InputStreamReader isr = new InputStreamReader(in);
-         int charRead;
-           String str = "";
-           char[] inputBuffer = new char[BUFFER_SIZE];          
-         try {
-             while ((charRead = isr.read(inputBuffer))>0)
-             {                    
-                 //---convert the chars to a String---
-                 String readString =
-                     String.copyValueOf(inputBuffer, 0, charRead);                    
-                 str += readString;
-                 inputBuffer = new char[BUFFER_SIZE];
-             }
-             in.close();
-         } catch (IOException e) {
-             // TODO Auto-generated catch block
-             e.printStackTrace();
-             return "FAILED";
-         } 
-
-         Log.v("Auramap", "Coords: " + str);
-         return str;        
-     }
+     } 
+     
 }

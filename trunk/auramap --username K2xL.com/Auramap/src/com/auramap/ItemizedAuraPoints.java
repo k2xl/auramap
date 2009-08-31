@@ -2,7 +2,9 @@ package com.auramap;
 
 import java.util.ArrayList;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -10,6 +12,7 @@ import android.graphics.drawable.Drawable;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 import com.google.android.maps.Projection;
@@ -44,9 +47,13 @@ public class ItemizedAuraPoints extends ItemizedOverlay
 			point = items.get(i).getPoint();
 			//double emoteRatio = 256*Integer.parseInt(items.get(i).getSnippet())+100.0/200.0;
 			//int color = (((int)emoteRatio)<<6)|0x000000;
+			if(items.get(i).getSnippet().equals("curPoint")) {
+				auraImage.setColor(0x000000);
+			}else {
 			int color = Integer.parseInt(items.get(i).getSnippet());
 			auraImage.setColor(color);
 			auraImage.setAlpha(63);
+			}
 			Point pixelPoint = proj.toPixels(point, null);
 			if (pixelPoint.x < 0 || pixelPoint.x > canvas.getWidth() || pixelPoint.y < 0 || pixelPoint.y > canvas.getHeight()){ continue; }
 			canvas.drawCircle(pixelPoint.x,pixelPoint.y,Math.max(3,(int)(111.0/Math.pow(2,19-zoomLevel))),auraImage);
@@ -114,5 +121,8 @@ public class ItemizedAuraPoints extends ItemizedOverlay
 		// TODO Auto-generated method stub
 		return items.size();
 	}
+	
+ 
+
 	
 }

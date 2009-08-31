@@ -6,16 +6,15 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class BuddyScreen extends Activity {
@@ -32,23 +31,25 @@ public class BuddyScreen extends Activity {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		pd.dismiss();
 		String response = data.getExtras().getString("webResponse");
-		String fromServer = "1234576,2,43,0#4321,4,62,0#1234576,2,43,0#4321,4,62,0#1234576,2,43,0#4321,4,62,0#1234576,2,43,0#4321,4,62,0#1234576,2,43,0#4321,4,62,0#1234576,2,43,0#4321,4,62,0#1234576,2,43,0#4321,4,62,0#1234576,2,43,0#4321,4,62,0";
+		String fromServer = "";
 		if (response.equals("[404]") == false) {
 			fromServer = response;
 		}
 		
-        
-         
-         
-		// data.getExtras().getString("webResponse");
 		Log.v("Auramap", "Buddy List Server Result: " + fromServer);
+		
+		//Split the server result---------------------------------------------------------------------|
 		String[][] buddyList;
 		String[] sploded = fromServer.split("#");
 		int tempS = sploded.length;
 		buddyList = new String[tempS][4];
 		for (int i = 0; i < tempS; i++) {
 			buddyList[i] = sploded[i].split(",;,");
+			if(buddyList[i].length<2) {
+				Log.v("Auramap", "0: "+ buddyList[i][0] + " 1: NULL, NO ENTRY");				
+			} else {
 			Log.v("Auramap", "0: " + buddyList[i][0] + " 1: " + buddyList[i][1]);
+			}
 		}
 
 		ListView list = (ListView) findViewById(R.id.BuddylistView);
@@ -62,9 +63,11 @@ public class BuddyScreen extends Activity {
 		imgStates[5] = R.drawable.happy;
 
 		ArrayList<HashMap<String, Object>> mylist = new ArrayList<HashMap<String, Object>>();
-		HashMap<String, Object> map;
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		for (int i = 0; i < tempS; i++) {
-			if(buddyList[i][1].equals("EMPTY_RESULT")) {
+			if(buddyList[i][0].equals("")) {
+				Toast.makeText(this.getBaseContext(), "You have no contacts, let us know when you get some friends", 30000).show();
+			} else if(buddyList[i][1].equals("") || buddyList[i][1].equals("EMPTY_RESULT")) {
 				
 				map = new HashMap<String, Object>();
 				map.put("phone", Data.getContactNameFromNumber(buddyList[i][0],this.getBaseContext().getContentResolver()));				

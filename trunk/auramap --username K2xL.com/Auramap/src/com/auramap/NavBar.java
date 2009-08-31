@@ -49,7 +49,6 @@ public class NavBar {
     
 	public static void adaptNav(Activity current) {
 		ImageButton queryButton = (ImageButton)current.findViewById(R.id.querynav);
-		Log.v("aaaaa","What's null is it queryButton? = "+queryButton+" or navBarListener = "+navBarListener);
 		queryButton.setOnClickListener(navBarListener);
 		ImageButton mapButton = (ImageButton)current.findViewById(R.id.mapnav);
 		mapButton.setOnClickListener(navBarListener);
