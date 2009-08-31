@@ -315,10 +315,20 @@ public class GetTag extends Activity {
 
 		}
 	};
+	public String stripGarbage(String s) {  
+	    String good =
+	      " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,";
+	    String result = "";
+	    for ( int i = 0; i < s.length(); i++ ) {
+	        if ( good.indexOf(s.charAt(i)) >= 0 )
+	           result += s.charAt(i);
+	        }
+	    return result;
+	    }
 
 	private void sendAuraPoint() {
-
 		String t = tag.getText().toString();
+		t = stripGarbage(t);
 		Intent i = new Intent(this.getBaseContext(), ConnectionResource.class);
 		i.putExtras(this.getIntent().getExtras());
 		i.putExtra("tag", t);
