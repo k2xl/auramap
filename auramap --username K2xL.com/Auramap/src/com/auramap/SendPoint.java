@@ -39,7 +39,6 @@ public class SendPoint extends Activity {
 	
 
 	private void goToMap() {
-
 		Intent i = new Intent(this.getBaseContext(), MoodMap.class);
 		startActivity(i);
 		finish();

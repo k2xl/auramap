@@ -286,7 +286,7 @@ public class GetTag extends Activity {
     private void sendAuraPoint() {
         
         String t= tag.getText().toString();
-    	Intent i = new Intent(this.getBaseContext(), SendPoint.class);				
+    	Intent i = new Intent(this.getBaseContext(), ConnectionResource.class);				
 		i.putExtras(this.getIntent().getExtras());
 		i.putExtra("tag", t);
 		startActivity(i);

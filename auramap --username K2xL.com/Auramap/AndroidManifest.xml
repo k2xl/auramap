@@ -19,7 +19,7 @@
         <activity android:name=".QueryScreen" android:label="QueryScreen"/>
         <activity android:name=".ProgressScreen" android:label="ProgressScreen"/>
         <activity android:name=".OptionsScreen" android:label="Change Options"/>
-        <activity android:name=".BuddyScreen" android:label="View your Buddys"/>
+        <activity android:name=".BuddyScreen" android:label="View your Buddies"/>
         <activity android:name=".RegisterPhone" android:label="Register your Phone"/>
         <activity android:name=".UpdateBuddies" android:label="Update your Buddies"/>
         <activity android:name=".GetBuddy" android:label="View single buddy"/>

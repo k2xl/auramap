@@ -153,6 +153,7 @@ public class ConnectionResource extends Activity {
 	
 	public String textURL(String vars)
     {
+		String servMessage = "username="+Data.pNumber+"&password="+Data.pKey+"&"+vars;
     	int BUFFER_SIZE = 2000;
         InputStream in = null;
 
@@ -163,12 +164,12 @@ public class ConnectionResource extends Activity {
             con.setRequestProperty("METHOD", "POST");
             con.setDoInput( true );
             con.setDoOutput( true );
-            Log.v("Auramap", "Sending message: " + vars);
+            Log.v("Auramap", "Sending message: " + servMessage);
            // add url form parameters
             DataOutputStream ostream = null;
             try {
                 ostream = new DataOutputStream( con.getOutputStream() );
-                ostream.writeBytes( vars );
+                ostream.writeBytes( servMessage );
             }finally {
                 if( ostream != null ) {
                     ostream.flush();
