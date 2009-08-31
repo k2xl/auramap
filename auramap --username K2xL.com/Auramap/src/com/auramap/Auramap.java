@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 public class Auramap extends Activity {
 	/** Called when the activity is first created. */
+	
 	public static Activity Instance;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,8 +34,26 @@ public class Auramap extends Activity {
 			startService(i);
 			//Toast t = Toast.makeText(this.getApplicationContext(), "Starting service...",1000);
 	        //t.show();
-			Intent o = new Intent(this.getBaseContext(), QueryScreen.class);
-			startActivity(o);
+			String GoToScreen = "";
+			try
+			{
+				GoToScreen = this.getIntent().getExtras().getString("GoToScreen");
+			}catch(NullPointerException e){
+				GoToScreen = "";
+			}
+			if (GoToScreen.equals("")){
+				Intent o = new Intent(this.getBaseContext(), QueryScreen.class);
+				startActivity(o);
+			}
+			else
+			{
+				String[] splode = GoToScreen.split(",;,");
+				GoToScreen = "";
+				Intent intent = new Intent(this.getBaseContext(), GetBuddy.class);
+				intent.putExtra("name", Data.getContactNameFromNumber(splode[1],getBaseContext().getContentResolver()));
+				intent.putExtra("phone", splode[1]);
+				startActivity(intent);
+			}
 			finish();
 		}
 	}
