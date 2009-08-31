@@ -15,6 +15,7 @@
         <activity android:name=".TextURL" android:label="TextURLLabel"/>
         <activity android:name=".ConnectionResource" android:label="ConnectionResourceLabel"/>
         <activity android:name=".MoodMap" android:label="MapLabel"/>
+        <activity android:name=".SendPoint" android:label="Sends Aurapoint to the Server"/>
         <activity android:name=".QueryScreen" android:label="QueryScreen"/>
         <activity android:name=".ProgressScreen" android:label="ProgressScreen"/>
         <activity android:name=".OptionsScreen" android:label="Change Options"/>
