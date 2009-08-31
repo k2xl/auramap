@@ -28,14 +28,14 @@ public class QueryScreen extends Activity {
         happyState = new HappyState();
         location = manager.getLastKnownLocation( "gps" );
         locationListener = new MyLocationListener();
-        
+        //i.putExtra("lat", location.getLatitude());
+        //i.putExtra("lon", location.getLongitude());
         
         
         TelephonyManager telephony = (TelephonyManager)
         
         getSystemService(TELEPHONY_SERVICE);
         MyPhoneNumber = telephony.getLine1Number();
-        Log.v("aaa","My telephone number = "+MyPhoneNumber);
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 2500,
                 25,
@@ -148,15 +148,14 @@ public class QueryScreen extends Activity {
     	33.78156339080061 - Math.random() * 0.010487523427205;
     double randomTechpointLon =
     -84.38984870910645 - Math.random() * 0.01780986785888;
-    i.putExtra("lat", randomTechpointLat);
-    i.putExtra("lon", randomTechpointLon);
-    //i.putExtra("lat", location.getLatitude());
-    //i.putExtra("lon", location.getLongitude());
+    //i.putExtra("lat", randomTechpointLat);
+    //i.putExtra("lon", randomTechpointLon);
+    i.putExtra("lat", location.getLatitude());
+    i.putExtra("lon", location.getLongitude());
     Log.v("Auramap", "Lat/Lon: " + location.getLatitude() + ", " + location.getLongitude());
     startActivity(i);
     finish();
     }
-
  }
 
 
