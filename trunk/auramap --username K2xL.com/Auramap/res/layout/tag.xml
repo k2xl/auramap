@@ -9,7 +9,7 @@ android:background="#333333" >
         android:text="Tag your reasons or select from the most popular ones below." 
         android:gravity="center_horizontal" android:padding="6dip" 
         android:layout_marginRight="6dip"></TextView>
-        <EditText android:layout_width="wrap_content" android:id="@+id/tag" android:layout_height="wrap_content" android:layout_marginLeft="19dip" android:layout_marginRight="19dip" android:maxLines="1"></EditText>
+        <EditText android:layout_width="wrap_content" android:id="@+id/tag" android:layout_height="wrap_content" android:layout_marginLeft="19dip" android:layout_marginRight="19dip" android:maxLines="1" android:singleLine="true"></EditText>
   <TableLayout android:gravity="center_horizontal|center">
 <TableRow android:id="@+id/taglabels" android:layout_width="wrap_content" android:paddingBottom="2dp"
     android:layout_height="wrap_content" android:gravity="center">

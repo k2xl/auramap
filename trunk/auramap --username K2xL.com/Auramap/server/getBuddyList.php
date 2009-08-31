@@ -17,9 +17,12 @@ while ($rs = mysql_fetch_assoc($buddies))
 	$permissions = -1;
 	$lastupdate = 0;
 	$happystate = -1;
-	
+	$lastAura = false;
 	if ($userID > 0){
 		$lastAura = getLatestAurapoint($userID);
+	}
+	if (!$lastAura)
+	{
 		$happystate = $lastAura['emotrating'];
 		$lastupdate = ($lastAura['timestamp']);
 		//$lastupdate = time()-$lastupdate;

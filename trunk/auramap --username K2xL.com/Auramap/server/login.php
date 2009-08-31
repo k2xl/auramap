@@ -30,7 +30,7 @@ if (isset($Headers['username'])== false)
 
 if (isset($Headers['username']) == false ||isset($Headers['password']) == false) { echo PARAMETER_ERROR; exit(); }
 $username = phonerize($Headers['username']);
-if (!$username) { echo PARAMETER_ERROR; }
+if (!$username) { echo PARAMETER_ERROR; exit(); }
 $password = ($Headers['password']);
 connectDB();
  
