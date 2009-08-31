@@ -1,6 +1,4 @@
 package com.auramap;
-import java.util.List;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,11 +20,11 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 public class MoodMap extends MapActivity {
 	ProgressDialog pd ;
+    BitmapDrawable bmp; 
      LinearLayout linearLayout;
      GeoPoint curPoint;
      MapView mapView;
@@ -67,7 +66,7 @@ public class MoodMap extends MapActivity {
     
     private void drawPoints() {
         Drawable drawable = this.getResources().getDrawable(R.drawable.blank2);
-        ItemizedAuraPoints circ = new ItemizedAuraPoints(drawable);
+        /*ItemizedAuraPoints circ = new ItemizedAuraPoints(drawable);
         
         int tempS = items.length;
         for (int i = 0 ; i < tempS ; i++)
@@ -76,12 +75,15 @@ public class MoodMap extends MapActivity {
         }
         //circ.addOverlay(curPoint);
         
-        circ.callPopulate();
+        circ.callPopulate();*/
+        
+        
         mapView.setAlwaysDrawnWithCacheEnabled(true);
         mapView.setDrawingCacheEnabled(true);     
 
-        
-        mapView.getOverlays().add(circ);
+        GraphicOverlay bmpOverlay = new GraphicOverlay((Drawable)getResources().getDrawable(R.drawable.happy), curPoint);
+        mapView.getOverlays().add(bmpOverlay);
+        //mapView.getOverlays().add(circ);
         
         
     }
