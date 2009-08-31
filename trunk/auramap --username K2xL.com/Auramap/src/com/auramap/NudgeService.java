@@ -51,7 +51,7 @@ public class NudgeService extends Service {
 	public void onStart(Intent intent, int startId) {
 		super.onStart(intent, startId);
 
-		Log.v("Auramap", "Begin NudgeListener");
+		Log.v("NudgeService", "Begin NudgeListener");
 
 	}
 
@@ -61,7 +61,7 @@ public class NudgeService extends Service {
 			timer.scheduleAtFixedRate(new TimerTask() {
 				public void run() {
 					count++;
-					Log.v("Auramap", "NudgeService is listening..." + count);
+					Log.v("NudgeService", "NudgeService is listening..." + count);
 					callServer();
 				}
 			}, 0, INTERVAL);
@@ -123,8 +123,9 @@ public class NudgeService extends Service {
 
 		// The PendingIntent to launch our activity if the user selects this
 		// notification
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, Auramap.class), 0);
+		Intent i = new Intent(this, Auramap.class);
+		i.putExtra("GoToScreen", "Buddy,;,"+sploded[0]);
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, 0);
 
 		// Set the info for the views that show in the notification panel.
 		notification.setLatestEventInfo(this, name
