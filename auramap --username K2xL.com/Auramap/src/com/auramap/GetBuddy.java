@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ public class GetBuddy extends Activity {
 	private String number;
 	final int LOAD_BUDDY_INFORMATION = 111;
 	final int NUDGE_BUDDY = 222;
+	final int CHANGE_BUDDY_NUDGE_PERMISSION = 333;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,15 +42,44 @@ public class GetBuddy extends Activity {
 		backButton.setOnClickListener(backListener);
 		final Button nudgeButton = (Button) findViewById(R.id.SendNudgeButton);
 		nudgeButton.setOnClickListener(nListener);
-		startActivityForResult(i, LOAD_BUDDY_INFORMATION);
-		
-	}
+		final CheckBox AllowNudgeCheckBox = (CheckBox) findViewById(R.id.nudgeAllowedCheckbox);
+		AllowNudgeCheckBox
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+					
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+							AllowNudgeCheckBox.setEnabled(false);
+							updateBuddyNudgePermission(isChecked);
+						// TODO Auto-generated method stub
 
+					}
+				});
+
+		startActivityForResult(i, LOAD_BUDDY_INFORMATION);
+
+	}
+	public void updateBuddyNudgePermission(boolean checked)
+	{
+		Intent intent = new Intent(this.getBaseContext(), TextURL.class);
+		intent.putExtra("URL",
+				"http://www.k2xl.info/auramap/server/insertaura.php");
+		intent.putExtra("loadMessage", "Updating preferences");
+		intent.putExtra("servMessage", "target="+number+"&nudgeprivacy="+checked);
+		startActivityForResult(intent, CHANGE_BUDDY_NUDGE_PERMISSION);
+	}
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		String fromServer = data.getExtras().getString("webResponse");
 		Log.v("Auramap", "Get Buddy Server Result: " + fromServer);
-		
-		if(requestCode == LOAD_BUDDY_INFORMATION) {
+		if (requestCode == CHANGE_BUDDY_NUDGE_PERMISSION)
+		{
+			CheckBox AllowNudgeCheckBox = (CheckBox) findViewById(R.id.nudgeAllowedCheckbox);
+			if (fromServer.equals("SUCCESS") == false)
+			{
+				 AllowNudgeCheckBox.setChecked(!AllowNudgeCheckBox.isChecked());
+			}
+			AllowNudgeCheckBox.setEnabled(true);
+		}
+		if (requestCode == LOAD_BUDDY_INFORMATION) {
 			int[] imgStates = new int[6];
 			imgStates[0] = R.drawable.blank;
 			imgStates[1] = R.drawable.sad2;
@@ -58,13 +90,15 @@ public class GetBuddy extends Activity {
 			if (fromServer.indexOf("UNKNOWN_PHONE") >= 0) {
 				lastupdated.setText("No data found for phone");
 				ImageView status = (ImageView) findViewById(R.id.Buddystatus);
-				status.setImageDrawable(getResources().getDrawable(R.drawable.mapicon));
+				status.setImageDrawable(getResources().getDrawable(
+						R.drawable.mapicon));
 				lasttags.setText(number);
 				return;
 			}
-			
+
 			String[] strdata = fromServer.split(",;,");
-			String secondsago = Data.distanceTo(Long.parseLong(strdata[0]), true);
+			String secondsago = Data.distanceTo(Long.parseLong(strdata[0]),
+					true);
 			double rawval = Double.parseDouble(strdata[1]);
 			int val = 0;
 			if (rawval != -1) {
@@ -72,27 +106,26 @@ public class GetBuddy extends Activity {
 			}
 			ImageView status = (ImageView) findViewById(R.id.Buddystatus);
 			status.setImageDrawable(getResources().getDrawable(imgStates[val]));
-			
+
 			lastupdated.setText(secondsago);
-			lasttags.setText("Tags: "+strdata[2]);
-			
-			if (strdata[3].equals("0"))
-			{
+			lasttags.setText("Tags: " + strdata[2]);
+
+			if (strdata[3].equals("0")) {
 				Button nudgeB = (Button) findViewById(R.id.SendNudgeButton);
 				nudgeB.setEnabled(false);
 			}
-			
+
 			Log.v("Auramap", "Server Result: " + fromServer);
-			
+
 		} else if (requestCode == NUDGE_BUDDY) {
 
 			final Button nudgeButton = (Button) findViewById(R.id.SendNudgeButton);
-			if(fromServer.contains("SUCCESS")==false) {
-				nudgeButton.setEnabled(true);				
+			if (fromServer.contains("SUCCESS") == false) {
+				nudgeButton.setEnabled(true);
 			}
 		}
 	}
-	
+
 	private OnClickListener nListener = new OnClickListener() {
 		public void onClick(View v) {
 
@@ -106,18 +139,17 @@ public class GetBuddy extends Activity {
 			exit();
 		}
 	};
-	
+
 	private void exit() {
 		finish();
 	}
-	
+
 	private void nudgeBuddy() {
 		Intent i = new Intent(this.getBaseContext(), TextURL.class);
 		i.putExtra("URL", "http://www.k2xl.info/auramap/server/sendNudge.php");
-		i.putExtra("servMessage", "target="+number);
+		i.putExtra("servMessage", "target=" + number);
 		i.putExtra("loadMessage", "Nudging Buddy...");
 		startActivityForResult(i, NUDGE_BUDDY);
 	}
-	
-	
+
 }
