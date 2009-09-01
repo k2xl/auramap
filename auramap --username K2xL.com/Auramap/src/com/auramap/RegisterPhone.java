@@ -25,7 +25,7 @@ public class RegisterPhone extends Activity {
         String MyPhoneNumber = telephony.getLine1Number();
         Data.pNumber = MyPhoneNumber;
         //Data.pNumber = "3333333333";
-        Data.pNumber ="2222222220";//"17231165314"; "16555555556"; MyPhoneNumber;
+        Data.pNumber ="2222222267";//"17231165314"; "16555555556"; MyPhoneNumber;
         Data.pKey = passkey;
         //Data.pKey = "12345"; // debuggin
         

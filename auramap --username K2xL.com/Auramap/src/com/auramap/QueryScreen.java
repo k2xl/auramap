@@ -30,8 +30,6 @@ public class QueryScreen extends Activity {
 		happyState = new HappyState();
 		location = manager.getLastKnownLocation("gps");
 		locationListener = new MyLocationListener();
-		// i.putExtra("lat", location.getLatitude());
-		// i.putExtra("lon", location.getLongitude());
 
 		TelephonyManager telephony = (TelephonyManager)
 
