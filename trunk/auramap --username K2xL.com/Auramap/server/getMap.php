@@ -1,5 +1,5 @@
 <?php
-Header ("Content-type: image/png");
+
 require_once("login.php");
  
 /*$myimage = ImageCreate (200, 40); 
@@ -71,12 +71,21 @@ $ArrayColors[4] = 0xFF9900;
 $radius = floatval($Headers['radius']);
 $W = floatval($Headers['w']);
 $H = floatval($Headers['h']);
-$myImage = imagecreate($W,$H);
-//$bgcolor = ImageColorAllocate ($myImage, 0, 0, 0); 
-$bgcolor = ImageColorAllocate ($myImage, 0,0,0); 
-$textcolor = ImageColorAllocate ($myImage, 255, 255, 255); 
-$circlealpha = .5;//0.05;
-ImageString ($myImage, 4, 96, 19, "Num points: ".mysql_num_rows($pts), $textcolor); 
+$myImage = imagecreatetruecolor($W,$H);
+$img = $myImage; // alias
+$im = $img;
+
+$black = imagecolorallocate($myImage, 255, 255, 255);
+// Make the background transparent
+imagefilledrectangle($im, 0, 0, $W, $H, imagecolorallocate($im, 255, 255, 255));
+
+imagecolortransparent($myImage, $black);
+
+
+
+$circlealpha = 1;//0.05;
+$depthGrad = 20;
+//ImageString ($myImage, 4, $W/2, 0, "Num points: ".mysql_num_rows($pts), $textcolor); 
 while ($rs = mysql_fetch_assoc($pts))
 {
 	$perc = (100+$rs['emotrating'])/200.0;
@@ -88,18 +97,28 @@ while ($rs = mysql_fetch_assoc($pts))
 	$Color = $ArrayColors[intval(4*$rs['emotrating'])];
 	
 	
-	$r = rand(0,256);
-	$b = rand(0,256);
-	$g = rand(0,256);
-	$c = imagecolorallocatealpha($myImage,$r,$g,$b,128*(1-$circlealpha));
-	imagefilledellipse($myImage,$x,$y,$radius*2,$radius*2,$c);
+	$r = $Color >> 16&0xFF;//rand(0,256);
+	$g = $Color >> 8 &0xFF;//rand(0,256);
+	$b = $Color & 0xFF;//rand(0,256);
+	//$c = imagecolorallocatealpha($myImage,$r,$g,$b,128*(1-$circlealpha));
+	
+
+	for ($j = $depthGrad; $j > 0 ; $j--)
+	{
+		$tempAlpha = 125;//128*(1.0*$j/$depthGrad);	
+		$tempc = imagecolorallocatealpha($myImage,$r,$g,$b,$tempAlpha);//128*(1-$circlealpha));
+		//$tempR = 5+$j/$radius;
+		$tempR = 1.0*$radius*($j/$depthGrad);
+		imagefilledellipse($myImage,$x,$y,$tempR*2,$tempR*2,$tempc);
+	}
 	
 }
+
+Header ("Content-type: image/png");
 
 ImagePng($myImage);
 // destroy the reference pointer to the image in memory to free up resources
 ImageDestroy($myImage); 
 
-//echo SUCCESS."$str";
 
 ?>
