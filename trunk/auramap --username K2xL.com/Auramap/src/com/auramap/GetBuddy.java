@@ -107,12 +107,15 @@ public class GetBuddy extends Activity {
 
 			lastupdated.setText(secondsago);
 			lasttags.setText("Tags: " + strdata[2]);
-			if (strdata.length <5)
+			Button nudgeB = (Button) findViewById(R.id.SendNudgeButton);
+			
+			if (strdata.length <4)
 			{
+				nudgeB.setEnabled(false);
 				return;
 			}
 			if (strdata[3].equals("0")) {
-				Button nudgeB = (Button) findViewById(R.id.SendNudgeButton);
+				
 				nudgeB.setEnabled(false);
 			}
 			if (strdata[4].equals("0"))

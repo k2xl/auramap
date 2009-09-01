@@ -15,7 +15,7 @@ if ($target == false) { echo INVALID_PHONE_ERROR; exit(); };
 
 // Step 2: Check if max nudges reached...
 $myid = $Me['id'];
-$alreadyNudged = $DB->count("nudges", "where expired=0 and user_id=$myid and target_number=$target");
+$alreadyNudged = $DB->count("nudges", "where expired<=1 and user_id=$myid and target_number=$target");
 if ($alreadyNudged > 0)
 {
 	echo ALREADY_NUDGED; exit();
