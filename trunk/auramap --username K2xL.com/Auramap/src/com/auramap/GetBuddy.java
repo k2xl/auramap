@@ -43,13 +43,11 @@ public class GetBuddy extends Activity {
 		final Button nudgeButton = (Button) findViewById(R.id.SendNudgeButton);
 		nudgeButton.setOnClickListener(nListener);
 		final CheckBox AllowNudgeCheckBox = (CheckBox) findViewById(R.id.nudgeAllowedCheckbox);
-		AllowNudgeCheckBox
-				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		AllowNudgeCheckBox.setOnClickListener(new OnClickListener() {
 					
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
+					public void onClick(View v) {
 							AllowNudgeCheckBox.setEnabled(false);
-							updateBuddyNudgePermission(isChecked);
+							updateBuddyNudgePermission(AllowNudgeCheckBox.isChecked());
 						// TODO Auto-generated method stub
 
 					}
@@ -62,7 +60,7 @@ public class GetBuddy extends Activity {
 	{
 		Intent intent = new Intent(this.getBaseContext(), TextURL.class);
 		intent.putExtra("URL",
-				"http://www.k2xl.info/auramap/server/insertaura.php");
+				"http://www.k2xl.info/auramap/server/changePreferences.php");
 		intent.putExtra("loadMessage", "Updating preferences");
 		intent.putExtra("servMessage", "target="+number+"&nudgeprivacy="+checked);
 		startActivityForResult(intent, CHANGE_BUDDY_NUDGE_PERMISSION);
@@ -79,7 +77,7 @@ public class GetBuddy extends Activity {
 			}
 			AllowNudgeCheckBox.setEnabled(true);
 		}
-		if (requestCode == LOAD_BUDDY_INFORMATION) {
+		else if (requestCode == LOAD_BUDDY_INFORMATION) {
 			int[] imgStates = new int[6];
 			imgStates[0] = R.drawable.blank;
 			imgStates[1] = R.drawable.sad2;
@@ -109,10 +107,18 @@ public class GetBuddy extends Activity {
 
 			lastupdated.setText(secondsago);
 			lasttags.setText("Tags: " + strdata[2]);
-
+			if (strdata.length <5)
+			{
+				return;
+			}
 			if (strdata[3].equals("0")) {
 				Button nudgeB = (Button) findViewById(R.id.SendNudgeButton);
 				nudgeB.setEnabled(false);
+			}
+			if (strdata[4].equals("0"))
+			{
+				CheckBox AllowNudgeCheckBox = (CheckBox) findViewById(R.id.nudgeAllowedCheckbox);
+				AllowNudgeCheckBox.setChecked(true);
 			}
 
 			Log.v("Auramap", "Server Result: " + fromServer);
