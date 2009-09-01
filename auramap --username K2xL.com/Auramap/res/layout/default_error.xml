@@ -5,7 +5,7 @@ android:layout_height="wrap_content" xmlns:android="http://schemas.android.com/a
 android:layout_centerInParent="true" android:layout_height="wrap_content" 
 android:src="@drawable/ohno2"></ImageView>
 
-<TextView id="@+id/error1"
+<TextView android:id="@+id/error1"
  android:text="Error 1"
  android:layout_width="wrap_content"
  android:layout_height="wrap_content"
