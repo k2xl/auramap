@@ -24,4 +24,5 @@
 <Button android:text="Send Nudge" android:id="@+id/SendNudgeButton" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 <Button android:text="Go Back" android:id="@+id/BackButton" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 
+<CheckBox android:text="Allow nudges from this person" android:id="@+id/nudgeAllowedCheckbox" android:layout_width="wrap_content" android:layout_height="wrap_content"></CheckBox>
 </TableLayout>
