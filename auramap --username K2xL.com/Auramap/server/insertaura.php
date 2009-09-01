@@ -11,6 +11,10 @@ $lat = floatval($Headers['lat']);
 $long = floatval($Headers['lon']);
 $emotx = floatval($Headers['emotx']); 
 $tag = $Headers['tag'];
+if (trim($tag) == "")
+{
+	$tag = "(no tags)";
+}
 // Step 2: Insert into DB
 $Data = array();
 $Data['user_id']= $Me['id'];

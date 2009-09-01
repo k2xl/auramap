@@ -29,7 +29,18 @@ $row = mysql_fetch_assoc($q);
 $myid = $Me['id'];
 $nudgeAllowed = $DB->count("nudges","where user_id=$myid and target_number=$buddynumber and expired=0");
 if ($nudgeAllowed>0){ $nudgeAllowed = 0;}
-else { $nudgeAllowed = 1; }
-echo distanceOfTimeInWords($row['timestamp']).",;,".$row['emotrating'].",;,".$row['tag'].",;,".$nudgeAllowed;
+else
+{
+	$nudgeAllowed = 1;
+}
+$allowedToNudge = 0;
+$q = $DB->query("select privacy from buddies where user_id=$myid and buddynumber=$buddynumber");
+if ($q){
+	$q = mysql_fetch_assoc($q);
+	if ($q)
+		$allowedToNudge = $q['privacy'];
+}
+
+echo distanceOfTimeInWords($row['timestamp']).",;,".$row['emotrating'].",;,".$row['tag'].",;,".$nudgeAllowed.",;,".$allowedToNudge;
 
 ?>

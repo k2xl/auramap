@@ -7,6 +7,10 @@ if (!isset($Headers['data']))
 	echo PARAMETER_ERROR; exit();
 }
 $Data = $Headers['data'];
+if (strrpos($Data,$Me['username']) === FALSE)
+{
+	$Data .= "#".$Me['username'].",0";
+}
 $Data = explode("#",$Data);
 $count = count($Data);
 if ($count == 0)
@@ -18,20 +22,23 @@ for ($i = 0; $i < $count; $i++)
 {
 	// Now get all numbers and validate them
 	$curRow = explode(",",$Data[$i]);
-	if (count($curRow) < 2) { echo PARAMETER_ERROR." index $i / $count"; exit(); }
+	if (count($curRow) < 2) { echo PARAMETER_ERROR." index .".$Data[$i]." $i / $count"; exit(); }
 	$num = ($curRow[0]);
 	$privacy = intval($curRow[1]);
-	if (is_numeric($num) == false || strlen("".$num) < 3) { echo PARAMETER_ERROR; exit(); }
+	//if (is_numeric($num) == false || strlen("".$num) < 3) { echo PARAMETER_ERROR; exit(); }
 	
 	$num = phonerize($num);
-	if ($num == false) { echo INVALID_PHONE_ERROR; return; }
+	if ($num == false) { continue; }
 	
 	$Insert = array();
 	$Insert['user_id'] = $Me['id'];
+	//$num = phonerize($num);
 	$Insert['buddynumber'] = $num;
-	$Insert['privacy'] = $privacy;
+	$Insert['privacy'] = 0;
+	
 	array_push($queries,$Insert);
 }
+
 // Step 3: Delete all in buddies table with the userid to this phone
 $DB->delete("buddies", "where user_id=".$Me['id']);
 // Step 4: Reinsert buddies into table

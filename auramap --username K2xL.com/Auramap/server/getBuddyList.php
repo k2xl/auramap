@@ -21,7 +21,7 @@ while ($rs = mysql_fetch_assoc($buddies))
 	if ($userID > 0){
 		$lastAura = getLatestAurapoint($userID);
 	}
-	if (!$lastAura)
+	if (isset($lastAura['id']))
 	{
 		$happystate = $lastAura['emotrating'];
 		$lastupdate = ($lastAura['timestamp']);
@@ -82,7 +82,7 @@ function getLatestAurapoint($userID)
 	$latestAurapoint = $DB->query($sql);
 	if (!$latestAurapoint) { echo SERVER_ERROR; exit(); }
 	$latestAurapoint = mysql_fetch_assoc($latestAurapoint);
-
+	
 	return $latestAurapoint;
 }
 ?>
