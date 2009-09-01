@@ -2,5 +2,5 @@
 <resources>
     <string name="emote">emotion</string>
     <string name="hello">Hello World, Auramap!</string>
-    <string name="app_name">Auramap</string>
+    <string name="app_name">HappyMap</string>
 </resources>
