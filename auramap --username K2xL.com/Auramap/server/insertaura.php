@@ -2,6 +2,11 @@
 require_once("login.php");
 
 // Step 1: Secure parameters
+if (!isset($Headers['lat']) || !isset($Headers['lon']) || !isset($Headers['emotx']) || !isset($Headers['tag']))
+{
+	echo PARAMETER_ERROR;
+	exit();
+}
 $lat = floatval($Headers['lat']);
 $long = floatval($Headers['lon']);
 $emotx = floatval($Headers['emotx']); 
