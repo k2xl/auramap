@@ -89,7 +89,7 @@ public class GetBuddy extends Activity {
 				lastupdated.setText("No data found for phone");
 				ImageView status = (ImageView) findViewById(R.id.Buddystatus);
 				status.setImageDrawable(getResources().getDrawable(
-						R.drawable.mapicon));
+						R.drawable.helpicon2));
 				lasttags.setText(number);
 				return;
 			}
