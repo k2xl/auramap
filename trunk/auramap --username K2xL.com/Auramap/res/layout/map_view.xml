@@ -9,9 +9,8 @@
         android:layout_height="fill_parent"
         android:enabled="true"
         android:clickable="true"
-        android:apiKey="04MVU6_RL2g6kiIAHt2gmYggahd85gaeWNK66QQ"
+        android:apiKey="04MVU6_RL2g5WL39au87w5UQEyVLndzQDxr7CQA"
         />
-        <!-- android:apiKey="04MVU6_RL2g5WL39au87w5UQEyVLndzQDxr7CQA" -->
         
         
      

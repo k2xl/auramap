@@ -21,8 +21,7 @@
         
     <TableRow android:id="@+id/select" android:layout_width="wrap_content" android:padding="5dip"
     android:layout_height="wrap_content" android:gravity="center_horizontal">
-        <ImageView
-            android:background="@drawable/select"></ImageView>	
+        <TextView android:text="Select a face" android:textColor="#FFFFFF" android:textSize="16sp"></TextView>	
     </TableRow>
 	
 	<TableRow android:id="@+id/faces" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal" android:padding="8dip">
