@@ -1,13 +1,12 @@
 package com.auramap;
 
-import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -72,6 +71,8 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 
 		mapView = (MapView) findViewById(R.id.thismap);
 		mapView.setBuiltInZoomControls(true);
+		mapZoom = new ZoomControls(this);
+		mapZoom.setZoomSpeed(1);
 		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -79,6 +80,8 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 		;
 		mHeight = dm.heightPixels;
 		;
+		
+		zoomLevel = 14;
 		manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		location = manager.getLastKnownLocation("gps");
 		locationListener = new MyLocationListener();
@@ -86,18 +89,28 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 		int lonData = (int) (1000000 * location.getLongitude());
 		curPoint = new GeoPoint(latData, lonData);
 		happyGrid = new Bitmap[3][3];
-		animateToCurrentPoint();
-		getImage();
-		zoomLevel = 14;
-	}
 
+		animateToCurrentPoint();
+		
+		getImage();
+	}
+	MotionEvent ev2;
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
+		ev2 = ev;
 		onTouch(mapView, ev);
 		super.dispatchTouchEvent(ev);
-
 		return true; // super.dispatchTouchEvent(ev);
 	}
+	
+	@Override
+	public void onDestroy() {
+		timer.cancel();
+		super.onDestroy();
+		
+	}
+	
+	
 
 	public boolean onTouch(View v, MotionEvent e) {
 		
@@ -148,6 +161,7 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 
 	}
 
+
 	private void drawPoints() {
 		BitmapDrawable drawable = new BitmapDrawable(happyMap);
 
@@ -155,7 +169,7 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 		mapView.setDrawingCacheEnabled(true);
 
 		CurrentPointOverlay cpo = new CurrentPointOverlay();
-		GraphicOverlay bmpOverlay = new GraphicOverlay(drawable, topLeft);
+		GraphicOverlay bmpOverlay = new GraphicOverlay(drawable, topLeft,this);
 
 		mapView.getOverlays().add(bmpOverlay);
 		mapView.getOverlays().add(cpo);
@@ -164,33 +178,21 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 		// pd.dismiss();
 	}
 
-	private void drawGrid() {
-		BitmapDrawable drawable = new BitmapDrawable(happyMap);
+	
 
-		mapView.setAlwaysDrawnWithCacheEnabled(true);
-		mapView.setDrawingCacheEnabled(true);
-
-		CurrentPointOverlay cpo = new CurrentPointOverlay();
-		GraphicOverlay bmpOverlay = new GraphicOverlay(drawable, topLeft);
-		mapView.getOverlays().clear();
-		mapView.getOverlays().add(bmpOverlay);
-		mapView.getOverlays().add(cpo);
-		mapView.invalidate();
-		isUpdating = false;
-		// pd.dismiss();
-	}
-
-	private void getImage() {
+	public void getImage() {
 		if (isUpdating) {
 			Toast.makeText(this, "Updating Map", 1000).show();
 			
 			mapView.getOverlays().clear();
+			if (happyMap != null)
+				happyMap.recycle();
 			Projection p = mapView.getProjection();
 			int screenWidth = mWidth;
 			int screenHeight = mHeight;
 			Log.v("Test", "" + (mWidth) + "," + mHeight + " should be 320,480");
 			// curPoint = p.fromPixels(0, 0);
-			curPoint = mapView.getMapCenter();
+			//curPoint = mapView.getMapCenter();
 			topLeft = p.fromPixels(SPAN_X / -2 + screenWidth / 2, SPAN_Y / -2
 					+ screenHeight / 2);
 
@@ -250,7 +252,7 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 
 			int screenWidth = mWidth;
 			int screenHeight = mHeight;
-			curPoint = mapView.getMapCenter();
+			//curPoint = mapView.getMapCenter();
 
 			int xItr = mWidth / 2 - SPAN_X - SPAN_X / 2;
 			int yItr = mHeight / 2 - SPAN_Y - SPAN_Y / 2;
@@ -280,7 +282,7 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 				xItr = mWidth / 2 - SPAN_X - SPAN_X / 2;
 			}
 
-			drawGrid();
+			//drawGrid();
 		}
 	}
 

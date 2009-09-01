@@ -82,7 +82,7 @@ public class NudgeService extends Service {
 		// The PendingIntent to launch our activity if the user selects this
 		// notification
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, Auramap.class), 0);
+				new Intent(this, HappyMap.class), 0);
 
 		// Set the info for the views that show in the notification panel.
 		notification.setLatestEventInfo(this, "You've been nudged!", text,
@@ -123,7 +123,7 @@ public class NudgeService extends Service {
 
 		// The PendingIntent to launch our activity if the user selects this
 		// notification
-		Intent i = new Intent(this, Auramap.class);
+		Intent i = new Intent(this, HappyMap.class);
 		i.putExtra("GoToScreen", "Buddy,;,"+sploded[0]);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, i, 0);
 

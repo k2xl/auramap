@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-public class Auramap extends Activity {
+public class HappyMap extends Activity {
 	/** Called when the activity is first created. */
 	
 	public static Activity Instance;
