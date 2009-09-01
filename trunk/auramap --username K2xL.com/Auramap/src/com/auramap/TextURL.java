@@ -29,7 +29,7 @@ public class TextURL extends Activity {
         String response = contactServer(url, servMessage, loadMessage);
         
 		if (response.indexOf("ERROR") >= 0) {
-			Log.v("Auramap","Error returned from server: "+response);
+			Log.v("Server","Error returned from server: "+response);
 			setContentView(R.layout.default_error);
 			//finish();
 			Intent i = new Intent();
@@ -60,7 +60,7 @@ public class TextURL extends Activity {
             con.setRequestProperty("METHOD", "POST");
             con.setDoInput( true );
             con.setDoOutput( true );
-            Log.v("Auramap", "Sending message: " + servMessage);
+            Log.v("Server", "Sending message: " + servMessage);
            // add url form parameters
             DataOutputStream ostream = null;
             try {

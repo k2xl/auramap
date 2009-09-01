@@ -211,7 +211,7 @@ public class NudgeService extends Service {
 			con.setRequestProperty("METHOD", "POST");
 			con.setDoInput(true);
 			con.setDoOutput(true);
-			Log.v("Auramap", "Sending message: " + servMessage);
+			Log.v("Server", "Sending message: " + servMessage);
 			// add url form parameters
 			DataOutputStream ostream = null;
 			try {

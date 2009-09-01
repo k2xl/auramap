@@ -47,6 +47,7 @@ shadow) {
                 Paint paint = new Paint();
                 paint.setAlpha(60);
                 Point projP = proj.toPixels(p,null);
+                if (bmp.getBitmap() == null) { return; }
                 canvas.drawBitmap(bmp.getBitmap(), projP.x,projP.y, paint);
         }
 

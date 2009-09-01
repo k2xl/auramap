@@ -1,9 +1,10 @@
 package com.auramap;
 
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -29,15 +30,25 @@ public class ImageURL extends Activity {
 
 		String servMessage = "username=" + Data.pNumber + "&password="
 				+ Data.pKey + "&" + b.getString("servMessage");
-		Bitmap response = contactServer(url, servMessage, loadMessage);
+		byte[] response = contactServer(url, servMessage, loadMessage);
 
 		Intent i = new Intent();
 		i.putExtra("webResponse", response);
+		
+		// i.putExtra("webResponse", response);
+
 		setResult(RESULT_OK, i);
 		finish();
 	}
 
-	private Bitmap contactServer(String url, String servMessage,
+	public static String convertBitmapToString(Bitmap src) {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		src.compress(android.graphics.Bitmap.CompressFormat.PNG, 100,
+				(OutputStream) os);
+		return os.toString();
+	}
+
+	private byte[] contactServer(String url, String servMessage,
 			String loadMessage) {
 
 		String str;
@@ -74,12 +85,22 @@ public class ImageURL extends Activity {
 			str = e1.toString();
 		}
 		if (in == null) {
-			return null;}
-
+			return null;
+		}
+		/*int length = 0;
+		byte[] bytes = new byte[0];
+		try{
+		
+		bytes = new byte[10000];
+		in.read(bytes);
+		}catch(IOException i){Log.v("Auramap","Error");}
+		*/
+		
 		BitmapFactory bmpFact = new BitmapFactory();
 		Bitmap bmp = bmpFact.decodeStream(in);
-
-		return bmp;
+		MoodMap.happyMap = bmp;
+		return new byte[2];
+		//return bytes;
 	}
 
 }
