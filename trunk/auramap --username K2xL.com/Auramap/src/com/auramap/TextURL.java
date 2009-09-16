@@ -28,7 +28,7 @@ public class TextURL extends Activity {
         String servMessage = "username="+Data.pNumber+"&password="+Data.pKey+"&"+b.getString("servMessage");
         String response = contactServer(url, servMessage, loadMessage);
         
-		if (response.indexOf("ERROR") >= 0) {
+		if (response.indexOf("ERROR") >= 0 || response.indexOf("[404]")>=0) {
 			Log.v("Server","Error returned from server: "+response);
 			setContentView(R.layout.default_error);
 			//finish();

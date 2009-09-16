@@ -77,9 +77,9 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		mWidth = dm.widthPixels;
-		;
+		
 		mHeight = dm.heightPixels;
-		;
+		
 		
 		zoomLevel = 14;
 		manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);

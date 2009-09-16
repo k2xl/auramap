@@ -15,22 +15,40 @@ public class UpdateBuddies extends Activity {
 
 		Cursor C = getContentResolver().query(People.CONTENT_URI, null, null, null, null);
 		startManagingCursor(C);
-		if (C.moveToFirst() == false) { 		setResult(RESULT_OK, null); Log.v("Auramap","No friends?"); finish(); return; }
+		if (C.moveToFirst() == false) { 		
+			//setResult(RESULT_OK, null); 
+			//Log.v("Auramap","No friends?"); 
+			//finish(); return; 
+		}
 		String contacts = "";
+		int count = 0;
 		do 
 		{
 			int index = C.getColumnIndexOrThrow(People.NUMBER_KEY);
+			count++;
+			//Log.v("Auramap",C+" ..C count = "+index+"..,"+C.getString(C.getColumnIndexOrThrow(People.NUMBER_KEY)));
 			String num = C.getString(index);
+			if (num == null) { continue; }
 			int size = num.length();
 			char[] temp = new char[size];
 			for(int h =0; h<size; h++) {				
 				temp[h] = num.charAt(size-1-h);
 			}
 			num = new String(temp);
-			Log.v("Auramap", "Number: " + num);
+			//Log.v("Auramap", "Number: " + num);
 			contacts+=num+",0#";
 		}while (C.moveToNext());
-		contacts = contacts.substring(0,contacts.length()-1);
+		if (contacts.length() > 0){
+			contacts = contacts.substring(0,contacts.length()-1);
+		}
+		else
+		{
+			//Log.v("Auramap","No friends... weird... There should be "+count);
+			//setResult(RESULT_OK, null);
+			//finish();
+			//return;
+		}
+		
 		Log.v("Auramap","Sending contacts..."+contacts);
 		
 
