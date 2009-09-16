@@ -9,7 +9,13 @@ if (!isset($Headers['data']))
 $Data = $Headers['data'];
 if (strrpos($Data,$Me['username']) === FALSE)
 {
+	if (strlen($Data) == 0)
+	{
+		$Data .= "".$Me['username'].",0";
+	}
+	else{
 	$Data .= "#".$Me['username'].",0";
+	}
 }
 $Data = explode("#",$Data);
 $count = count($Data);

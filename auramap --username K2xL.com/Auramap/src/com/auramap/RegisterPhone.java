@@ -23,9 +23,13 @@ public class RegisterPhone extends Activity {
         
         getSystemService(TELEPHONY_SERVICE);
         String MyPhoneNumber = telephony.getLine1Number();
+        if (MyPhoneNumber == null)
+        {
+        	MyPhoneNumber = "3333333339";
+        }
         Data.pNumber = MyPhoneNumber;
         //Data.pNumber = "3333333333";
-        Data.pNumber ="2222222220";//"17231165314"; "16555555556"; MyPhoneNumber;
+        //Data.pNumber ="2222222220";//"17231165314"; "16555555556"; MyPhoneNumber;
         Data.pKey = passkey;
         //Data.pKey = "12345"; // debuggin
         
@@ -59,7 +63,8 @@ public class RegisterPhone extends Activity {
         	editor.putString("MyPassKey", message[1]);
         	Data.pKey = message[1];
             editor.commit();	
-    	} 	else //if (fromServer.contains("_ERROR"))
+    	} 	
+    	else //if (fromServer.contains("_ERROR"))
     	{
     		data.putExtra("Result", "ERROR");
     		Log.v("Auramap","Error = "+fromServer);
