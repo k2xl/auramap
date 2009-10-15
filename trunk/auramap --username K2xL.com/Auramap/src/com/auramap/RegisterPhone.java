@@ -41,9 +41,18 @@ public class RegisterPhone extends Activity {
         intent.putExtra("loadMessage","Retrieving Tags");
         intent.putExtra("servMessage",toServer);
 
-		Data.FAKELAT = (int)((37.748457761603355-Math.random()* -0.044235951909101)*1000000);
-		Data.FAKELON = (int)((-122.4481201171875-Math.random()* -0.05544662475586)*1000000);
-		
+        // california
+		//Data.FAKELAT = (int)((37.748457761603355-Math.random()* -0.044235951909101)*1000000);
+		//Data.FAKELON = (int)((-122.4481201171875-Math.random()* -0.05544662475586)*1000000);
+        //gtech 33.781126,-84.407272
+        double randomTechpointLat = 33.78156339080061 - Math.random() * 0.010487523427205;
+		double randomTechpointLon = -84.38984870910645 - Math.random()* 0.01780986785888;
+        Data.FAKELAT = (int)(randomTechpointLat*1000000); //(int)((33.78156339080061-Math.random()*-0.009846)*1000000);
+        Data.FAKELON = (int)(randomTechpointLon*1000000); //(int)((-84.407272-Math.random()*-0.016479)*1000000);;
+        // 
+        //Data.FAKELAT = (int)((37.748457761603355-Math.random()* -0.044235951909101)*1000000);
+		//Data.FAKELON = (int)((-122.4481201171875-Math.random()* -0.05544662475586)*1000000);
+        
         startActivityForResult(intent,0);
 	}
 	
