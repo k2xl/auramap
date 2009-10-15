@@ -85,8 +85,26 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 		manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		location = manager.getLastKnownLocation("gps");
 		locationListener = new MyLocationListener();
-		int latData = (int) (1000000 * location.getLatitude());
-		int lonData = (int) (1000000 * location.getLongitude());
+		int latData, lonData;
+		
+		try {
+
+			latData = (int) (1000000 * location.getLatitude());
+			lonData = (int) (1000000 * location.getLongitude());
+		} catch (NullPointerException e) {
+			Toast t = Toast
+					.makeText(
+							this.getApplicationContext(),
+							"Couldn't access/find your location!\nTry again when your location is available!",
+							1000);
+			t.show();
+			//37.7852, -122.4044
+			latData=Data.FAKELAT;
+			lonData=Data.FAKELON;
+		}
+		// force
+		latData=Data.FAKELAT;
+		lonData=Data.FAKELON;
 		curPoint = new GeoPoint(latData, lonData);
 		happyGrid = new Bitmap[3][3];
 
@@ -157,7 +175,7 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 		mapView = (MapView) findViewById(R.id.thismap);
 		mc = mapView.getController();
 		mc.setCenter(curPoint);
-		mc.setZoom(14);
+		mc.setZoom(16);
 
 	}
 
@@ -328,7 +346,7 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 
 			// ---add the marker---
 			Bitmap bmp = BitmapFactory.decodeResource(getResources(),
-					android.R.drawable.ic_menu_mylocation);
+					R.drawable.dot);
 			canvas.drawBitmap(bmp, screenPts.x - bmp.getWidth() / 2,
 					screenPts.y - bmp.getHeight() / 2, null);
 			return true;

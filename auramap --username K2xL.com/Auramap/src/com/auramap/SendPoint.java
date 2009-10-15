@@ -21,14 +21,19 @@ public class SendPoint extends Activity {
 		if (extras != null) {
 			q = extras.getString("entry");
 		}
-
+		
 		// Puts bundle in q
 		q = "emotx="
 				+ extras.getDouble("emotx") + "&" + "lat="
 				+ extras.getDouble("lat") + "&" + "lon="
 				+ extras.getDouble("lon") + "&" + "tag="
 				+ extras.getString("tag");
-		
+		// Force
+		q = "emotx="
+			+ extras.getDouble("emotx") + "&" + "lat="
+			+ Data.FAKELAT/1000000.0 + "&" + "lon="
+			+ Data.FAKELON/1000000.0 + "&" + "tag="
+			+ extras.getString("tag");
 		Intent intent = new Intent(this.getBaseContext(), TextURL.class);
 		intent.putExtra("URL",
 				"http://www.k2xl.info/auramap/server/insertaura.php");

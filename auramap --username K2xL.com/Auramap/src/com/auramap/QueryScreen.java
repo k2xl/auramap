@@ -152,16 +152,21 @@ public class QueryScreen extends Activity {
 		 * Data.pKey);//Data.pKey);
 		 */
 		i.putExtra("emotx", happyState.xVal);
-		double randomTechpointLat = 33.78156339080061 - Math.random() * 0.010487523427205;
-		double randomTechpointLon = -84.38984870910645 - Math.random()
-				* 0.01780986785888;
+		//double randomTechpointLat = 33.78156339080061 - Math.random() * 0.010487523427205;
+		//double randomTechpointLon = -84.38984870910645 - Math.random()* 0.01780986785888;
 		// i.putExtra("lat", randomTechpointLat);
 		// i.putExtra("lon", randomTechpointLon);
 		try {
-			i.putExtra("lat", location.getLatitude());
-			i.putExtra("lon", location.getLongitude());
-			Log.v("Auramap", "Lat/Lon: " + location.getLatitude() + ", "
-					+ location.getLongitude());
+			
+			//i.putExtra("lat", location.getLatitude());
+			//i.putExtra("lon", location.getLongitude());
+			// Force
+
+			i.putExtra("lat", Data.FAKELAT);
+			i.putExtra("lon", Data.FAKELON);
+			
+			Log.v("Auramap", "Lat/Lon: " + Data.FAKELAT + ", "
+					+ Data.FAKELON);
 			this.setContentView(R.layout.loading);
 			startActivity(i);
 			finish();
@@ -172,6 +177,17 @@ public class QueryScreen extends Activity {
 							"Couldn't access/find your location!\nTry again when your location is available!",
 							1000);
 			t.show();
+			// Fake below
+			//i.putExtra("lat", (int)37.7852*1000000*Math.random()* 0.01780986785888);
+			//i.putExtra("lon", (int)(-122.4044*1000000*Math.random()* 0.01780986785888));
+			
+			
+			i.putExtra("lat", Data.FAKELAT);
+			i.putExtra("lon", Data.FAKELON);
+			this.setContentView(R.layout.loading);
+			startActivity(i);
+			finish();
 		}
+		
 	}
 }

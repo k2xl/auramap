@@ -8,9 +8,11 @@ import android.provider.Contacts;
 public class Data {
 public static String pNumber;
 public static String pKey;
+public static int FAKELON;
+public static int FAKELAT;
 	
 	public static String getContactNameFromNumber(String number, ContentResolver cont) {
-		if (number.equals(Data.pNumber)) { return "Me"; }
+		if (number.substring(1,number.length()).equals(Data.pNumber) || number.equals(Data.pNumber)) { return "Me"; }
 		// define the columns I want the query to return
 		String[] projection = new String[] { Contacts.Phones.DISPLAY_NAME,
 				Contacts.Phones.NUMBER };

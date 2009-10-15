@@ -21,12 +21,14 @@ import android.widget.TextView;
 public class ConnectionResource extends Activity {
 	/** Called when the activity is first created. */
 	public final static String queryBase = "http://ngp.lcc.gatech.edu/php_scripts/droid_root.php?";
-	String[] randTags = { "Traffic", "Whales", "Pizza", "Android", "Jackson",
+	/*String[] randTags = { "Traffic", "Whales", "Pizza", "Android", "Jackson",
 			"Sunshine", "Paper Cups", "Weather", "Tulips", "Beer", "Flowers",
 			"Rainbows", "Computer", "Android", "Girlfriend", "Boyfriend", "Kids",
 			"Spaceships", "Dinosaurs", "Bears", "Pizza", "Fire",
 			"Bruce Willis", "M Jackson", "Doughnuts", "Lightning", "Life",
-			"Plague", "Baseball", "Hockey", "Money", "Economy", "Obama" };
+			"Plague", "Baseball", "Hockey", "Money", "Economy", "Obama" };*/
+	
+	String[] randTags= {"Sunshine", "IDF 2009", "Rainbow", "Giants"};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -109,13 +111,20 @@ public class ConnectionResource extends Activity {
 
 	private OnClickListener gListener = new OnClickListener() {
 		public void onClick(View v) {
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < 20; i++) {
 				String s = "";
-				double eX = ((Math.round(Math.random() * 4))) / 4.0;
-				// Log.v()
-				double randomTechpointLat = 33.78156339080061 - Math.random() * 0.010487523427205;
+				double eX = Math.random();
+				if(eX>.5)eX=.75;
+				else eX=1;
+				eX=1;
+				
+				Log.v("Auramap", "EX: " + eX);
+				
+				double randomTechpointLat = (37.748457761603355-Math.random()* -0.044235951909101);
+				double randomTechpointLon = (-122.4481201171875-Math.random()* -0.05544662475586);
+				/*double randomTechpointLat = 33.78156339080061 - Math.random() * 0.010487523427205;
 				double randomTechpointLon = -84.38984870910645 - Math.random()
-						* 0.01780986785888;
+						* 0.01780986785888;*/
 
 				int numTags = (int) (1 + Math.random() * 4);
 				int startTag = (int) (Math.random() * (randTags.length - numTags));
