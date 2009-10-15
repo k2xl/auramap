@@ -220,11 +220,14 @@ public class GetTag extends Activity {
 		globalTagColors = new int[5];
 
 		tag = (EditText) findViewById(R.id.tag);
-
+		
+		/*
 		String toServer = "lat="
 				+ this.getIntent().getExtras().getDouble("lat") + "&lon="
 				+ this.getIntent().getExtras().getDouble("lon");
-		Log.v("Auramap", "Tags To Server: " + toServer);
+		Log.v("Auramap", "Tags To Server: " + toServer);*/
+		String toServer = "lat=" + Data.FAKELAT/1000000.0 +"&lon="+Data.FAKELON/1000000.0;
+		Log.v("Auramap","ToServer, lat/lon: " +"lat=" + Data.FAKELAT +"&lon="+Data.FAKELON);
 		setupLocalTags(toServer);
 		setupGlobalTags(toServer);
 
@@ -330,6 +333,8 @@ public class GetTag extends Activity {
 		String t = tag.getText().toString();
 		t = stripGarbage(t);
 		Intent i = new Intent(this.getBaseContext(), SendPoint.class);
+		//Intent i = new Intent(this.getBaseContext(), ConnectionResource.class);
+		
 		i.putExtras(this.getIntent().getExtras());
 		i.putExtra("tag", t);
 		startActivity(i);

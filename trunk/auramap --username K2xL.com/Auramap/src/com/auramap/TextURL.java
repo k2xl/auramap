@@ -13,6 +13,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class TextURL extends Activity {
 	private ProgressDialog pd;
@@ -31,6 +32,22 @@ public class TextURL extends Activity {
 		if (response.indexOf("ERROR") >= 0 || response.indexOf("[404]")>=0) {
 			Log.v("Server","Error returned from server: "+response);
 			setContentView(R.layout.default_error);
+			if (response.indexOf("[404]")>=0)
+			{
+				Toast.makeText(this, "Doesn't look like you have internet!", 1000).show();
+			}
+			else if (response.indexOf("LOGIN_ERROR")>=0)
+			{
+				Toast.makeText(this, "Error logging you in.", 1000).show();
+			}
+			else if (response.indexOf("PARAMETER_ERROR")>=0)
+			{
+				Toast.makeText(this, "Looks like some invalid data was sent to the server.", 1000).show();
+			}
+			else if (response.indexOf("SERVER_ERROR")>=0)
+			{
+				Toast.makeText(this, "An error occured on HappyMap's server.", 1000).show();
+			}
 			//finish();
 			Intent i = new Intent();
 	        i.putExtra("webResponse", response);

@@ -23,9 +23,9 @@ public class RegisterPhone extends Activity {
         
         getSystemService(TELEPHONY_SERVICE);
         String MyPhoneNumber = telephony.getLine1Number();
-        if (MyPhoneNumber == null)
+        if (MyPhoneNumber == null || MyPhoneNumber.equals(""))
         {
-        	MyPhoneNumber = "3333333339";
+        	MyPhoneNumber = "3333333338";
         }
         Data.pNumber = MyPhoneNumber;
         //Data.pNumber = "3333333333";
@@ -40,7 +40,10 @@ public class RegisterPhone extends Activity {
         intent.putExtra("URL","http://www.k2xl.info/auramap/server/registerphone.php");
         intent.putExtra("loadMessage","Retrieving Tags");
         intent.putExtra("servMessage",toServer);
-    	
+
+		Data.FAKELAT = (int)((37.748457761603355-Math.random()* -0.044235951909101)*1000000);
+		Data.FAKELON = (int)((-122.4481201171875-Math.random()* -0.05544662475586)*1000000);
+		
         startActivityForResult(intent,0);
 	}
 	

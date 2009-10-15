@@ -3,6 +3,7 @@ package com.auramap;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
 import android.provider.Contacts.People;
 import android.util.Log;
@@ -27,7 +28,13 @@ public class UpdateBuddies extends Activity {
 			int index = C.getColumnIndexOrThrow(People.NUMBER_KEY);
 			count++;
 			//Log.v("Auramap",C+" ..C count = "+index+"..,"+C.getString(C.getColumnIndexOrThrow(People.NUMBER_KEY)));
-			String num = C.getString(index);
+			String num = null;
+			try{
+			num = C.getString(index);
+			}catch (CursorIndexOutOfBoundsException e)
+			{
+				continue;
+			}
 			if (num == null) { continue; }
 			int size = num.length();
 			char[] temp = new char[size];
