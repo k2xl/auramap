@@ -188,7 +188,7 @@ public class MoodMap extends MapActivity implements OnTouchListener {
 
 		CurrentPointOverlay cpo = new CurrentPointOverlay();
 		GraphicOverlay bmpOverlay = new GraphicOverlay(drawable, topLeft,this);
-
+		
 		mapView.getOverlays().add(bmpOverlay);
 		mapView.getOverlays().add(cpo);
 		mapView.invalidate();
