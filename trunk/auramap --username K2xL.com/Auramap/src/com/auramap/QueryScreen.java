@@ -3,16 +3,18 @@ package com.auramap;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class QueryScreen extends Activity {
@@ -23,6 +25,7 @@ public class QueryScreen extends Activity {
 	Location location; // location
 	LocationListener locationListener;
 	String MyPhoneNumber;
+	LinearLayout mScreen;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,13 +42,53 @@ public class QueryScreen extends Activity {
 				locationListener);
 
 		setContentView(R.layout.main);
+		
 		((ImageButton) findViewById(R.id.FaceButton))
 				.setBackgroundDrawable(getResources().getDrawable(
 						R.drawable.neutral2));
-
 		happyState.xVal = .5;
+		switchBGColor(5);
 		createButtons();
 		NavBar.adaptNav(this);
+	}
+	
+	private void switchBGColor(int select) {
+	mScreen = (LinearLayout) findViewById(R.id.main);
+	TextView tView = (TextView) findViewById(R.id.querylabel);
+	switch (select) {
+	
+	case 0: 
+
+		mScreen.setBackgroundColor(0xFF33CCCC);
+		tView.setText("You feel sad");
+		break;
+
+	case 1: 
+
+		mScreen.setBackgroundColor(0xFF66CC99);
+		tView.setText("You feel pretty sad");
+		break;
+
+	case 2: 
+		mScreen.setBackgroundColor(0xFF99CC66);
+		tView.setText("You feel nuetral");
+		break;
+
+	case 3: 
+		mScreen.setBackgroundColor(0xFFCC9933);
+		tView.setText("You feel pretty happy");
+		break;
+
+	case 4: 
+		mScreen.setBackgroundColor(0xFFFF9900);
+		tView.setText("You feel happy!");
+		break;
+		
+	case 5:
+		mScreen.setBackgroundColor(Color.BLACK);
+		tView.setText("Pick a face");
+	}
+	
 	}
 
 	private OnClickListener happyButtonListener = new OnClickListener() {
@@ -58,12 +101,14 @@ public class QueryScreen extends Activity {
 				((ImageButton) findViewById(R.id.FaceButton))
 						.setBackgroundDrawable(getResources().getDrawable(
 								R.drawable.sad2));
+				switchBGColor(0);
 				break;
 			case R.id.HappyButton1:
 				happyState.stateName = "sad";
 				((ImageButton) findViewById(R.id.FaceButton))
 						.setBackgroundDrawable(getResources().getDrawable(
 								R.drawable.lesssad2));
+				switchBGColor(1);
 
 				happyState.xVal = .25;
 				break;
@@ -72,6 +117,7 @@ public class QueryScreen extends Activity {
 				((ImageButton) findViewById(R.id.FaceButton))
 						.setBackgroundDrawable(getResources().getDrawable(
 								R.drawable.neutral2));
+				switchBGColor(2);
 
 				happyState.xVal = .5;
 				break;
@@ -80,6 +126,7 @@ public class QueryScreen extends Activity {
 				((ImageButton) findViewById(R.id.FaceButton))
 						.setBackgroundDrawable(getResources().getDrawable(
 								R.drawable.lesshappy2));
+				switchBGColor(3);
 
 				happyState.xVal = .75;
 				break;
@@ -88,7 +135,7 @@ public class QueryScreen extends Activity {
 				((ImageButton) findViewById(R.id.FaceButton))
 						.setBackgroundDrawable(getResources().getDrawable(
 								R.drawable.happy2));
-
+				switchBGColor(4);
 				happyState.xVal = 1;
 				break;
 			case R.id.nextButton:

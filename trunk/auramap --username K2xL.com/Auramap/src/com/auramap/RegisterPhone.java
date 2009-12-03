@@ -23,10 +23,10 @@ public class RegisterPhone extends Activity {
         
         getSystemService(TELEPHONY_SERVICE);
         String MyPhoneNumber = telephony.getLine1Number();
-        if (MyPhoneNumber == null || MyPhoneNumber.equals(""))
-        {
-        	MyPhoneNumber = "3333333338";
-        }
+        //if (MyPhoneNumber == null || MyPhoneNumber.equals(""))
+        //{
+        	MyPhoneNumber = "3333338332";
+       // }
         Data.pNumber = MyPhoneNumber;
         //Data.pNumber = "3333333333";
         //Data.pNumber ="2222222220";//"17231165314"; "16555555556"; MyPhoneNumber;
