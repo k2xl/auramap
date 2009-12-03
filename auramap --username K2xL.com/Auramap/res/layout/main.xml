@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:descendantFocusability="afterDescendants" android:gravity="center_horizontal|center" 
-    android:background="#333333">
+    android:id="@+id/main">
 
     <TableRow android:id="@+id/question" android:layout_width="wrap_content" android:padding="15dip"
     android:layout_height="wrap_content" android:gravity="center_horizontal">
@@ -21,7 +21,7 @@
         
     <TableRow android:id="@+id/select" android:layout_width="wrap_content" android:padding="5dip"
     android:layout_height="wrap_content" android:gravity="center_horizontal">
-        <TextView android:text="Select a face" android:textColor="#FFFFFF" android:textSize="16sp"></TextView>	
+        <TextView android:text="Select a face" android:textColor="#FFFFFF" android:textSize="16sp" android:id="@+id/querylabel" android:layout_gravity="center"/>	
     </TableRow>
 	
 	<TableRow android:id="@+id/faces" android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_horizontal" android:padding="8dip">
